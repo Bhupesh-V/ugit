@@ -1,0 +1,96 @@
+#!/usr/bin/env bash
+
+# ugit: Undo your last oopsie in Git 🙈️
+
+# TODO: Undo git stash commands (apply, drop, clear)
+# TODO: Undo git tag delete
+
+set -euo pipefail;
+
+[[ "${BASH_VERSINFO[0]}" -lt 3 ]] && die "Bash >=3 required"
+
+installed() {
+    cmd=$(command -v "${1}")
+
+    [[ -n "${cmd}" ]] && [[ -f "${cmd}" ]]
+    return ${?}
+}
+
+die() {
+    >&2 echo "Fatal: ${@}"
+    exit 1
+}
+
+deps=(fzf git awk)
+for dep in "${deps[@]}"; do
+    installed "${dep}" || die "Missing dependency: '${dep}'"
+done
+
+menu=$(cat << MENU
+1 Undo [git commit]
+2 Undo [git push]
+3 Undo [git add]
+4 Undo [git pull]
+5 Undo [git commit message]
+6 Undo [git branch delete -D]
+7 Undo [git reset]
+MENU
+)
+option=$(echo "$menu" | fzf --height 10% --reverse --pointer='ᐅ' --header='Undo your last oopsie in Git' | awk '{print $1}')
+
+undo_git_commit() {
+    git reset HEAD~
+    # undo last commit (don't unstage everything)
+    # git reset --soft HEAD^
+}
+
+undo_git_add() {
+    # show prompt to unstage files interactively
+    choices=$(git ls-files | fzf --height 10% --reverse --multi --header="Choose Files to unstage")
+    git restore --staged $choices
+}
+
+change_commit_message() {
+    echo -e "Enter New Commit Message (Ctrl+d to save):"
+    msg=$(</dev/stdin)
+    echo
+    [[ "$msg" ]] && git commit --amend -m "$msg" || echo "bruh enter something!!"
+}
+
+undo_git_push() {
+    commit_hash=$(git log --oneline | fzf --ansi --height 10% --reverse --multi --header="Choose Commit hash to revert/undo" | awk '{print $1}')
+    git revert "$commit_hash"
+    echo "Make sure to run 'git push' now"
+}
+
+undo_branch_delete() {
+    # undo local branch delete
+    last_branch_commit=$(git reflog | fzf --ansi --height 20% --reverse --multi --header="Choose last good branch commit" | awk '{print $1}')
+    # echo "$last_branch_commit"
+    read -p "Enter Branch Name: " branch_name
+    git checkout -b "$branch_name" "$last_branch_commit"
+}
+
+undo_git_pull() {
+    # FROM: https://stackoverflow.com/questions/1223354/undo-git-pull-how-to-bring-repos-to-old-state
+    last_good_state=$(git reflog | fzf --ansi --height 20% --reverse --multi --header="Choose last good branch commit" | awk '{print $1}')
+    # check if working tree is clean or not
+    [[ $(git status --porcelain 2>/dev/null) ]] && read -p "You have uncommited changes, still proceed [Y/n]: " -n 1 -r USER_INPUT
+    USER_INPUT=${USER_INPUT:-Y}
+    [[ "$USER_INPUT" == Y ]] && git reset --hard "$last_good_state"
+}
+
+undo_git_reset() {
+    last_good_state=$(git reflog | fzf --ansi --height 20% --reverse --multi --header="Choose last known good commit" | awk '{print $1}')
+    git reset "$last_good_state"
+}
+
+case $option in
+    1) undo_git_commit;;
+    2) undo_git_push;;
+    3) undo_git_add;;
+    4) undo_git_pull;;
+    5) change_commit_message;;
+    6) undo_branch_delete;;
+    7) undo_git_reset;;
+esac

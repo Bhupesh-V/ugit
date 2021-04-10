@@ -1,11 +1,11 @@
-<h1 align="center">sample-project</h1>
+<h1 align="center">ugit</h1>
 <p align="center">
 <!--  <img src="" />-->
-  <a href="https://github.com/Bhupesh-V/sample-project/blob/master/LICENSE">
-    <img alt="License: MIT" src="https://img.shields.io/github/license/Bhupesh-V/sample-project" target="_blank" />
+  <a href="https://github.com/Bhupesh-V/ugit/blob/master/LICENSE">
+    <img alt="License: MIT" src="https://img.shields.io/github/license/Bhupesh-V/ugit" target="_blank" />
   </a>
-  <a href="https://github.com/Bhupesh-V/sample-project/issues">
-    <img alt="Issues" src="https://img.shields.io/github/issues/Bhupesh-V/sample-project?color=blueviolet" />
+  <a href="https://github.com/Bhupesh-V/ugit/issues">
+    <img alt="Issues" src="https://img.shields.io/github/issues/Bhupesh-V/ugit?color=blueviolet" />
   </a>
   <a href="">
     <img alt="Website Status" src="https://img.shields.io/website?down_color=red&down_message=down&up_color=darkgreen&up_message=up&url=https%3A%2F%2Fwebsite.com" />
@@ -15,9 +15,45 @@
   </a>
 </p>
 
-> This is a template repository used for creating side-projects.
+> Undo your last oopsie in git without much effort
+
+## Why `ugit`
+
+- You did an accidental `git` command you didn't want to.
+- You don't want to waste your time searching on _how to undo ..._
 
 
+## What's in the box
+`ugit` supports undoing following operations, some are a WIP. If you know of any operation that can be undone and is not in the list, make sure to send a quick PR 💛️
+
+- [x] Undo `git commit`
+- [x] Undo `git add`
+- [x] Undo `git push`
+- [x] Undo `git branch -D` (branch delete)
+- [x] Undo `git pull`
+- [x] Undo `git reset`
+- [ ] Undo `git merge`
+- [ ] Undo `git tag -D` (tag delete)
+- [ ] Undo `git stash apply`
+- [ ] Undo `git stash drop/clear`
+
+## Installation
+
+**ugit** dependencies:
+
+1. `Bash>=3`
+2. GNU utils like `awk`, `grep` etc
+3. fzf
+
+Install the script using `wget`
+
+```bash
+wget -q https://raw.githubusercontent.com/Bhupesh-V/ugit/main/ugit && chmod +x ugit && mv ugit $HOME/.local/bin/
+```
+
+## Not satisfied? 😒️
+
+You can read my in my process guide on [**How to undo anything in Git**](https://bhupesh.gitbook.io/notes/git/how-to-undo-anything-in-git)
 
 ## Author
 
@@ -27,11 +63,9 @@
 - Twitter : [@bhupeshimself](https://twitter.com/bhupeshimself)
 - DEV : [bhupesh](https://dev.to/bhupesh)
 
-[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
-
 ## ☺️ Show your support
 
-Support me by giving a ⭐️ if this project helped you! or just [![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FBhupesh-V%2Ftil%2F)](https://twitter.com/intent/tweet?url=https://github.com/Bhupesh-V/til&text=til%20via%20@bhupeshimself)
+Support me by giving a ⭐️ if this project helped you! or just [![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FBhupesh-V%2Fugit%2F)](https://twitter.com/intent/tweet?url=https://github.com/Bhupesh-V/ugit&text=ugit%20via%20@bhupeshimself)
 
 <a href="https://liberapay.com/bhupesh/donate">
   <img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg" width="100">
@@ -43,8 +77,8 @@ Support me by giving a ⭐️ if this project helped you! or just [![Twitter URL
 
 ## 📝 License
 
-Copyright © 2020 [Bhupesh Varshney](https://github.com/Bhupesh-V).<br />
-This project is [MIT](https://github.com/Bhupesh-V/sample-project/blob/master/LICENSE) licensed.
+Copyright © 2021 [Bhupesh Varshney](https://github.com/Bhupesh-V).<br />
+This project is [MIT](https://github.com/Bhupesh-V/ugit/blob/master/LICENSE) licensed.
 
 ## 👋 Contributing
 
