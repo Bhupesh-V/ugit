@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
 
-# ugit: Undo your last oopsie in Git 🙈️
+# ugit: Undo your last oopsie in Git
 
 # TODO: Undo git stash commands (apply, drop, clear)
 # TODO: Undo git tag delete
 
 set -euo pipefail;
-
-[[ "${BASH_VERSINFO[0]}" -lt 3 ]] && die "Bash >=3 required"
 
 installed() {
     cmd=$(command -v "${1}")
@@ -21,6 +19,8 @@ die() {
     exit 1
 }
 
+[[ "${BASH_VERSINFO[0]}" -lt 3 ]] && die "Bash >=3 required"
+
 deps=(fzf git awk)
 for dep in "${deps[@]}"; do
     installed "${dep}" || die "Missing dependency: '${dep}'"
@@ -32,11 +32,14 @@ menu=$(cat << MENU
 3 Undo [git add]
 4 Undo [git pull]
 5 Undo [git commit message]
-6 Undo [git branch delete -D]
+6 Undo local branch delete [git branch -D]
 7 Undo [git reset]
+8 Undo a Merge with Conflicts
+9 Undo an Unpushed Merge Commit
+10 Undo a Pushed Merge Commit
 MENU
 )
-option=$(echo "$menu" | fzf --height 10% --reverse --pointer='ᐅ' --header='Undo your last oopsie in Git' | awk '{print $1}')
+option=$(echo "$menu" | fzf --height 20% --reverse --pointer='ᐅ' --header='Undo your last oopsie in Git 🙈️' --preview 'git status -s' | awk '{print $1}')
 
 undo_git_commit() {
     git reset HEAD~
@@ -85,6 +88,20 @@ undo_git_reset() {
     git reset "$last_good_state"
 }
 
+undo_git_merge() {
+    # WIP (untested)
+    if [[ "$1" == "conflicts" ]]; then
+        git merge --abort
+    elif [[ "$1" == "unpushed" ]]; then
+        undo_git_pull
+    else
+        default_branch=$(git remote show origin | awk '/HEAD/ {print $3}')
+        echo -e "Switching to default branch $default_branch"
+        git checkout "$default_branch"
+        commit_hash=$(git log --oneline | fzf --ansi --height 10% --reverse --multi --header="Choose appropriate hash of the merge commit" | awk '{print $1}')
+        git revert -m 1 "$commit_hash"
+    fi
+}
 case $option in
     1) undo_git_commit;;
     2) undo_git_push;;
@@ -93,4 +110,7 @@ case $option in
     5) change_commit_message;;
     6) undo_branch_delete;;
     7) undo_git_reset;;
+    8) undo_git_merge "conflicts";;
+    9) undo_git_merge "unpushed";;
+    10) undo_git_merge "pushed";;
 esac
