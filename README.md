@@ -1,6 +1,6 @@
 <h1 align="center">ugit</h1>
+<h3 align="center"><code>Undo your last oopsie 🙈️ in git without much effort</code></h4>
 <p align="center">
-<!--  <img src="" />-->
   <a href="https://github.com/Bhupesh-V/ugit/blob/master/LICENSE">
     <img alt="License: MIT" src="https://img.shields.io/github/license/Bhupesh-V/ugit" target="_blank" />
   </a>
@@ -13,9 +13,9 @@
   <a href="https://twitter.com/bhupeshimself">
     <img alt="Twitter: bhupeshimself" src="https://img.shields.io/twitter/follow/bhupeshimself.svg?style=social" target="_blank" />
   </a>
+  <img align="center" alt="ugit demo gid" src="https://user-images.githubusercontent.com/34342551/114261429-1ea4fb80-99f8-11eb-92b4-66315a65b854.gif"><br>
 </p>
 
-> Undo your last oopsie in git without much effort
 
 ## Why `ugit`
 
@@ -43,12 +43,12 @@
 
 1. `Bash>=3`
 2. GNU utils like `awk`, `grep` etc
-3. fzf
+3. [fzf](https://github.com/junegunn/fzf)
 
 Install the script using `wget`
 
 ```bash
-wget -q https://raw.githubusercontent.com/Bhupesh-V/ugit/main/ugit && chmod +x ugit && mv ugit $HOME/.local/bin/
+wget -q https://raw.githubusercontent.com/Bhupesh-V/ugit/master/ugit && chmod +x ugit && mv ugit $HOME/.local/bin/
 ```
 
 ## Not satisfied? 😒️
