@@ -21,7 +21,7 @@ die() {
 
 [[ "${BASH_VERSINFO[0]}" -lt 3 ]] && die "Bash >=3 required"
 
-deps=(fzf git awk)
+deps=(fzf git awk xargs cut)
 for dep in "${deps[@]}"; do
     installed "${dep}" || die "Missing dependency: '${dep}'"
 done
@@ -37,6 +37,7 @@ menu=$(cat << MENU
 8 Undo a Merge with Conflicts
 9 Undo an Unpushed Merge Commit
 10 Undo a Pushed Merge Commit
+11 Undo stash drop/clear
 MENU
 )
 option=$(echo "$menu" | fzf --height 20% --reverse --pointer='ᐅ' --header='Undo your last oopsie in Git 🙈️' --preview 'git status -s' | awk '{print $1}')
@@ -74,15 +75,6 @@ undo_branch_delete() {
     git checkout -b "$branch_name" "$last_branch_commit"
 }
 
-undo_git_pull() {
-    # FROM: https://stackoverflow.com/questions/1223354/undo-git-pull-how-to-bring-repos-to-old-state
-    last_good_state=$(git reflog | fzf --ansi --height 20% --reverse --multi --header="Choose last good branch commit" | awk '{print $1}')
-    # check if working tree is clean or not
-    [[ $(git status --porcelain 2>/dev/null) ]] && read -p "You have uncommited changes, still proceed [Y/n]: " -n 1 -r USER_INPUT
-    USER_INPUT=${USER_INPUT:-Y}
-    [[ "$USER_INPUT" == Y ]] && git reset --hard "$last_good_state"
-}
-
 undo_git_reset() {
     last_good_state=$(git reflog | fzf --ansi --height 20% --reverse --multi --header="Choose last known good commit" | awk '{print $1}')
     git reset "$last_good_state"
@@ -93,7 +85,12 @@ undo_git_merge() {
     if [[ "$1" == "conflicts" ]]; then
         git merge --abort
     elif [[ "$1" == "unpushed" ]]; then
-        undo_git_pull
+        # FROM: https://stackoverflow.com/questions/1223354/undo-git-pull-how-to-bring-repos-to-old-state
+        last_good_state=$(git reflog | fzf --ansi --height 20% --reverse --multi --header="Choose last good branch commit" | awk '{print $1}')
+        # check if working tree is clean or not
+        [[ $(git status --porcelain 2>/dev/null) ]] && read -p "You have uncommited changes, still proceed [Y/n]: " -n 1 -r USER_INPUT
+        USER_INPUT=${USER_INPUT:-Y}
+        [[ "$USER_INPUT" == Y ]] && git reset --hard "$last_good_state"
     else
         default_branch=$(git remote show origin | awk '/HEAD/ {print $3}')
         echo -e "Switching to default branch $default_branch"
@@ -102,15 +99,25 @@ undo_git_merge() {
         git revert -m 1 "$commit_hash"
     fi
 }
+recover_lost_stash() {
+    lost_stash_hash=$(git fsck --no-progress --unreachable | grep commit | cut -d ' ' -f3 | xargs git log --oneline --merges --no-walk | awk '{print $1}')
+    read -p "Enter Stash Message/Comment: " -r STASH_MSG
+    if git update-ref refs/stash "$lost_stash_hash" --create-reflog -m "$STASH_MSG"; then
+        echo "Stash Successfully Recovered"
+        git stash list | grep "$STASH_MSG"
+    fi
+}
+
 case $option in
     1) undo_git_commit;;
     2) undo_git_push;;
     3) undo_git_add;;
-    4) undo_git_pull;;
+    4) undo_git_merge "unpushed";;
     5) change_commit_message;;
     6) undo_branch_delete;;
     7) undo_git_reset;;
     8) undo_git_merge "conflicts";;
     9) undo_git_merge "unpushed";;
     10) undo_git_merge "pushed";;
+    11) recover_lost_stash;;
 esac
