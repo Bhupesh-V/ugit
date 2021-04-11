@@ -2,7 +2,6 @@
 
 # ugit: Undo your last oopsie in Git
 
-# TODO: Undo git stash commands (apply, drop, clear)
 # TODO: Undo git tag delete
 
 set -euo pipefail;
@@ -21,27 +20,27 @@ die() {
 
 [[ "${BASH_VERSINFO[0]}" -lt 3 ]] && die "Bash >=3 required"
 
-deps=(fzf git awk xargs cut)
+deps=(fzf git awk xargs cut nl)
 for dep in "${deps[@]}"; do
     installed "${dep}" || die "Missing dependency: '${dep}'"
 done
 
-menu=$(cat << MENU
-1 Undo [git commit]
-2 Undo [git push]
-3 Undo [git add]
-4 Undo [git pull]
-5 Undo [git commit message]
-6 Undo local branch delete [git branch -D]
-7 Undo [git reset]
-8 Undo a Merge with Conflicts
-9 Undo an Unpushed Merge Commit
-10 Undo a Pushed Merge Commit
-11 Undo stash drop/clear
-12 Undo git stash apply
-MENU
-)
-option=$(echo "$menu" | fzf --height 20% --reverse --pointer='ᐅ' --header='Undo your last oopsie in Git 🙈️' --preview 'git status -s' | awk '{print $1}')
+display_menu() {
+    printf "%s\n" "Undo [git commit]"
+    printf "%s\n" "Undo [git push]"
+    printf "%s\n" "Undo [git add]"
+    printf "%s\n" "Undo [git pull]"
+    printf "%s\n" "Undo [git commit message]"
+    printf "%s\n" "Undo local branch delete [git branch -D]"
+    printf "%s\n" "Undo [git reset]"
+    printf "%s\n" "Undo a Merge with Conflicts"
+    printf "%s\n" "Undo an Unpushed Merge Commit"
+    printf "%s\n" "Undo a Pushed Merge Commit"
+    printf "%s\n" "Undo stash drop/clear"
+    printf "%s\n" "Undo git stash apply"
+}
+
+option=$(display_menu | nl -n ln | fzf --height 20% --reverse --pointer='ᐅ' --header='Undo your last oopsie in Git 🙈️' --preview 'git status -s' | awk '{print $1}')
 
 undo_git_commit() {
     git reset HEAD~
@@ -51,7 +50,7 @@ undo_git_commit() {
 
 undo_git_add() {
     # show prompt to unstage files interactively
-    choices=$(git ls-files | fzf --height 10% --reverse --multi --header="Choose Files to unstage")
+    choices=$(git ls-files | fzf --height 10% --reverse --multi --marker='🢂' --color 'marker:#B8CC52' --header="Choose Files to unstage (TAB to select)")
     git restore --staged $choices
 }
 
