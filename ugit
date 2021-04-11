@@ -38,6 +38,7 @@ menu=$(cat << MENU
 9 Undo an Unpushed Merge Commit
 10 Undo a Pushed Merge Commit
 11 Undo stash drop/clear
+12 Undo git stash apply
 MENU
 )
 option=$(echo "$menu" | fzf --height 20% --reverse --pointer='ᐅ' --header='Undo your last oopsie in Git 🙈️' --preview 'git status -s' | awk '{print $1}')
@@ -99,6 +100,7 @@ undo_git_merge() {
         git revert -m 1 "$commit_hash"
     fi
 }
+
 recover_lost_stash() {
     lost_stash_hash=$(git fsck --no-progress --unreachable | grep commit | cut -d ' ' -f3 | xargs git log --oneline --merges --no-walk | awk '{print $1}')
     read -p "Enter Stash Message/Comment: " -r STASH_MSG
@@ -106,6 +108,12 @@ recover_lost_stash() {
         echo "Stash Successfully Recovered"
         git stash list | grep "$STASH_MSG"
     fi
+}
+
+undo_git_stash_apply() {
+    # TODO: check if diff coloring is on in git config otherwise the reverse apply command will fail
+    # TODO: option to select which stash to unapply?
+    git stash show -p | git apply --reverse
 }
 
 case $option in
@@ -120,4 +128,5 @@ case $option in
     9) undo_git_merge "unpushed";;
     10) undo_git_merge "pushed";;
     11) recover_lost_stash;;
+    12) undo_git_stash_apply;;
 esac

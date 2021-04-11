@@ -31,8 +31,8 @@
 - [x] Undo `git reset`
 - [ ] Undo `git merge`
 - [ ] Undo `git tag -D` (tag delete)
-- [ ] Undo `git stash apply`
-- [ ] Undo `git stash drop/clear`
+- [x] Undo `git stash apply`
+- [x] Undo `git stash drop/clear`
 
 ## Installation
 
