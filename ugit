@@ -82,8 +82,8 @@ undo_git_reset() {
     git reset "$last_good_state"
 }
 
+# WIP (untested)
 undo_git_merge() {
-    # WIP (untested)
     if [[ "$1" == "conflicts" ]]; then
         git merge --abort
     elif [[ "$1" == "unpushed" ]]; then
@@ -116,6 +116,21 @@ undo_git_stash_apply() {
     # TODO: option to select which stash to unapply?
     echo "Undoing latest git stash apply ..."
     git stash show -p | git apply --reverse
+}
+
+# WIP
+recover_deleted_tag() {
+    # only works for annotead tags? :(
+
+    # git fsck --unreachable | grep tag
+    # to see changes git show <COMMIT_HASH>
+    # git update-ref refs/tags/<tag-name> <COMMIT_HASH>
+    COMMIT_HASH=$(git fsck --no-progress --unreachable | grep tag | cut -d ' ' -f3)
+    read -p "Enter Lost tag name: " -r TAG_NAME
+    if git update-ref refs/tags "$TAG_NAME" --create-reflog "$COMMIT_HASH"; then
+        echo "Tag $TAG_NAME Successfully Recovered"
+        git tag -l | grep "$TAG_NAME"
+    fi
 }
 
 case $option in
