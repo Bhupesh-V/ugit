@@ -25,12 +25,14 @@ for dep in "${deps[@]}"; do
     installed "${dep}" || die "Missing dependency: '${dep}'"
 done
 
+printf "%s\n%s" "$(tput bold)Undo your last oopsie in Git 🙈️$(tput sgr0)" "Contact 📬️: varshneybhupesh@gmail.com for assistance"
+
 display_menu() {
     printf "%s\n" "Undo [git commit]"
     printf "%s\n" "Undo [git push]"
     printf "%s\n" "Undo [git add]"
     printf "%s\n" "Undo [git pull]"
-    printf "%s\n" "Undo [git commit message]"
+    printf "%s\n" "Undo/Change [git commit message]"
     printf "%s\n" "Undo local branch delete [git branch -D]"
     printf "%s\n" "Undo [git reset]"
     printf "%s\n" "Undo a Merge with Conflicts"
@@ -40,7 +42,7 @@ display_menu() {
     printf "%s\n" "Undo git stash apply"
 }
 
-option=$(display_menu | nl -n ln | fzf --height 20% --reverse --pointer='ᐅ' --header='Undo your last oopsie in Git 🙈️' --preview 'git status -s' | awk '{print $1}')
+option=$(display_menu | nl -n ln | fzf --height 30% --reverse --pointer='ᐅ' --cycle | awk '{print $1}')
 
 undo_git_commit() {
     git reset HEAD~
@@ -86,16 +88,16 @@ undo_git_merge() {
         git merge --abort
     elif [[ "$1" == "unpushed" ]]; then
         # FROM: https://stackoverflow.com/questions/1223354/undo-git-pull-how-to-bring-repos-to-old-state
-        last_good_state=$(git reflog | fzf --ansi --height 20% --reverse --multi --header="Choose last good branch commit" | awk '{print $1}')
+        last_good_state=$(git reflog | fzf --ansi --height 20% --reverse --header="Choose last good branch commit" | awk '{print $1}')
         # check if working tree is clean or not
-        [[ $(git status --porcelain 2>/dev/null) ]] && read -p "You have uncommited changes, still proceed [Y/n]: " -n 1 -r USER_INPUT
+        [[ $(git status --porcelain 2>/dev/null) ]] && read -p "You have uncommited changes, still proceed? [Y/n]: " -n 1 -r USER_INPUT
         USER_INPUT=${USER_INPUT:-Y}
         [[ "$USER_INPUT" == Y ]] && git reset --hard "$last_good_state"
     else
         default_branch=$(git remote show origin | awk '/HEAD/ {print $3}')
         echo -e "Switching to default branch $default_branch"
         git checkout "$default_branch"
-        commit_hash=$(git log --oneline | fzf --ansi --height 10% --reverse --multi --header="Choose appropriate hash of the merge commit" | awk '{print $1}')
+        commit_hash=$(git log --oneline | fzf --ansi --height 10% --reverse --header="Choose appropriate hash of the merge commit" | awk '{print $1}')
         git revert -m 1 "$commit_hash"
     fi
 }
@@ -112,6 +114,7 @@ recover_lost_stash() {
 undo_git_stash_apply() {
     # TODO: check if diff coloring is on in git config otherwise the reverse apply command will fail
     # TODO: option to select which stash to unapply?
+    echo "Undoing latest git stash apply ..."
     git stash show -p | git apply --reverse
 }
 
