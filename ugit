@@ -2,9 +2,7 @@
 
 # ugit: Undo your last oopsie in Git
 
-# TODO: Undo git tag delete
-
-set -euo pipefail;
+set -uo pipefail;
 
 installed() {
     cmd=$(command -v "${1}")
@@ -33,18 +31,20 @@ display_menu() {
     printf "%s\n" "Undo [git add]"
     printf "%s\n" "Undo [git pull]"
     printf "%s\n" "Undo/Change [git commit message]"
-    printf "%s\n" "Undo local branch delete [git branch -D]"
+    printf "%s\n" "Undo local branch delete [git branch -d]"
     printf "%s\n" "Undo [git reset]"
     printf "%s\n" "Undo a Merge with Conflicts"
     printf "%s\n" "Undo an Unpushed Merge Commit"
     printf "%s\n" "Undo a Pushed Merge Commit"
-    printf "%s\n" "Undo stash drop/clear"
-    printf "%s\n" "Undo git stash apply"
+    printf "%s\n" "Undo [git stash pop/drop/clear]"
+    printf "%s\n" "Undo [git stash apply]"
+    printf "%s\n" "Undo [git tag -d] tag delete"
 }
 
-option=$(display_menu | nl -n ln | fzf --height 30% --reverse --pointer='ᐅ' --cycle | awk '{print $1}')
+option=$(display_menu | nl -n ln | fzf --header="Don't worry we all mess up sometimes" --height 30% --reverse --pointer='ᐅ' --cycle | awk '{print $1}')
 
 undo_git_commit() {
+    # TODO: ask which commit to undo?
     git reset HEAD~
     # undo last commit (don't unstage everything)
     # git reset --soft HEAD^
@@ -74,12 +74,14 @@ undo_branch_delete() {
     last_branch_commit=$(git reflog | fzf --ansi --height 20% --reverse --multi --header="Choose last good branch commit" | awk '{print $1}')
     # echo "$last_branch_commit"
     read -p "Enter Branch Name: " branch_name
-    git checkout -b "$branch_name" "$last_branch_commit"
+    if git checkout -b "$branch_name" "$last_branch_commit"; then
+        printf "%s\n" "Branch $branch_name successfully recovered"
+    fi
 }
 
 undo_git_reset() {
-    last_good_state=$(git reflog | fzf --ansi --height 20% --reverse --multi --header="Choose last known good commit" | awk '{print $1}')
-    git reset "$last_good_state"
+    LAST_GOOD_STATE=$(git reflog | fzf --ansi --height 20% --reverse --multi --header="Choose last known good commit" | awk '{print $1}')
+    git reset "$LAST_GOOD_STATE"
 }
 
 # WIP (untested)
@@ -103,10 +105,10 @@ undo_git_merge() {
 }
 
 recover_lost_stash() {
-    lost_stash_hash=$(git fsck --no-progress --unreachable | grep commit | cut -d ' ' -f3 | xargs git log --oneline --merges --no-walk | awk '{print $1}')
+    LOST_STASH_HASH=$(git fsck --no-progress --unreachable | grep commit | cut -d ' ' -f3 | xargs git log --oneline --merges --no-walk | fzf --ansi --height 20% --reverse --header="Choose commit associated with stash" |  awk '{print $1}')
     read -p "Enter Stash Message/Comment: " -r STASH_MSG
-    if git update-ref refs/stash "$lost_stash_hash" --create-reflog -m "$STASH_MSG"; then
-        echo "Stash Successfully Recovered"
+    if git update-ref refs/stash "$LOST_STASH_HASH" --create-reflog -m "$STASH_MSG"; then
+        printf "%s\n" "Stash Successfully Recovered"
         git stash list | grep "$STASH_MSG"
     fi
 }
@@ -114,8 +116,9 @@ recover_lost_stash() {
 undo_git_stash_apply() {
     # TODO: check if diff coloring is on in git config otherwise the reverse apply command will fail
     # TODO: option to select which stash to unapply?
-    echo "Undoing latest git stash apply ..."
-    git stash show -p | git apply --reverse
+    if git stash show -p | git apply --reverse; then
+        printf "%s\n" "Done 👍️"
+    fi
 }
 
 # WIP
@@ -126,6 +129,8 @@ recover_deleted_tag() {
     # to see changes git show <COMMIT_HASH>
     # git update-ref refs/tags/<tag-name> <COMMIT_HASH>
     COMMIT_HASH=$(git fsck --no-progress --unreachable | grep tag | cut -d ' ' -f3)
+    [[ -z "$COMMIT_HASH" ]] && printf "%s\n" "Unable to find any deleted tags :("; exit
+
     read -p "Enter Lost tag name: " -r TAG_NAME
     if git update-ref refs/tags "$TAG_NAME" --create-reflog "$COMMIT_HASH"; then
         echo "Tag $TAG_NAME Successfully Recovered"
@@ -146,4 +151,5 @@ case $option in
     10) undo_git_merge "pushed";;
     11) recover_lost_stash;;
     12) undo_git_stash_apply;;
+    13) recover_deleted_tag;;
 esac
