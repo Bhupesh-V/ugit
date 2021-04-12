@@ -50,7 +50,7 @@ wget -q https://raw.githubusercontent.com/Bhupesh-V/ugit/master/ugit && chmod +x
 
 ## Not satisfied? 😒️
 
-You can read my in my process guide on [**How to undo anything in Git**](https://bhupesh.gitbook.io/notes/git/how-to-undo-anything-in-git)
+You can read my in-process guide on [**How to undo anything in Git**](https://bhupesh.gitbook.io/notes/git/how-to-undo-anything-in-git)
 
 ## Author
 
