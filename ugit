@@ -2,6 +2,8 @@
 
 # ugit: Undo your last oopsie in Git
 
+# TODO: Add self-updating --update #
+
 set -uo pipefail;
 
 installed() {
@@ -39,6 +41,7 @@ display_menu() {
     printf "%s\n" "Undo [git stash pop/drop/clear]"
     printf "%s\n" "Undo [git stash apply]"
     printf "%s\n" "Undo [git tag -d] tag delete"
+    printf "%s\n" "Undo [git rebase]"
 }
 
 option=$(display_menu | nl -n ln | fzf --header="Don't worry we all mess up sometimes" --height 30% --reverse --pointer='ᐅ' --cycle | awk '{print $1}')
@@ -48,6 +51,16 @@ undo_git_commit() {
     git reset HEAD~
     # undo last commit (don't unstage everything)
     # git reset --soft HEAD^
+}
+
+do_git_reset() {
+    # FROM: https://stackoverflow.com/questions/1223354/undo-git-pull-how-to-bring-repos-to-old-state
+    FZF_HEADER=${1:-"Choose last good branch commit"}
+    last_good_state=$(git reflog | fzf --ansi --height 20% --reverse --header="$FZF_HEADER" | awk '{print $1}')
+    # check if working tree is clean or not
+    [[ $(git status --porcelain 2>/dev/null) ]] && read -p "You have uncommited changes, still proceed? [Y/n]: " -n 1 -r USER_INPUT
+    USER_INPUT=${USER_INPUT:-Y}
+    [[ "$USER_INPUT" == Y ]] && git reset --hard "$last_good_state"
 }
 
 undo_git_add() {
@@ -105,20 +118,15 @@ undo_git_merge() {
 }
 
 recover_lost_stash() {
-    LOST_STASH=$(git fsck --no-progress --unreachable | grep commit | cut -d ' ' -f3 | \
-        xargs git log --oneline --merges --no-walk | \
-        fzf --ansi --height 20% --reverse --header="Choose commit associated with stash" | \
-        awk '{print $1}')
-            read -p "Enter Stash Message/Comment: " -r STASH_MSG
-            if git update-ref refs/stash "$LOST_STASH" --create-reflog -m "$STASH_MSG"; then
-                printf "%s\n" "Stash Successfully Recovered"
-                git stash list | grep "$STASH_MSG"
-            fi
-        }
+    LOST_STASH=$(git fsck --no-progress --unreachable | grep commit | cut -d ' ' -f3 | xargs git log --oneline --merges --no-walk | fzf --ansi --height 20% --reverse --header="Choose commit associated with stash" | awk '{print $1}')
+    read -p "Enter Stash Message/Comment: " -r STASH_MSG
+    if git update-ref refs/stash "$LOST_STASH" --create-reflog -m "$STASH_MSG"; then
+        printf "%s\n" "Stash Successfully Recovered"
+        git stash list | grep "$STASH_MSG"
+    fi
+}
 
-    undo_git_stash_apply() {
-        # TODO: option to select which stash to unapply?
-
+undo_git_stash_apply() {
     # check if diff coloring is set to auto in git config if not the reverse apply command will fail
     is_diff_color=$(git config --get color.diff | tr -d '\n')
     if [[ "$is_diff_color" == "auto" ]]; then
@@ -149,7 +157,7 @@ recover_deleted_tag() {
         printf "%s" "Input tag name $TAG_NAME doesn't match with previously deleted tag $DELETED_TAG"
     elif git update-ref refs/tags/"$TAG_NAME" --create-reflog "$COMMIT_HASH"; then
         printf "%s\n" "Tag $TAG_NAME Successfully Recovered 👍️"
-        git cat-file -p "$COMMIT_HASH"
+        git cat-file tag "$DELETED_TAG"
     fi
 }
 
@@ -162,9 +170,10 @@ case $option in
     6) undo_branch_delete;;
     7) undo_git_reset;;
     8) undo_git_merge "conflicts";;
-    9) undo_git_merge "unpushed";;
+    9) do_git_reset;;
     10) undo_git_merge "pushed";;
     11) recover_lost_stash;;
     12) undo_git_stash_apply;;
     13) recover_deleted_tag;;
+    14) do_git_reset "Choose commit just before rebase started";;
 esac

@@ -34,6 +34,9 @@
 - [x] Undo `git stash apply`
 - [x] Undo `git stash pop/drop/clear`
 - [ ] Undo `git tag` (rename a tag)
+- [ ] Undo `git rebase`
+- [ ] Undo `git cherry-pick`
+- [ ] Undo accidental file delete (Restore a deleted file after a commit)
 
 ## Installation
 
