@@ -1,5 +1,6 @@
 <h1 align="center">ugit</h1>
-<h3 align="center"><code>Undo your last oopsie 🙈️ in git without much effort</code></h4>
+<p align="center"><img align="center" alt="ugit logo" height="100px" src="https://user-images.githubusercontent.com/34342551/115037937-a608d800-9eec-11eb-88a9-252da7d6f507.png"></p>
+<h3 align="center"><code>Undo your last oopsie 🙈️ in git without much effort</code></h3>
 <p align="center">
   <a href="https://github.com/Bhupesh-V/ugit/blob/master/LICENSE">
     <img alt="License: MIT" src="https://img.shields.io/github/license/Bhupesh-V/ugit" target="_blank" />
@@ -12,7 +13,6 @@
   </a>
   <img align="center" alt="ugit demo gid" src="https://user-images.githubusercontent.com/34342551/114261429-1ea4fb80-99f8-11eb-92b4-66315a65b854.gif"><br>
 </p>
-
 
 ## Why `ugit`
 
@@ -37,6 +37,7 @@
 - [ ] Undo `git rebase`
 - [ ] Undo `git cherry-pick`
 - [ ] Undo accidental file delete (Restore a deleted file after a commit)
+- [ ] Undo `git worktree remove` (recover deleted work-tree)
 
 ## Installation
 
