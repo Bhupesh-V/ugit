@@ -44,7 +44,7 @@
 **ugit** dependencies:
 
 1. `Bash>=3`
-2. GNU utils like `awk`, `grep` etc
+2. GNU utils like `awk`, `grep`, `tput` etc
 3. [fzf](https://github.com/junegunn/fzf)
 
 Install the script using `wget`
@@ -60,9 +60,9 @@ or `curl`
 
 ```bash
 # Linux
-curl -fsSL https://raw.githubusercontent.com/Bhupesh-V/ugit/master/ugit && chmod +x ugit && mv ugit $HOME/.local/bin/
+curl -fsSL https://raw.githubusercontent.com/Bhupesh-V/ugit/master/ugit -o ugit && chmod +x ugit && mv ugit $HOME/.local/bin/
 # Mac
-curl -fsSL https://raw.githubusercontent.com/Bhupesh-V/ugit/master/ugit && chmod +x ugit && mv ugit /usr/local/bin
+curl -fsSL https://raw.githubusercontent.com/Bhupesh-V/ugit/master/ugit -o ugit && chmod +x ugit && mv ugit /usr/local/bin
 ```
 
 ## Please read ⚠️
