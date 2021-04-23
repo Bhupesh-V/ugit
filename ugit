@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # ugit: Undo your last oopsie in Git
+# Read the guide: https://bhupesh.gitbook.io/notes/git/how-to-undo-anything-in-git
 
 # TODO: Add self-updating --update #
 
@@ -42,6 +43,8 @@ display_menu() {
     printf "%s\n" "Undo [git stash apply]"
     printf "%s\n" "Undo [git tag -d] tag delete"
     printf "%s\n" "Undo [git rebase]"
+    printf "%s\n" "Undo/Recover commited file delete"
+    printf "%s\n" "Undo/Recover uncommited file delete"
 }
 
 option=$(display_menu | nl -n ln | fzf --header="Don't worry we all mess up sometimes" --height 30% --reverse --pointer='ᐅ' --cycle | awk '{print $1}')
@@ -141,10 +144,8 @@ undo_git_stash_apply() {
 
 recover_deleted_tag() {
     # only works for annotated tags? :(
+    printf "%s" "Note: Only annotated tags can be restored"
 
-    # git fsck --unreachable | grep tag
-    # to see changes git show <COMMIT_HASH>
-    # git update-ref refs/tags/<tag-name> <COMMIT_HASH>
     read -p "Enter lost Tag name (e.g v1.2): " -r TAG_NAME
     COMMIT_HASH=$(git fsck --no-progress --unreachable --tags | awk '/tagged/ {print $6}')
     [[ -z "$COMMIT_HASH" ]] && printf "%s\n" "Unable to find any deleted tags :(" && exit 1
@@ -158,6 +159,21 @@ recover_deleted_tag() {
     elif git update-ref refs/tags/"$TAG_NAME" --create-reflog "$COMMIT_HASH"; then
         printf "%s\n" "Tag $TAG_NAME Successfully Recovered 👍️"
         git cat-file tag "$DELETED_TAG"
+    fi
+}
+
+undo_file_delete() {
+    if [[ "$1" == "uncommited" ]]; then
+        DELETED_FILE=$(git ls-files -d | fzf --ansi --height 20% --reverse --header="Choose deleted file to recover" | awk '{print $1}')
+        if git checkout HEAD "$DELETED_FILE"; then
+            printf "%s\n" "$DELETED_FILE Successfully Recovered"
+            exit 0
+        fi
+    fi
+    commit_hash=$(git log --diff-filter=D --oneline| fzf --ansi --height 20% --reverse --header="Choose commit that deleted the file" | awk '{print $1}')
+    read -p "Enter complete filename: " -r FILENAME
+    if git checkout "$commit_hash"~1 -- "$FILENAME"; then
+        printf "%s\n" "$FILENAME Successfully Recovered"
     fi
 }
 
@@ -176,4 +192,6 @@ case $option in
     12) undo_git_stash_apply;;
     13) recover_deleted_tag;;
     14) do_git_reset "Choose commit just before rebase started";;
+    15) undo_file_delete;;
+    16) undo_file_delete "uncommited";;
 esac

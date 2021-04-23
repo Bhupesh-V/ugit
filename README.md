@@ -36,7 +36,7 @@
 - [ ] Undo `git tag` (rename a tag)
 - [ ] Undo `git rebase`
 - [ ] Undo `git cherry-pick`
-- [ ] Undo accidental file delete (Restore a deleted file after a commit)
+- [x] Undo accidental file delete (Restore a deleted file after a commit)
 - [ ] Undo `git worktree remove` (recover deleted work-tree)
 
 ## Installation
@@ -64,6 +64,27 @@ curl -fsSL https://raw.githubusercontent.com/Bhupesh-V/ugit/master/ugit && chmod
 # Mac
 curl -fsSL https://raw.githubusercontent.com/Bhupesh-V/ugit/master/ugit && chmod +x ugit && mv ugit /usr/local/bin
 ```
+
+## Please read ⚠️
+
+Git comes with a garbage collector ([in case you didn't know](https://git-scm.com/docs/git-gc)) therefore undoing some commands will become impossible if the entries are deleted from the reflog.
+One way to prevent this is to increase default time limits before the reflog entries expire:
+Add these configuration in your global `.gitconfig` file:
+
+```gitconfig
+[gc]
+    # default 90 days
+    reflogExpire = 200
+```
+Used to set how long records in a branches reflog should be preserved.
+
+```gitconfig
+[gc]
+    # default 30 days
+    reflogExpireUnreachable = 90
+
+```
+Used to set how long inaccessible reflog records should be preserved.
 
 ## Not satisfied? 😒️
 
