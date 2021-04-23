@@ -21,7 +21,7 @@ die() {
 
 [[ "${BASH_VERSINFO[0]}" -lt 3 ]] && die "Bash >=3 required"
 
-deps=(fzf git awk xargs cut nl)
+deps=(fzf git awk xargs cut nl tput)
 for dep in "${deps[@]}"; do
     installed "${dep}" || die "Missing dependency: '${dep}'"
 done
