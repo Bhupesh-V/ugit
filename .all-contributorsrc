@@ -1,0 +1,25 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "sharan-aithal",
+      "name": "Sharan Aithal",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32029982?v=4",
+      "profile": "https://github.com/sharan-aithal",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "ugit",
+  "projectOwner": "Bhupesh-V",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
