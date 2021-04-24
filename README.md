@@ -1,6 +1,6 @@
 <h1 align="center">ugit</h1>
 <p align="center"><img align="center" alt="ugit logo" height="100px" src="https://user-images.githubusercontent.com/34342551/115037937-a608d800-9eec-11eb-88a9-252da7d6f507.png"></p>
-<h3 align="center"><code>Undo your last oopsie 🙈️ in git without much effort</code></h3>
+<h4 align="center"><code>Undo your last oopsie 🙈️ in git without much effort</code></h4>
 <p align="center">
   <a href="https://github.com/Bhupesh-V/ugit/blob/master/LICENSE">
     <img alt="License: MIT" src="https://img.shields.io/github/license/Bhupesh-V/ugit" target="_blank" />
@@ -29,14 +29,15 @@
 - [x] Undo `git branch -D` (branch delete)
 - [x] Undo `git pull`
 - [x] Undo `git reset`
-- [ ] Undo `git merge`
 - [x] Undo `git tag -d` (tag delete)
 - [x] Undo `git stash apply`
 - [x] Undo `git stash pop/drop/clear`
+- [x] Undo accidental file delete (Restore a deleted file after a commit)
+- [x] Undo (Restore) a file to a previous version
+- [ ] Undo `git merge`
 - [ ] Undo `git tag` (rename a tag)
 - [ ] Undo `git rebase`
 - [ ] Undo `git cherry-pick`
-- [x] Undo accidental file delete (Restore a deleted file after a commit)
 - [ ] Undo `git worktree remove` (recover deleted work-tree)
 
 ## Installation
@@ -97,6 +98,9 @@ You can read my in-process guide on [**How to undo anything in Git**](https://bh
 - Web : [bhupesh-v.github.io](https://bhupesh-v.github.io)
 - Twitter : [@bhupeshimself](https://twitter.com/bhupeshimself)
 - DEV : [bhupesh](https://dev.to/bhupesh)
+
+## Credit & Thanks
+To all the SO threads that I will probably never visit again ;)
 
 ## ☺️ Show your support
 

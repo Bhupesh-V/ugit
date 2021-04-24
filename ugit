@@ -45,6 +45,7 @@ display_menu() {
     printf "%s\n" "Undo [git rebase]"
     printf "%s\n" "Undo/Recover commited file delete"
     printf "%s\n" "Undo/Recover uncommited file delete"
+    printf "%s\n" "Undo/Restore file to a previous commit/version"
 }
 
 option=$(display_menu | nl -n ln | fzf --header="Don't worry we all mess up sometimes" --height 30% --reverse --pointer='ᐅ' --cycle | awk '{print $1}')
@@ -73,10 +74,10 @@ undo_git_add() {
 }
 
 change_commit_message() {
-    echo -e "Enter New Commit Message (Ctrl+d to save):"
+    printf "%s" "Enter New Commit Message (Ctrl+d to save):"
     msg=$(</dev/stdin)
     echo
-    [[ "$msg" ]] && git commit --amend -m "$msg" || echo "bruh enter something!!"
+    [[ "$msg" ]] && git commit --amend -m "$msg" || printf "%s" "Empty Commit string!"
 }
 
 undo_git_push() {
@@ -89,9 +90,9 @@ undo_branch_delete() {
     # undo local branch delete
     last_branch_commit=$(git reflog | fzf --ansi --height 20% --reverse --multi --header="Choose last good branch commit" | awk '{print $1}')
     # echo "$last_branch_commit"
-    read -p "Enter Branch Name: " branch_name
-    if git checkout -b "$branch_name" "$last_branch_commit"; then
-        printf "%s\n" "Branch $branch_name successfully recovered"
+    read -p "Enter Branch Name: " -r BRANCH_NAME
+    if git checkout -b "$BRANCH_NAME" "$last_branch_commit"; then
+        printf "%s\n" "Branch $BRANCH_NAME successfully recovered"
     fi
 }
 
@@ -170,10 +171,23 @@ undo_file_delete() {
             exit 0
         fi
     fi
-    commit_hash=$(git log --diff-filter=D --oneline| fzf --ansi --height 20% --reverse --header="Choose commit that deleted the file" | awk '{print $1}')
+    commit_hash=$(git log --diff-filter=D --oneline | fzf --ansi --height 20% --reverse --header="Choose commit that deleted the file" | awk '{print $1}')
     read -p "Enter complete filename: " -r FILENAME
     if git checkout "$commit_hash"~1 -- "$FILENAME"; then
         printf "%s\n" "$FILENAME Successfully Recovered"
+    fi
+}
+
+restore_file() {
+    FILE=$(git ls-files | fzf --ansi --height 20% --reverse --header="Choose file to restore" | awk '{print $1}')
+    COMMIT=$(git log --oneline "$FILE" | fzf --ansi --height 80% --reverse --prompt="Choose commit to restore file to" --header="Use ctrl-j/ctrl-k to navigate file preview" --preview "echo {} | cut -d' ' -f1 | xargs -I{} git show {}:$FILE" --bind 'j:down,k:up,ctrl-j:preview-down,ctrl-k:preview-up' --preview-window down:60%)
+
+    if ! git diff -s --exit-code "$FILE"; then
+        # check if any local changes
+        printf "%s\n" "$FILE seems to be modified. Please either commit or discard those changes."
+        exit 0
+    elif git reset "$COMMIT" "$FILE"; then
+        printf "%s\n" "$FILE restored to version $COMMIT"
     fi
 }
 
@@ -194,4 +208,5 @@ case $option in
     14) do_git_reset "Choose commit just before rebase started";;
     15) undo_file_delete;;
     16) undo_file_delete "uncommited";;
+    17) restore_file;;
 esac
