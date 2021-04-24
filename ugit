@@ -81,9 +81,11 @@ change_commit_message() {
 }
 
 undo_git_push() {
-    commit_hash=$(git log --oneline | fzf --ansi --height 10% --reverse --multi --header="Choose Commit hash to revert/undo" | awk '{print $1}')
-    git revert "$commit_hash"
-    echo "Make sure to run 'git push' now"
+    commit=$(git log --oneline | fzf --ansi --height 10% --reverse --multi --header="Choose Commit hash to revert/undo" | awk '{print $1}')
+    if git revert "$commit"; then
+        printf "%s\n" "Commit: $commit successfully reverted."
+        printf "%s\n" "Make sure to run 'git push' now"
+    fi
 }
 
 undo_branch_delete() {
@@ -116,8 +118,8 @@ undo_git_merge() {
         default_branch=$(git remote show origin | awk '/HEAD/ {print $3}')
         echo -e "Switching to default branch $default_branch"
         git checkout "$default_branch"
-        commit_hash=$(git log --oneline | fzf --ansi --height 10% --reverse --header="Choose appropriate hash of the merge commit" | awk '{print $1}')
-        git revert -m 1 "$commit_hash"
+        commit=$(git log --oneline | fzf --ansi --height 10% --reverse --header="Choose appropriate hash of the merge commit" | awk '{print $1}')
+        git revert -m 1 "$commit"
     fi
 }
 
@@ -148,16 +150,16 @@ recover_deleted_tag() {
     printf "%s" "Note: Only annotated tags can be restored"
 
     read -p "Enter lost Tag name (e.g v1.2): " -r TAG_NAME
-    COMMIT_HASH=$(git fsck --no-progress --unreachable --tags | awk '/tagged/ {print $6}')
-    [[ -z "$COMMIT_HASH" ]] && printf "%s\n" "Unable to find any deleted tags :(" && exit 1
-    OBJECT_TYPE=$(git cat-file -t "$COMMIT_HASH")
+    COMMIT=$(git fsck --no-progress --unreachable --tags | awk '/tagged/ {print $6}')
+    [[ -z "$COMMIT" ]] && printf "%s\n" "Unable to find any deleted tags :(" && exit 1
+    OBJECT_TYPE=$(git cat-file -t "$COMMIT")
     if [[ "$OBJECT_TYPE" == "tag" ]] ; then
         printf "%s\n" "Found Deleted tag"
     fi
-    DELETED_TAG=$(git cat-file -p "$COMMIT_HASH" | awk '/tag / { print$2 }')
+    DELETED_TAG=$(git cat-file -p "$COMMIT" | awk '/tag / { print$2 }')
     if [[ "$DELETED_TAG" != "$TAG_NAME" ]]; then
         printf "%s" "Input tag name $TAG_NAME doesn't match with previously deleted tag $DELETED_TAG"
-    elif git update-ref refs/tags/"$TAG_NAME" --create-reflog "$COMMIT_HASH"; then
+    elif git update-ref refs/tags/"$TAG_NAME" --create-reflog "$COMMIT"; then
         printf "%s\n" "Tag $TAG_NAME Successfully Recovered 👍️"
         git cat-file tag "$DELETED_TAG"
     fi
@@ -165,24 +167,25 @@ recover_deleted_tag() {
 
 undo_file_delete() {
     if [[ "$1" == "uncommited" ]]; then
+        # user didn't commit the file deletion
         DELETED_FILE=$(git ls-files -d | fzf --ansi --height 20% --reverse --header="Choose deleted file to recover" | awk '{print $1}')
         if git checkout HEAD "$DELETED_FILE"; then
-            printf "%s\n" "$DELETED_FILE Successfully Recovered"
+            printf "%s\n" "$DELETED_FILE Successfully Recovered 👍️"
             exit 0
         fi
     fi
-    commit_hash=$(git log --diff-filter=D --oneline | fzf --ansi --height 20% --reverse --header="Choose commit that deleted the file" | awk '{print $1}')
     read -p "Enter complete filename: " -r FILENAME
-    if git checkout "$commit_hash"~1 -- "$FILENAME"; then
-        printf "%s\n" "$FILENAME Successfully Recovered"
+    COMMIT=$(git log --diff-filter=D --oneline | fzf --ansi --height 20% --reverse --header="Choose commit that deleted $FILENAME" | awk '{print $1}')
+    if git checkout "$COMMIT"~1 -- "$FILENAME"; then
+        printf "%s\n" "$FILENAME Successfully Recovered 👍️"
     fi
 }
 
 restore_file() {
     FILE=$(git ls-files | fzf --ansi --height 20% --reverse --header="Choose file to restore" | awk '{print $1}')
-    COMMIT=$(git log --oneline "$FILE" | fzf --ansi --height 80% --reverse --prompt="Choose commit to restore file to" --header="Use ctrl-j/ctrl-k to navigate file preview" --preview "echo {} | cut -d' ' -f1 | xargs -I{} git show {}:$FILE" --bind 'j:down,k:up,ctrl-j:preview-down,ctrl-k:preview-up' --preview-window down:60%)
+    COMMIT=$(git log --oneline "$FILE" | fzf --ansi --height 80% --reverse --prompt="Choose commit to restore file to" --header="Use ctrl-j/ctrl-k to navigate file preview. ctrl+space to toggle preview" --preview "echo {} | cut -d' ' -f1 | xargs -I{} git show {}:$FILE" --bind 'j:down,k:up,ctrl-j:preview-down,ctrl-k:preview-up,ctrl-space:toggle-preview' --preview-window down:60%)
 
-    if ! git diff -s --exit-code "$FILE"; then
+    if ! git diff -s --quiet "$FILE"; then
         # check if any local changes
         printf "%s\n" "$FILE seems to be modified. Please either commit or discard those changes."
         exit 0
