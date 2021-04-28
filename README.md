@@ -34,7 +34,7 @@
 - [x] Undo `git stash pop/drop/clear`
 - [x] Undo accidental file delete (Restore a deleted file after a commit)
 - [x] Undo (Restore) a file to a previous version
-- [ ] Undo `git merge`
+- [x] Undo `git merge`
 - [ ] Undo `git tag` (rename a tag)
 - [ ] Undo `git rebase`
 - [ ] Undo `git cherry-pick`

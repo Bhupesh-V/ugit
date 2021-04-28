@@ -154,21 +154,22 @@ undo_git_stash_apply() {
 
 recover_deleted_tag() {
     # only works for annotated tags? :(
-    printf "%s" "Note: Only annotated tags can be restored"
+    printf "%s\n\n" "Note: Only annotated tags can be restored"
 
     read -p "Enter lost Tag name (e.g v1.2): " -r TAG_NAME
     COMMIT=$(git fsck --no-progress --unreachable --tags | awk '/tagged/ {print $6}')
+
     [[ -z "$COMMIT" ]] && printf "%s\n" "Unable to find any deleted tags :(" && exit 1
+
     OBJECT_TYPE=$(git cat-file -t "$COMMIT")
-    if [[ "$OBJECT_TYPE" == "tag" ]] ; then
-        printf "%s\n" "Found Deleted tag"
-    fi
-    DELETED_TAG=$(git cat-file -p "$COMMIT" | awk '/tag / { print$2 }')
-    if [[ "$DELETED_TAG" != "$TAG_NAME" ]]; then
+    DELETED_TAG=$(git cat-file -p "$COMMIT" | awk '/tag / {print$2;exit;}')
+
+    if [[ "$OBJECT_TYPE" == "tag" && "$DELETED_TAG" != "$TAG_NAME" ]]; then
         printf "%s" "Input tag name $TAG_NAME doesn't match with previously deleted tag $DELETED_TAG"
     elif git update-ref refs/tags/"$TAG_NAME" --create-reflog "$COMMIT"; then
         printf "%s\n" "Tag $TAG_NAME Successfully Recovered 👍️"
-        git cat-file tag "$DELETED_TAG"
+    else
+        printf "%s\n" "Unable to recover deleted tag $TAG_NAME"
     fi
 }
 
