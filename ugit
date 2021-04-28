@@ -103,23 +103,30 @@ undo_git_reset() {
     git reset "$LAST_GOOD_STATE"
 }
 
-# WIP (untested)
 undo_git_merge() {
+    # Undoing a git merge is a messy business
+    printf "%s\n" "Tips: "
+    printf "%s\n" "Do a revert of the previous revert if the faulty side branch was fixed by adding corrections on top."
+    printf "%s\n" "Re-merge the result branch if the faulty side branch (discarded by an earlier revert of a merge) was rebuilt from scratch (i.e. rebasing and fixing)."
     if [[ "$1" == "conflicts" ]]; then
         git merge --abort
     elif [[ "$1" == "unpushed" ]]; then
         # FROM: https://stackoverflow.com/questions/1223354/undo-git-pull-how-to-bring-repos-to-old-state
-        last_good_state=$(git reflog | fzf --ansi --height 20% --reverse --header="Choose last good branch commit" | awk '{print $1}')
+        # last_good_state=$(git reflog | fzf --ansi --height 20% --reverse --header="Choose the merge commit" | awk '{print $1}')
         # check if working tree is clean or not
         [[ $(git status --porcelain 2>/dev/null) ]] && read -p "You have uncommited changes, still proceed? [Y/n]: " -n 1 -r USER_INPUT
         USER_INPUT=${USER_INPUT:-Y}
-        [[ "$USER_INPUT" == Y ]] && git reset --hard "$last_good_state"
+        # ref: ORIG_HEAD points to the original commit from before the merge
+        [[ "$USER_INPUT" == Y ]] && git reset --merge ORIG_HEAD || exit 0
+        # [[ "$USER_INPUT" == Y ]] && git reset --merge "$last_good_state" || exit 0
     else
         default_branch=$(git remote show origin | awk '/HEAD/ {print $3}')
-        echo -e "Switching to default branch $default_branch"
+        printf "%s\n" "Switching to default branch $default_branch"
         git checkout "$default_branch"
-        commit=$(git log --oneline | fzf --ansi --height 10% --reverse --header="Choose appropriate hash of the merge commit" | awk '{print $1}')
-        git revert -m 1 "$commit"
+        commit=$(git log --oneline | fzf --ansi --height 10% --reverse --header="Choose the merge commit" | awk '{print $1}')
+        if git revert -m 1 "$commit"; then
+            printf "%s\n" "Merge ($commit) successfully reverted"
+        fi
     fi
 }
 
@@ -190,7 +197,7 @@ restore_file() {
         printf "%s\n" "$FILE seems to be modified. Please either commit or discard those changes."
         exit 0
     elif git reset "$COMMIT" "$FILE"; then
-        printf "%s\n" "$FILE restored to version $COMMIT"
+        printf "%s\n" "$FILE restored to version at $COMMIT"
     fi
 }
 
@@ -213,3 +220,4 @@ case $option in
     16) undo_file_delete "uncommited";;
     17) restore_file;;
 esac
+
