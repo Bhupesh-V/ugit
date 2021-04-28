@@ -1,17 +1,20 @@
 <h1 align="center">ugit</h1>
 <p align="center"><img align="center" alt="ugit logo" height="100px" src="https://user-images.githubusercontent.com/34342551/115037937-a608d800-9eec-11eb-88a9-252da7d6f507.png"></p>
-<h4 align="center"><code>Undo your last oopsie 🙈️ in git without much effort</code></h4>
+<h4 align="center"><code>Undo your last oopsie 🙈️ in git with ease</code></h4>
 <p align="center">
   <a href="https://github.com/Bhupesh-V/ugit/blob/master/LICENSE">
     <img alt="License: MIT" src="https://img.shields.io/github/license/Bhupesh-V/ugit" target="_blank" />
   </a>
-  <a href="https://github.com/Bhupesh-V/ugit/issues">
-    <img alt="Issues" src="https://img.shields.io/github/issues/Bhupesh-V/ugit?color=blueviolet" />
+  <a href="">
+    <img alt="platform support linux and macos" src="https://img.shields.io/badge/platform-GNU/Linux %7C MacOS-blue">
+  </a>
+  <a href="https://github.com/ellerbrock/open-source-badges">
+    <img alt="bash love" src="https://raw.githubusercontent.com/ellerbrock/open-source-badges/master/badges/bash-v1/bash.png">
   </a>
   <a href="https://twitter.com/bhupeshimself">
     <img alt="Twitter: bhupeshimself" src="https://img.shields.io/twitter/follow/bhupeshimself.svg?style=social" target="_blank" />
   </a>
-  <img align="center" alt="ugit demo gid" src="https://user-images.githubusercontent.com/34342551/114261429-1ea4fb80-99f8-11eb-92b4-66315a65b854.gif"><br>
+  <img align="center" alt="ugit demo gif" src="https://user-images.githubusercontent.com/34342551/114261429-1ea4fb80-99f8-11eb-92b4-66315a65b854.gif"><br>
 </p>
 
 ## Why `ugit`
