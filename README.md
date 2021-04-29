@@ -55,18 +55,18 @@ Install the script using `wget`
 
 ```bash
 # Linux
-wget -q https://raw.githubusercontent.com/Bhupesh-V/ugit/master/ugit && chmod +x ugit && mv ugit $HOME/.local/bin/
+wget -q https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit && chmod +x ugit && mv ugit $HOME/.local/bin/
 # Mac
-wget -q https://raw.githubusercontent.com/Bhupesh-V/ugit/master/ugit && chmod +x ugit && mv ugit /usr/local/bin
+wget -q https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit && chmod +x ugit && mv ugit /usr/local/bin
 ```
 
 or `curl`
 
 ```bash
 # Linux
-curl -fsSL https://raw.githubusercontent.com/Bhupesh-V/ugit/master/ugit -o ugit && chmod +x ugit && mv ugit $HOME/.local/bin/
+curl -fsSL https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit -o ugit && chmod +x ugit && mv ugit $HOME/.local/bin/
 # Mac
-curl -fsSL https://raw.githubusercontent.com/Bhupesh-V/ugit/master/ugit -o ugit && chmod +x ugit && mv ugit /usr/local/bin
+curl -fsSL https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit -o ugit && chmod +x ugit && mv ugit /usr/local/bin
 ```
 
 ## Please read ⚠️
