@@ -231,6 +231,18 @@ show_version() {
 }
 
 print_help() {
+    cat <<EOF
+Usage: $(basename "${BASH_SOURCE[0]}") [-h] [-v] [-u]
+
+ugit helps you undo your last git command without much effort
+Just run 'ugit' and search for what you want to undo
+
+Available options:
+
+-h, --help      Print this help and exit
+-v, --version   Print current ugit version
+-u, --update    Update ugit
+EOF
     printf "\n%s\n" "Contact 📬️: varshneybhupesh@gmail.com for assistance"
     printf "%s\n" "Read the guide: https://bhupesh.gitbook.io/notes/git/how-to-undo-anything-in-git"
 }
@@ -257,13 +269,13 @@ main() {
     if [[ $# -gt 0 ]]; then
         local key="$1"
         case "$key" in
-            --version)
+            --version|-v)
                 show_version
                 ;;
-            --update)
+            --update|-u)
                 ugit_update
                 ;;
-            --help)
+            --help|-h)
                 print_help
                 exit
                 ;;

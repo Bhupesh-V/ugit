@@ -21,6 +21,7 @@
 
 - You did an accidental `git` command you didn't want to.
 - You don't want to waste your time searching on _how to undo ..._
+- Because ugit is cool
 
 
 ## What's in the box
@@ -51,23 +52,28 @@
 2. GNU utils like `awk`, `grep`, `tput` etc
 3. [fzf](https://github.com/junegunn/fzf)
 
-Install the script using `wget`
+1. Install the script using `wget`
+   ```bash
+   # Linux
+   wget -q https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit && chmod +x ugit && mv ugit $HOME/.local/bin/
+   # Mac
+   wget -q https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit && chmod +x ugit && mv ugit /usr/local/bin
+   ```
 
-```bash
-# Linux
-wget -q https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit && chmod +x ugit && mv ugit $HOME/.local/bin/
-# Mac
-wget -q https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit && chmod +x ugit && mv ugit /usr/local/bin
-```
+   or `curl`
 
-or `curl`
+   ```bash
+   # Linux
+   curl -fsSL https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit -o ugit && chmod +x ugit && mv ugit $HOME/.local/bin/
+   # Mac
+   curl -fsSL https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit -o ugit && chmod +x ugit && mv ugit /usr/local/bin
+   ```
 
-```bash
-# Linux
-curl -fsSL https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit -o ugit && chmod +x ugit && mv ugit $HOME/.local/bin/
-# Mac
-curl -fsSL https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit -o ugit && chmod +x ugit && mv ugit /usr/local/bin
-```
+2. Verify installation
+   ```bash
+   ugit --version
+   ```
+   Optionally run `ugit --help` to see help and management commands
 
 ## Please read ⚠️
 
