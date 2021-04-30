@@ -25,7 +25,7 @@
 
 
 ## What's in the box
-`ugit` supports undoing following operations, some are a WIP. If you know of any operation that can be undone and is not in the list, make sure to send a quick PR 💛️
+`ugit` supports undoing following operations, some are a WIP. If you know of any other operations that can be undone and is not in the list, make sure to send a quick PR 💛️
 
 - [x] Undo `git commit`
 - [x] Undo `git add`
@@ -48,9 +48,10 @@
 
 **ugit** dependencies:
 
-1. `Bash>=3`
-2. GNU utils like `awk`, `grep`, `tput` etc
-3. [fzf](https://github.com/junegunn/fzf)
+- `Bash`>=3
+- GNU utils like `awk`, `grep`, `tput` etc
+- [fzf](https://github.com/junegunn/fzf)
+
 
 1. Install the script using `wget`
    ```bash

@@ -194,12 +194,13 @@ undo_file_delete() {
 restore_file() {
     FILE=$(git ls-files | fzf --ansi --height 20% --reverse --header="Choose file to restore" | awk '{print $1}')
     COMMIT=$(git log --oneline "$FILE" | fzf --ansi --height 80% --reverse --prompt="Choose commit to restore file to" --header="Use ctrl-j/ctrl-k to navigate file preview. ctrl+space to toggle preview" --preview "echo {} | cut -d' ' -f1 | xargs -I{} git show {}:$FILE" --bind 'j:down,k:up,ctrl-j:preview-down,ctrl-k:preview-up,ctrl-space:toggle-preview' --preview-window down:60%)
+    COMMIT=$(printf "%s" "$COMMIT" | awk '{print $1}')
 
     if ! git diff -s --quiet "$FILE"; then
         # check if any local changes
         printf "%s\n" "$FILE seems to be modified. Please either commit or discard those changes."
         exit 0
-    elif git reset "$COMMIT" "$FILE"; then
+    elif git restore --source="$COMMIT" "$FILE"; then
         printf "%s\n" "$FILE restored to version at $COMMIT"
     fi
 }
