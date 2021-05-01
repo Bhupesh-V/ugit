@@ -69,6 +69,13 @@
    # Mac
    curl -fsSL https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit -o ugit && chmod +x ugit && mv ugit /usr/local/bin
    ```
+   
+   or Arch Linux users can install ugit via the AUR
+   
+   ```bash
+   git clone https://aur.archlinux.org/ugit.git && cd ugit
+   makepkg -si
+   ```
 
 2. Verify installation
    ```bash
