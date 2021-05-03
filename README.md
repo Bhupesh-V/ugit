@@ -1,6 +1,6 @@
 <h1 align="center">ugit</h1>
 <p align="center"><img align="center" alt="ugit logo" height="100px" src="https://user-images.githubusercontent.com/34342551/115037937-a608d800-9eec-11eb-88a9-252da7d6f507.png"></p>
-<h4 align="center"><code>Undo your last oopsie 🙈️ in git with ease</code></h4>
+<h3 align="center"><code>Undo your last oopsie 🙈️ in git</code></h4>
 <p align="center">
   <a href="https://github.com/Bhupesh-V/ugit/blob/master/LICENSE">
     <img alt="License: MIT" src="https://img.shields.io/github/license/Bhupesh-V/ugit" target="_blank" />
@@ -23,6 +23,7 @@
 - You don't want to waste your time searching on _how to undo ..._
 - Because ugit is cool
 
+#### [More video demos & motivations behind writing ugit 🙇‍♂️️](https://bhupesh-v.github.io/undo-your-last-git-mistake-with-ugit)
 
 ## What's in the box
 `ugit` supports undoing following operations, some are a WIP. If you know of any other operations that can be undone and is not in the list, make sure to send a quick PR 💛️
