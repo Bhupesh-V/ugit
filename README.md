@@ -71,11 +71,6 @@
    ```
    
    Or Arch Linux users can install [**ugit via AUR**](https://aur.archlinux.org/packages/ugit)
-   
-   ```bash
-   git clone https://aur.archlinux.org/ugit.git && cd ugit
-   makepkg -si
-   ```
 
 2. Verify installation
    ```bash
