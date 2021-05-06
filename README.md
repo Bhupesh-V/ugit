@@ -45,7 +45,7 @@
 - [ ] Undo `git cherry-pick`
 - [ ] Undo `git worktree remove` (recover deleted work-tree)
 
-Have any other ideas/suggestions? [**Hope in ugit discussions 💬️**](https://github.com/Bhupesh-V/ugit/discussions/7)
+Have any other ideas/suggestions? [**Hop in to ugit discussions 💬️**](https://github.com/Bhupesh-V/ugit/discussions/7)
 
 ## Installation
 
