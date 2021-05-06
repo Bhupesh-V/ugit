@@ -117,6 +117,10 @@ You can read my in-process guide on [**How to undo anything in Git**](https://bh
 ## Credit & Thanks
 To all the SO threads that I will probably never visit again ;)
 
+## `ugit` in News & Community
+
+- Featured on [Changelog News](https://changelog.com/news/ugit-helps-you-undo-your-last-git-command-with-grace-8X6L#discussion)
+
 ## ☺️ Show your support
 
 Support me by giving a ⭐️ if this project helped you! or just [![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FBhupesh-V%2Fugit%2F)](https://twitter.com/intent/tweet?url=https://github.com/Bhupesh-V/ugit&text=ugit%20via%20@bhupeshimself)
