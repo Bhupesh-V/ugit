@@ -14,7 +14,7 @@
   <a href="https://twitter.com/bhupeshimself">
     <img alt="Twitter: bhupeshimself" src="https://img.shields.io/twitter/follow/bhupeshimself.svg?style=social" target="_blank" />
   </a>
-  <img align="center" alt="ugit demo gif" src="https://user-images.githubusercontent.com/34342551/114261429-1ea4fb80-99f8-11eb-92b4-66315a65b854.gif"><br>
+  <img align="center" title="ugit demo: restore file to a previous commit" alt="ugit demo: restore file gif" src="https://user-images.githubusercontent.com/34342551/117250614-19a16380-ae61-11eb-97a9-8ba1695cc50a.gif"><br>
 </p>
 
 ## Why `ugit`
@@ -23,7 +23,7 @@
 - You don't want to waste your time searching on _how to undo ..._
 - Because ugit is cool
 
-#### [More video demos & motivations behind writing ugit 🙇‍♂️️](https://bhupesh-v.github.io/undo-your-last-git-mistake-with-ugit)
+### [More video demos & motivations behind writing ugit 🙇‍♂️️](https://bhupesh-v.github.io/undo-your-last-git-mistake-with-ugit)
 
 ## What's in the box
 `ugit` supports undoing following operations, some are a WIP. If you know of any other operations that can be undone and is not in the list, make sure to send a quick PR 💛️
@@ -44,6 +44,8 @@
 - [ ] Undo `git rebase`
 - [ ] Undo `git cherry-pick`
 - [ ] Undo `git worktree remove` (recover deleted work-tree)
+
+Have any other ideas/suggestions? [**Hope in ugit discussions 💬️**](https://github.com/Bhupesh-V/ugit/discussions/7)
 
 ## Installation
 
