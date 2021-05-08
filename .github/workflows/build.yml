@@ -1,0 +1,23 @@
+name: build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  linux-test:
+    name: Linux Test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: ShellCheck Test
+      uses: ludeeus/action-shellcheck@latest
+    - name: Syntax Testing
+      # -n : read  commands  but  do  not  execute  them.  
+      #      This may be used to check a shell script for syntax errors (ignored by interactive shells).
+      run : |
+          bash -n ugit
+          sh -n ugit          
+    
