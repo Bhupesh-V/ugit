@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: ShellCheck Test
-      uses: ludeeus/action-shellcheck@latest
+      uses: ludeeus/action-shellcheck@master
     - name: Syntax Testing
       # -n : read  commands  but  do  not  execute  them.  
       #      This may be used to check a shell script for syntax errors (ignored by interactive shells).
