@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-# ugit: Undo your last oopsie in Git
-# 
+# ugit: Undo your last git command without much effort. Powered by FZF
 
 set -uo pipefail;
 
@@ -18,11 +17,11 @@ installed() {
 }
 
 die() {
-    >&2 echo "Fatal: ${@}"
+    >&2 echo "Fatal: $*"
     exit 1
 }
 
-[[ "${BASH_VERSINFO[0]}" -lt 3 ]] && die "Bash >=3 required"
+[[ "${BASH_VERSINFO[0]}" -lt 4 ]] && die "Bash >=4 required"
 
 deps=(fzf git awk xargs cut nl tput)
 for dep in "${deps[@]}"; do
@@ -71,8 +70,10 @@ do_git_reset() {
 
 undo_git_add() {
     # show prompt to unstage files interactively
-    choices=$(git ls-files | fzf --height 10% --reverse --multi --marker='🢂' --color 'marker:#B8CC52' --header="Choose Files to unstage (TAB to select)")
-    git restore --staged $choices
+    # choices=$(git ls-files | fzf --height 10% --reverse --multi --marker='🢂' --color 'marker:#B8CC52' --header="Choose files to unstage (TAB to select multiple files)")
+    readarray -t choices < <(git ls-files | fzf --height 10% --reverse --multi --marker='🢂' --color 'marker:#B8CC52' --header="Choose files to unstage (TAB to select multiple files)")
+    # declare -p choices
+    git restore --staged "${choices[@]}"
 }
 
 change_commit_message() {
