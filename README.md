@@ -1,6 +1,6 @@
 <h1 align="center">ugit</h1>
 <p align="center"><img align="center" alt="ugit logo" height="100px" src="https://user-images.githubusercontent.com/34342551/115037937-a608d800-9eec-11eb-88a9-252da7d6f507.png"></p>
-<h4 align="center"><code>Undo your last oopsie 🙈️ in git with ease</code></h4>
+<h3 align="center"><code>Undo your last oopsie 🙈️ in git</code></h4>
 <p align="center">
   <a href="https://github.com/Bhupesh-V/ugit/blob/master/LICENSE">
     <img alt="License: MIT" src="https://img.shields.io/github/license/Bhupesh-V/ugit" target="_blank" />
@@ -14,7 +14,7 @@
   <a href="https://twitter.com/bhupeshimself">
     <img alt="Twitter: bhupeshimself" src="https://img.shields.io/twitter/follow/bhupeshimself.svg?style=social" target="_blank" />
   </a>
-  <img align="center" alt="ugit demo gif" src="https://user-images.githubusercontent.com/34342551/114261429-1ea4fb80-99f8-11eb-92b4-66315a65b854.gif"><br>
+  <img align="center" title="ugit demo: restore file to a previous commit" alt="ugit demo: restore file gif" src="https://user-images.githubusercontent.com/34342551/117250614-19a16380-ae61-11eb-97a9-8ba1695cc50a.gif"><br>
 </p>
 
 ## Why `ugit`
@@ -23,6 +23,7 @@
 - You don't want to waste your time searching on _how to undo ..._
 - Because ugit is cool
 
+### [More video demos & motivations behind writing ugit 🙇‍♂️️](https://bhupesh-v.github.io/undo-your-last-git-mistake-with-ugit)
 
 ## What's in the box
 `ugit` supports undoing following operations, some are a WIP. If you know of any other operations that can be undone and is not in the list, make sure to send a quick PR 💛️
@@ -43,6 +44,8 @@
 - [ ] Undo `git rebase`
 - [ ] Undo `git cherry-pick`
 - [ ] Undo `git worktree remove` (recover deleted work-tree)
+
+Have any other ideas/suggestions? [**Hop in to ugit discussions 💬️**](https://github.com/Bhupesh-V/ugit/discussions/7)
 
 ## Installation
 
@@ -69,6 +72,8 @@
    # Mac
    curl -fsSL https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit -o ugit && chmod +x ugit && mv ugit /usr/local/bin
    ```
+   
+   Or Arch Linux users can install [**ugit via AUR**](https://aur.archlinux.org/packages/ugit)
 
 2. Verify installation
    ```bash
@@ -112,6 +117,10 @@ You can read my in-process guide on [**How to undo anything in Git**](https://bh
 ## Credit & Thanks
 To all the SO threads that I will probably never visit again ;)
 
+## `ugit` in News & Community
+
+- Featured on [Changelog News](https://changelog.com/news/ugit-helps-you-undo-your-last-git-command-with-grace-8X6L#discussion)
+
 ## ☺️ Show your support
 
 Support me by giving a ⭐️ if this project helped you! or just [![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FBhupesh-V%2Fugit%2F)](https://twitter.com/intent/tweet?url=https://github.com/Bhupesh-V/ugit&text=ugit%20via%20@bhupeshimself)
@@ -137,6 +146,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://github.com/sharan-aithal"><img src="https://avatars.githubusercontent.com/u/32029982?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sharan Aithal</b></sub></a><br /><a href="https://github.com/Bhupesh-V/ugit/commits?author=sharan-aithal" title="Code">💻</a> <a href="https://github.com/Bhupesh-V/ugit/commits?author=sharan-aithal" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://tabulate.tech"><img src="https://avatars.githubusercontent.com/u/58576759?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Tabulate</b></sub></a><br /><a href="https://github.com/Bhupesh-V/ugit/commits?author=TabulateJarl8" title="Code">💻</a> <a href="#platform-TabulateJarl8" title="Packaging/porting to new platform">📦</a></td>
   </tr>
 </table>
 
