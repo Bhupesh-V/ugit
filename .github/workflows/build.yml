@@ -19,5 +19,3 @@ jobs:
       #      This may be used to check a shell script for syntax errors (ignored by interactive shells).
       run : |
           bash -n ugit
-          sh -n ugit          
-    

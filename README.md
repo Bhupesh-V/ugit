@@ -17,13 +17,29 @@
   <img align="center" title="ugit demo: restore file to a previous commit" alt="ugit demo: restore file gif" src="https://user-images.githubusercontent.com/34342551/117250614-19a16380-ae61-11eb-97a9-8ba1695cc50a.gif"><br>
 </p>
 
+<h3><details><summary>More Video Demos ✨️</summary>
+
+<h4>Undo <code>git add</code></h4>
+
+https://user-images.githubusercontent.com/34342551/117613719-f1797380-b184-11eb-9ff1-689b125265a9.mp4
+
+<h4>Undo <code>git branch -D</code></h4>
+
+https://user-images.githubusercontent.com/34342551/117613828-18d04080-b185-11eb-808b-fa1a65876ee9.mp4
+
+<h4>Undo <code>git merge</code></h4>
+
+https://user-images.githubusercontent.com/34342551/117613992-4ddc9300-b185-11eb-9286-bdc8b3aa2a8d.mp4
+
+</details></h3>
+
 ## Why `ugit`
 
 - You did an accidental `git` command you didn't want to.
 - You don't want to waste your time searching on _how to undo ..._
 - Because ugit is cool
 
-### [More video demos & motivations behind writing ugit 🙇‍♂️️](https://bhupesh-v.github.io/undo-your-last-git-mistake-with-ugit)
+### [Motivations behind writing ugit 🙇‍♂️️](https://bhupesh-v.github.io/undo-your-last-git-mistake-with-ugit)
 
 ## What's in the box
 `ugit` supports undoing following operations, some are a WIP. If you know of any other operations that can be undone and is not in the list, make sure to send a quick PR 💛️
@@ -45,6 +61,8 @@
 - [ ] Undo `git cherry-pick`
 - [ ] Undo `git worktree remove` (recover deleted work-tree)
 
+Help me finish above tasks by contributing?
+
 Have any other ideas/suggestions? [**Hop in to ugit discussions 💬️**](https://github.com/Bhupesh-V/ugit/discussions/7)
 
 ## Installation
@@ -57,23 +75,29 @@ Have any other ideas/suggestions? [**Hop in to ugit discussions 💬️**](https
 
 
 1. Install the script using `wget`
+   **Linux**
    ```bash
-   # Linux
    wget -q https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit && chmod +x ugit && mv ugit $HOME/.local/bin/
-   # Mac
+   ```
+
+   **Mac**
+   ```bash
    wget -q https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit && chmod +x ugit && mv ugit /usr/local/bin
    ```
 
    or `curl`
 
+   **Linux**
    ```bash
-   # Linux
    curl -fsSL https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit -o ugit && chmod +x ugit && mv ugit $HOME/.local/bin/
-   # Mac
+   ```
+
+   **Mac**
+   ```bash
    curl -fsSL https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit -o ugit && chmod +x ugit && mv ugit /usr/local/bin
    ```
    
-   Or Arch Linux users can install [**ugit via AUR**](https://aur.archlinux.org/packages/ugit)
+   Or Arch Linux users can install [**ugit via AUR**](https://aur.archlinux.org/packages/ugit).
 
 2. Verify installation
    ```bash
