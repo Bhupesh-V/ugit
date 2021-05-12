@@ -2,6 +2,9 @@
 <p align="center"><img align="center" alt="ugit logo" height="100px" src="https://user-images.githubusercontent.com/34342551/115037937-a608d800-9eec-11eb-88a9-252da7d6f507.png"></p>
 <h3 align="center"><code>Undo your last oopsie 🙈️ in git</code></h4>
 <p align="center">
+  <a href="https://github.com/Bhupesh-V/ugit/actions/workflows/build.yml">
+    <img alt="build ugit" src="https://github.com/Bhupesh-V/ugit/actions/workflows/build.yml/badge.svg">
+  </a>
   <a href="https://github.com/Bhupesh-V/ugit/blob/master/LICENSE">
     <img alt="License: MIT" src="https://img.shields.io/github/license/Bhupesh-V/ugit" target="_blank" />
   </a>
@@ -17,7 +20,7 @@
   <img align="center" title="ugit demo: restore file to a previous commit" alt="ugit demo: restore file gif" src="https://user-images.githubusercontent.com/34342551/117250614-19a16380-ae61-11eb-97a9-8ba1695cc50a.gif"><br>
 </p>
 
-<h3><details><summary>More Video Demos ✨️</summary>
+<h2><details><summary>More Video Demos ✨️</summary>
 
 <h4>Undo <code>git add</code></h4>
 
@@ -31,7 +34,7 @@ https://user-images.githubusercontent.com/34342551/117613828-18d04080-b185-11eb-
 
 https://user-images.githubusercontent.com/34342551/117613992-4ddc9300-b185-11eb-9286-bdc8b3aa2a8d.mp4
 
-</details></h3>
+</details></h2>
 
 ## Why `ugit`
 
@@ -74,18 +77,7 @@ Have any other ideas/suggestions? [**Hop in to ugit discussions 💬️**](https
 - [fzf](https://github.com/junegunn/fzf)
 
 
-1. Install the script using `wget`
-   **Linux**
-   ```bash
-   wget -q https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit && chmod +x ugit && mv ugit $HOME/.local/bin/
-   ```
-
-   **Mac**
-   ```bash
-   wget -q https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit && chmod +x ugit && mv ugit /usr/local/bin
-   ```
-
-   or `curl`
+1. Install the script using `curl`
 
    **Linux**
    ```bash
@@ -104,6 +96,30 @@ Have any other ideas/suggestions? [**Hop in to ugit discussions 💬️**](https
    ugit --version
    ```
    Optionally run `ugit --help` to see help and management commands
+   
+   ```bash
+   Undo your last oopsie in Git 🙈
+   Usage: ugit [-h] [-v] [-u]
+
+   ugit helps you undo your last git command without much effort
+   Just run 'ugit' and search for what you want to undo
+
+   Available options:
+
+   -h, --help      Print this help and exit
+   -v, --version   Print current ugit version
+   -u, --update    Update ugit
+
+   Contact 📬: varshneybhupesh@gmail.com for assistance
+   Read the guide: https://bhupesh.gitbook.io/notes/git/how-to-undo-anything-in-git
+
+   ```
+
+## `ugit` in ...
+**News**
+
+- Featured on [Changelog News](https://changelog.com/news/ugit-helps-you-undo-your-last-git-command-with-grace-8X6L#discussion)
+- The [guide was tweeted by GitHub](https://twitter.com/github/status/1392207961355862018?s=20) (the guide was complementary to ugit, since I was logging my research process there)
 
 ## Please read ⚠️
 
@@ -140,10 +156,6 @@ You can read my in-process guide on [**How to undo anything in Git**](https://bh
 
 ## Credit & Thanks
 To all the SO threads that I will probably never visit again ;)
-
-## `ugit` in News & Community
-
-- Featured on [Changelog News](https://changelog.com/news/ugit-helps-you-undo-your-last-git-command-with-grace-8X6L#discussion)
 
 ## ☺️ Show your support
 
