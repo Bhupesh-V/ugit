@@ -74,7 +74,7 @@ Have any other ideas/suggestions? [**Hop in to ugit discussions 💬️**](https
 
 - `Bash`>=3
 - GNU utils like `awk`, `grep`, `tput` etc
-- [fzf](https://github.com/junegunn/fzf)
+- [fzf](https://github.com/junegunn/fzf) (Install latest version. Minimum required 0.21.0)
 
 
 1. Install the script using `curl`
