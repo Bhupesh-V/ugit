@@ -121,6 +121,10 @@ Have any other ideas/suggestions? [**Hop in to ugit discussions 💬️**](https
 - Featured on [Changelog News](https://changelog.com/news/ugit-helps-you-undo-your-last-git-command-with-grace-8X6L#discussion)
 - The [guide was tweeted by GitHub](https://twitter.com/github/status/1392207961355862018?s=20) (the guide was complementary to ugit, since I was logging my research process there)
 
+**Community**
+
+- Alexander Alemayhu made a youtube tutorial on [Undoing Your Last Git Commit with Ugit](https://www.youtube.com/watch?v=nUnCgKb4tSc)
+
 ## Please read ⚠️
 
 Git comes with a garbage collector ([in case you didn't know](https://git-scm.com/docs/git-gc)) therefore undoing some commands will become impossible if the entries are deleted from the reflog.
