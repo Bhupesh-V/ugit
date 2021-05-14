@@ -12,9 +12,6 @@
   <a href="">
     <img alt="platform support linux and macos" src="https://img.shields.io/badge/platform-GNU/Linux %7C MacOS-blue">
   </a>
-  <a href="https://github.com/ellerbrock/open-source-badges">
-    <img alt="bash love" src="https://raw.githubusercontent.com/ellerbrock/open-source-badges/master/badges/bash-v1/bash.png">
-  </a>
   <a href="https://twitter.com/bhupeshimself">
     <img alt="Twitter: bhupeshimself" src="https://img.shields.io/twitter/follow/bhupeshimself.svg?style=social" target="_blank" />
   </a>
