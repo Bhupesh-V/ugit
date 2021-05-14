@@ -5,6 +5,7 @@
   <a href="https://github.com/Bhupesh-V/ugit/actions/workflows/build.yml">
     <img alt="build ugit" src="https://github.com/Bhupesh-V/ugit/actions/workflows/build.yml/badge.svg">
   </a>
+  <a href="https://deepsource.io/gh/Bhupesh-V/ugit/?ref=repository-badge" target="_blank"><img alt="DeepSource" title="DeepSource" src="https://deepsource.io/gh/Bhupesh-V/ugit.svg/?label=active+issues&show_trend=true"/></a>
   <a href="https://github.com/Bhupesh-V/ugit/blob/master/LICENSE">
     <img alt="License: MIT" src="https://img.shields.io/github/license/Bhupesh-V/ugit" target="_blank" />
   </a>
