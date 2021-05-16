@@ -7,7 +7,7 @@ set -uo pipefail;
 SCRIPT_NAME="$0"
 SCRIPT_URL="https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit"
 TMP_FILE="/tmp/ugit.sh"
-VERSION="1.0"
+VERSION="2.0"
 
 installed() {
     cmd=$(command -v "${1}")
@@ -247,8 +247,8 @@ Available options:
 -v, --version   Print current ugit version
 -u, --update    Update ugit
 EOF
-    printf "\n%s\n" "Contact 📬️: varshneybhupesh@gmail.com for assistance"
-    printf "%s\n" "Read the guide: https://bhupesh.gitbook.io/notes/git/how-to-undo-anything-in-git"
+printf "\n%s\n" "Contact 📬️: varshneybhupesh@gmail.com for assistance"
+printf "%s\n" "Read the guide: https://bhupesh.gitbook.io/notes/git/how-to-undo-anything-in-git"
 }
 
 ugit_update() {
@@ -270,7 +270,7 @@ ugit_update() {
 }
 
 detect_last_git_command() {
-    declare -a git_commands=("git add" "git push" "git pull" "git branch -D" "git stash apply" "git stash drop" "git stash clear")
+    declare -a git_commands=("git add" "git commit" "git push" "git pull" "git branch -D" "git tag -d" "git stash apply" "git stash drop" "git stash clear")
     last_git=""
     # get default shell history location
     case $SHELL in
@@ -280,6 +280,10 @@ detect_last_git_command() {
             SHELL_HISTORY="$XDG_DATA_HOME/fish/fish_history" && HISTORY_CONTENT=$(tail -50 "$SHELL_HISTORY" | grep 'cmd:' | awk -F ": " '{print $2}' | sort -rn);;
         *zsh*)
             SHELL_HISTORY="$HOME/.zsh_history" && HISTORY_CONTENT=$(tail -50 "$SHELL_HISTORY" | awk -F ";" '{print $2}'| sort -rn);;
+        *)
+            printf "%s\n" "ERROR: Unable to read shell history. Try running ugit without auto-detect flag"
+            exit 1
+            ;;
     esac
     # tail .zsh_history | awk -F ";" '{print $2}'
     # tail fish_history | grep 'cmd:' | awk -F ": " '{print $2}'
@@ -294,30 +298,39 @@ detect_last_git_command() {
     done
 
     for c in ${git_commands[*]}; do
-        echo -e "$c"
+        # echo -e "$c"
+        # checck substring
         if grep -q "$c" <<< "$last_git_cmd"; then
             last_git="$c"
         fi
     done
     printf "%s\n" "Your last git command was $(tput bold)$(tput setaf 214)$(tput setab 0)$last_git$(tput sgr0)"
+    # finally undo the shit
+    case $last_git in
+        *add*) undo_git_add;;
+        *commit*) undo_git_commit;;
+        *push*) undo_git_push;;
+        *pull*) undo_git_merge "unpushed";;
+        *"branch -D"*) undo_branch_delete;;
+        *"tag -d"*) recover_deleted_tag;;
+        *apply*) undo_git_stash_apply;;
+        *drop*) recover_lost_stash;;
+        *)  printf "%s\n" "ERROR: Unable to detect last git command. Switching to normal mode"
+            option=$(display_menu | nl -n ln | fzf --header="Don't worry we all mess up sometimes" --height 30% --reverse --pointer='ᐅ' --cycle | awk '{print $1}')
+            ugit_menu
+            ;;
+    esac
 }
 
 main() {
     if [[ $# -gt 0 ]]; then
         local key="$1"
         case "$key" in
-            --version|-v)
-                show_version
-                ;;
-            --update|-u)
-                ugit_update
-                ;;
-            --help|-h)
-                print_help
-                exit
-                ;;
-            *)
-                printf "%s\n" "ERROR: Unrecognized argument $key"
+            --version|-v) show_version ;;
+            --update|-u) ugit_update ;;
+            --auto|-a) detect_last_git_command ;;
+            --help|-h) print_help exit;;
+            *) printf "%s\n" "ERROR: Unrecognized argument $key"
                 exit 1
                 ;;
         esac
