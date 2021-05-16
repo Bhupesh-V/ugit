@@ -243,6 +243,7 @@ Just run 'ugit' and search for what you want to undo
 Available options:
 
 -h, --help      Print this help and exit
+-a. --auto      Auto detect last git command
 -v, --version   Print current ugit version
 -u, --update    Update ugit
 EOF
@@ -269,11 +270,20 @@ ugit_update() {
 }
 
 detect_last_git_command() {
-    declare -a git_commands=("git add" "git push" "git pull" "git branch -D" "git stash apply" "git diff")
+    declare -a git_commands=("git add" "git push" "git pull" "git branch -D" "git stash apply" "git stash drop" "git stash clear")
     last_git=""
-    # declare -a history_content=($(history 10 | sort -rn | awk '{print $2}'))
-    # echo -e "${history_content[@]}"
-    for c in $(tail -10 "$HOME/.bash_history" | sort -rn); do
+    # get default shell history location
+    case $SHELL in
+        *bash*)
+            SHELL_HISTORY="$HOME/.bash_history" && HISTORY_CONTENT=$(tail -50 "$SHELL_HISTORY" | sort -rn);;
+        *fish*)
+            SHELL_HISTORY="$XDG_DATA_HOME/fish/fish_history" && HISTORY_CONTENT=$(tail -50 "$SHELL_HISTORY" | grep 'cmd:' | awk -F ": " '{print $2}' | sort -rn);;
+        *zsh*)
+            SHELL_HISTORY="$HOME/.zsh_history" && HISTORY_CONTENT=$(tail -50 "$SHELL_HISTORY" | awk -F ";" '{print $2}'| sort -rn);;
+    esac
+    # tail .zsh_history | awk -F ";" '{print $2}'
+    # tail fish_history | grep 'cmd:' | awk -F ": " '{print $2}'
+    for c in $HISTORY_CONTENT; do
         # printf "%s\n" "$c"
         command_name=$(echo "$c" | awk '{print $1}')
         if alias "$command_name" > /dev/null 2>&1 && alias "$command_name" | grep "git"; then
@@ -289,7 +299,7 @@ detect_last_git_command() {
             last_git="$c"
         fi
     done
-    echo "Your last git command was $last_git"
+    printf "%s\n" "Your last git command was $(tput bold)$(tput setaf 214)$(tput setab 0)$last_git$(tput sgr0)"
 }
 
 main() {
