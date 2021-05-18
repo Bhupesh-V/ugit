@@ -123,7 +123,7 @@ undo_git_merge() {
         [[ "$USER_INPUT" == Y ]] && git reset --merge ORIG_HEAD || exit 0
         # [[ "$USER_INPUT" == Y ]] && git reset --merge "$last_good_state" || exit 0
     else
-        default_branch=$(git remote show origin | awk '/HEAD/ {print $3}')
+        default_branch=$(git symbolic-ref --short HEAD)
         printf "%s\n" "Switching to default branch $default_branch"
         git checkout "$default_branch"
         commit=$(git log --oneline | fzf --ansi --height 10% --reverse --header="Choose the merge commit" | awk '{print $1}')

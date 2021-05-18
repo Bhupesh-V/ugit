@@ -24,6 +24,15 @@
         "code",
         "platform"
       ]
+    },
+    {
+      "login": "MarounMaroun  ",
+      "name": "Maroun",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6213311?v=4",
+      "profile": "https://github.com/MarounMaroun",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
