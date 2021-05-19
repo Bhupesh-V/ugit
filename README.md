@@ -68,12 +68,15 @@ Have any other ideas/suggestions? [**Hop in to ugit discussions 💬️**](https
 
 ## Installation
 
+### Prerequisites
+
 **ugit** dependencies:
 
 - `Bash`>=3
 - GNU utils like `awk`, `grep`, `tput` etc
 - [fzf](https://github.com/junegunn/fzf) (Install latest version. Minimum required 0.21.0)
 
+### Manual Installation
 
 1. Install the script using `curl`
 
@@ -112,6 +115,39 @@ Have any other ideas/suggestions? [**Hop in to ugit discussions 💬️**](https
    Read the guide: https://bhupesh.gitbook.io/notes/git/how-to-undo-anything-in-git
 
    ```
+
+### ZSH Frameworks
+
+#### Zgenom
+
+If you're using [Zgenom](https://github.com/jandamm/zgenom):
+
+1. Add `zgenom load Bhupesh-V/ugit` to your `.zshrc` along with your other `zgenom load` commands.
+2. `zgenom reset && zgenom save`
+
+#### Antigen
+
+If you're using [Antigen](https://github.com/zsh-users/antigen):
+
+1. Add `antigen bundle Bhupesh-V/ugit` to your `.zshrc` where you've listed your other plugins.
+2. Close and reopen your Terminal/iTerm window to **refresh context** and use the plugin. Alternatively, you can run `antigen bundle Bhupesh-V/ugit` in a running shell to have `antigen` load the new plugin.
+
+#### Oh-My-ZSH
+
+If you're using [oh-my-zsh](github.com/robbyrussell/oh-my-zsh):
+
+1. Clone the repository into a new `git-extra-commands` directory in oh-my-zsh's plugin folder:
+
+    `git clone https://github.com/Bhupesh-V/ugit.git $ZSH_CUSTOM/plugins/ugit`
+
+2. Edit your `~/.zshrc` and add `ugit` – same as clone directory – to the list of plugins to enable:
+
+    `plugins=( ... ugit )`
+
+3. Then, restart your terminal application to **refresh context** and use the plugin. Alternatively, you can source your current shell configuration:
+
+    `source ~/.zshrc`
+
 
 ## `ugit` in ...
 **News**
