@@ -152,8 +152,8 @@ If you're using [oh-my-zsh](github.com/robbyrussell/oh-my-zsh):
 ## `ugit` in ...
 **News**
 
-- Featured on [Changelog News](https://changelog.com/news/ugit-helps-you-undo-your-last-git-command-with-grace-8X6L#discussion)
-- The [guide was tweeted by GitHub](https://twitter.com/github/status/1392207961355862018?s=20) (the guide was complementary to ugit, since I was logging my research process there)
+- Featured on [**Changelog News**](https://changelog.com/news/ugit-helps-you-undo-your-last-git-command-with-grace-8X6L#discussion)
+- The [guide was **tweeted by GitHub**](https://twitter.com/github/status/1392207961355862018?s=20) (I was logging my research process there while building ugit)
 
 **Community**
 
@@ -162,7 +162,8 @@ If you're using [oh-my-zsh](github.com/robbyrussell/oh-my-zsh):
 ## Please read ⚠️
 
 Git comes with a garbage collector ([in case you didn't know](https://git-scm.com/docs/git-gc)) therefore undoing some commands will become impossible if the entries are deleted from the reflog.
-One way to prevent this is to increase default time limits before the reflog entries expire:
+One way to prevent this is to increase default time limits before the reflog entries expire.
+
 Add these configuration in your global `.gitconfig` file:
 
 ```gitconfig
