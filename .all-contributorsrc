@@ -24,6 +24,17 @@
         "code",
         "platform"
       ]
+    },
+    {
+      "login": "unixorn",
+      "name": "Joe Block",
+      "avatar_url": "https://avatars.githubusercontent.com/u/23920?v=4",
+      "profile": "http://unixorn.github.io",
+      "contributions": [
+        "code",
+        "doc",
+        "plugin"
+      ]
     }
   ],
   "contributorsPerLine": 7,
