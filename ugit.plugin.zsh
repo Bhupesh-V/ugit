@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # Copyright 2021 Joseph Block <jpb@unixorn.net>
 #
 # Licensed under the MIT license.
