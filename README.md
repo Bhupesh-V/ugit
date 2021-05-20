@@ -38,12 +38,13 @@ https://user-images.githubusercontent.com/34342551/117613992-4ddc9300-b185-11eb-
 
 - You did an accidental `git` command you didn't want to.
 - You don't want to waste your time searching on _how to undo ..._
-- Because ugit is cool
+- Because `ugit` is cool
 
 ### [Motivations behind writing ugit 🙇‍♂️️](https://bhupesh-v.github.io/undo-your-last-git-mistake-with-ugit)
 
 ## What's in the box
-`ugit` supports undoing following operations, some are a WIP. If you know of any other operations that can be undone and is not in the list, make sure to send a quick PR 💛️
+
+`ugit`/`git-undo` supports undoing following operations, some are a WIP. If you know of any other operations that can be undone and is not in the list, make sure to send a quick PR 💛️
 
 - [x] Undo `git commit`
 - [x] Undo `git add`
