@@ -73,7 +73,7 @@ Have any other ideas/suggestions? [**Hop in to ugit discussions 💬️**](https
 
 **ugit** dependencies:
 
-- `Bash`>=3
+- `Bash`>=4
 - GNU utils like `awk`, `grep`, `tput` etc
 - [fzf](https://github.com/junegunn/fzf) (Install latest version. Minimum required 0.21.0)
 

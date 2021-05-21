@@ -7,7 +7,7 @@ set -uo pipefail;
 SCRIPT_NAME="$0"
 SCRIPT_URL="https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit"
 TMP_FILE="/tmp/ugit.sh"
-VERSION="1.0"
+VERSION="2.0"
 
 installed() {
     cmd=$(command -v "${1}")
