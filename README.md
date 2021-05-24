@@ -152,12 +152,13 @@ If you're using [oh-my-zsh](github.com/robbyrussell/oh-my-zsh):
 
 
 ## `ugit` in ...
-**News**
+
+### News
 
 - Featured on [**Changelog News**](https://changelog.com/news/ugit-helps-you-undo-your-last-git-command-with-grace-8X6L#discussion)
 - The [guide was **tweeted by GitHub**](https://twitter.com/github/status/1392207961355862018?s=20) (I was logging my research process there while building ugit)
 
-**Community**
+### Community
 
 - Alexander Alemayhu made a youtube tutorial on [Undoing Your Last Git Commit with Ugit](https://www.youtube.com/watch?v=nUnCgKb4tSc)
 
