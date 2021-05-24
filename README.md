@@ -73,9 +73,10 @@ Have any other ideas/suggestions? [**Hop in to ugit discussions 💬️**](https
 
 **ugit** dependencies:
 
-- `Bash`>=4
+- **Bash** >= `4.x.x`
+- **Git** >= `2.23.0`
+- [**fzf**](https://github.com/junegunn/fzf) >= `0.21.0`
 - GNU utils like `awk`, `grep`, `tput` etc
-- [fzf](https://github.com/junegunn/fzf) (Install latest version. Minimum required 0.21.0)
 
 ### Manual Installation
 
