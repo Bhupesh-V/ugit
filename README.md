@@ -75,7 +75,7 @@ Have any other ideas/suggestions? [**Hop in to ugit discussions 💬️**](https
 
 - **Bash** >= `4.x.x`
 - **Git** >= `2.23.0`
-- [**fzf**](https://github.com/junegunn/fzf) >= `0.21.0`
+- [**fzf**](https://github.com/junegunn/fzf) >= `0.21.0` - [Installation guide](https://github.com/junegunn/fzf#installation)
 - GNU utils like `awk`, `grep`, `tput` etc
 
 ### Manual Installation
