@@ -58,9 +58,9 @@ https://user-images.githubusercontent.com/34342551/117613992-4ddc9300-b185-11eb-
 - [x] Undo accidental file delete (Restore a deleted file after a commit)
 - [x] Undo (Restore) a file to a previous version
 - [x] Undo `git merge`
+- [x] Undo `git cherry-pick`
 - [ ] Undo `git tag` (rename a tag)
 - [ ] Undo `git rebase`
-- [ ] Undo `git cherry-pick`
 - [ ] Undo `git worktree remove` (recover deleted work-tree)
 
 Help me finish above tasks by contributing?

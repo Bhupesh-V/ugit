@@ -7,7 +7,7 @@ set -uo pipefail;
 SCRIPT_NAME="$0"
 SCRIPT_URL="https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit"
 TMP_FILE="/tmp/ugit.sh"
-VERSION="2.0"
+VERSION="3.0"
 
 installed() {
     cmd=$(command -v "${1}")
@@ -29,6 +29,7 @@ for dep in "${deps[@]}"; do
 done
 
 printf "%s\n" "$(tput bold)Undo your last oopsie in Git 🙈️$(tput sgr0)"
+printf "%s\n" "Press ctrl+c to exit anytime"
 
 display_menu() {
     printf "%s\n" "Undo [git commit]"
@@ -48,14 +49,23 @@ display_menu() {
     printf "%s\n" "Undo/Recover commited file delete"
     printf "%s\n" "Undo/Recover uncommited file delete"
     printf "%s\n" "Undo/Restore file to a previous commit/version"
+    printf "%s\n" "Undo [git cherry-pick]"
 }
 
 
 undo_git_commit() {
-    # TODO: ask which commit to undo?
-    git reset HEAD~
     # undo last commit (don't unstage everything)
     # git reset --soft HEAD^
+    commit=$(git log --oneline | fzf --ansi --height 10% --reverse --multi --header="Choose commit to undo" | awk '{print $1}')
+    last_commit=$(git log --format="%h" -n 1)
+
+    if [[ "$last_commit" == "$commit" ]]; then
+        if git reset HEAD~; then
+            printf "%s\n" "Commit: $last_commit successfully undone"
+        fi
+    elif git revert "$commit"; then
+        printf "%s\n" "Commit: $commit successfully reverted. Check 'git status'"
+    fi
 }
 
 do_git_reset() {
@@ -225,6 +235,7 @@ ugit_menu() {
         15) undo_file_delete;;
         16) undo_file_delete "uncommited";;
         17) restore_file;;
+        18) undo_git_commit;;
     esac
 }
 
