@@ -22,15 +22,15 @@
 
 <h4>Undo <code>git add</code></h4>
 
-https://user-images.githubusercontent.com/34342551/117613719-f1797380-b184-11eb-9ff1-689b125265a9.mp4
+https://user-images.githubusercontent.com/34342551/121651365-29dbdc80-cab8-11eb-8c43-6d0c4b1509ad.mp4
 
 <h4>Undo <code>git branch -D</code></h4>
 
-https://user-images.githubusercontent.com/34342551/117613828-18d04080-b185-11eb-808b-fa1a65876ee9.mp4
+https://user-images.githubusercontent.com/34342551/121650985-c487eb80-cab7-11eb-9b6a-9257fa704d1c.mp4
 
 <h4>Undo <code>git merge</code></h4>
 
-https://user-images.githubusercontent.com/34342551/117613992-4ddc9300-b185-11eb-9286-bdc8b3aa2a8d.mp4
+https://user-images.githubusercontent.com/34342551/121651071-d9fd1580-cab7-11eb-929d-d9359a64f0eb.mp4
 
 </details></h2>
 
