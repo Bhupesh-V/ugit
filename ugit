@@ -50,6 +50,7 @@ display_menu() {
     printf "%s\n" "Undo/Recover uncommited file delete"
     printf "%s\n" "Undo/Restore file to a previous commit/version"
     printf "%s\n" "Undo [git cherry-pick]"
+    printf "%s\n" "Undo all current uncommited changes"
 }
 
 
@@ -194,11 +195,12 @@ undo_file_delete() {
             printf "%s\n" "$DELETED_FILE Successfully Recovered 👍️"
             exit 0
         fi
-    fi
-    read -p "Enter complete filename: " -r FILENAME
-    COMMIT=$(git log --diff-filter=D --oneline | fzf --ansi --height 20% --reverse --header="Choose commit that deleted $FILENAME" | awk '{print $1}')
-    if git checkout "$COMMIT"~1 -- "$FILENAME"; then
-        printf "%s\n" "$FILENAME Successfully Recovered 👍️"
+    else
+        read -p "Enter complete filename: " -r FILENAME
+        COMMIT=$(git log --diff-filter=D --oneline | fzf --ansi --height 20% --reverse --header="Choose commit that deleted $FILENAME" | awk '{print $1}')
+        if git checkout "$COMMIT"~1 -- "$FILENAME"; then
+            printf "%s\n" "$FILENAME Successfully Recovered 👍️"
+        fi
     fi
 }
 
@@ -213,6 +215,18 @@ restore_file() {
         exit 0
     elif git restore --source="$COMMIT" "$FILE"; then
         printf "%s\n" "$FILE restored to version at $COMMIT"
+    fi
+}
+
+undo_all() {
+    # TODO: Ask user for permanent deletion (use git clean for this)
+    printf "%s\n" "Stashing current changes ..."
+    read -p "Enter Stash Description (optional): " -r STASH_MSG
+    if git stash save -au "${STASH_MSG}"; then
+        # TODO: only display this if there are untracked changes (new files)
+        # printf "%s\n" "Note: Stashing untracked files might take some time, hold on"
+        printf "%s\n" "Cleared all changes 👍️"
+        printf "%s\n" "Run 'git stash apply' to redo"
     fi
 }
 
@@ -236,6 +250,7 @@ ugit_menu() {
         16) undo_file_delete "uncommited";;
         17) restore_file;;
         18) undo_git_commit;;
+        19) undo_all;;
     esac
 }
 
@@ -247,7 +262,7 @@ print_help() {
     cat <<EOF
 Usage: $(basename "${BASH_SOURCE[0]}") [-h] [-v] [-u]
 
-ugit helps you undo your last git command without much effort
+ugit helps you undo git commands without much effort
 Just run 'ugit' and search for what you want to undo
 
 Available options:
@@ -256,8 +271,8 @@ Available options:
 -v, --version   Print current ugit version
 -u, --update    Update ugit
 EOF
-    printf "\n%s\n" "Contact 📬️: varshneybhupesh@gmail.com for assistance"
-    printf "%s\n" "Read the guide: https://bhupesh.gitbook.io/notes/git/how-to-undo-anything-in-git"
+printf "\n%s\n" "Contact 📬️: varshneybhupesh@gmail.com for assistance"
+printf "%s\n" "Read the guide: https://bhupesh.gitbook.io/notes/git/how-to-undo-anything-in-git"
 }
 
 ugit_update() {
