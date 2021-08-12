@@ -8,12 +8,13 @@
   <a href="https://github.com/Bhupesh-V/ugit/blob/master/LICENSE">
     <img alt="License: MIT" src="https://img.shields.io/github/license/Bhupesh-V/ugit" target="_blank" />
   </a>
+  <img alt="GitHub all releases" src="https://img.shields.io/github/downloads/Bhupesh-V/ugit/total?color=orange">
   <a href="">
     <img alt="platform support linux and macos" src="https://img.shields.io/badge/platform-GNU/Linux %7C MacOS-blue">
   </a>
   <a href="https://twitter.com/bhupeshimself">
     <img alt="Twitter: bhupeshimself" src="https://img.shields.io/twitter/follow/bhupeshimself.svg?style=social" target="_blank" />
-  </a>
+  </a><br><br>
   <img align="center" title="ugit demo: restore file to a previous commit" alt="ugit demo: restore file gif" src="https://user-images.githubusercontent.com/34342551/117250614-19a16380-ae61-11eb-97a9-8ba1695cc50a.gif"><br>
 </p>
 
