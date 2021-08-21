@@ -28,8 +28,6 @@ for dep in "${deps[@]}"; do
     installed "${dep}" || die "Missing dependency: '${dep}'"
 done
 
-printf "%s\n" "$(tput bold)Undo your last oopsie in Git 🙈️$(tput sgr0)"
-printf "%s\n" "Press ctrl+c to exit anytime"
 
 display_menu() {
     printf "%s\n" "Undo [git commit]"
@@ -44,7 +42,7 @@ display_menu() {
     printf "%s\n" "Undo a Pushed Merge Commit"
     printf "%s\n" "Undo [git stash pop/drop/clear]"
     printf "%s\n" "Undo [git stash apply]"
-    printf "%s\n" "Undo [git tag -d] tag delete"
+    printf "%s\n" "Undo tag delete [git tag -d]"
     printf "%s\n" "Undo [git rebase]"
     printf "%s\n" "Undo/Recover commited file delete"
     printf "%s\n" "Undo/Recover uncommited file delete"
@@ -226,7 +224,7 @@ undo_all() {
         # TODO: only display this if there are untracked changes (new files)
         # printf "%s\n" "Note: Stashing untracked files might take some time, hold on"
         printf "%s\n" "Cleared all changes 👍️"
-        printf "%s\n" "Run 'git stash apply' to redo"
+        printf "%s\n" "Run 'git stash apply' to redo changes or 'git stash drop' to remove them"
     fi
 }
 
@@ -260,7 +258,7 @@ show_version() {
 
 print_help() {
     cat <<EOF
-Usage: $(basename "${BASH_SOURCE[0]}") [-h] [-v] [-u]
+Usage: $(basename "${BASH_SOURCE[0]}") [-h] [-v] [-u] [-g]
 
 ugit helps you undo git commands without much effort
 Just run 'ugit' and search for what you want to undo
@@ -270,9 +268,11 @@ Available options:
 -h, --help      Print this help and exit
 -v, --version   Print current ugit version
 -u, --update    Update ugit
+-g, --guide     Open ugit undo text guide
 EOF
-printf "\n%s\n" "Contact 📬️: varshneybhupesh@gmail.com for assistance"
+printf "\n%s\n" "Contact 📬️: $(tput bold)varshneybhupesh@gmail.com$(tput sgr0) for assistance"
 printf "%s\n" "Read the guide: https://bhupesh.gitbook.io/notes/git/how-to-undo-anything-in-git"
+printf "\n%s\n" "Please give us ⭐ a if you liked ugit $(tput bold)$(tput setaf 208)https://github.com/Bhupesh-V/ugit$(tput sgr0)"
 }
 
 ugit_update() {
@@ -293,27 +293,53 @@ ugit_update() {
     exit 0
 }
 
+open_guide() {
+    GUIDE="https://bhupesh.gitbook.io/notes/git/how-to-undo-anything-in-git"
+
+    case "$(uname)" in
+        Linux ) xdg-open > /dev/null 2>&1 "$GUIDE";;
+        Darwin ) open "$GUIDE" ;;
+        *) printf "%s\n" "Guide: $GUIDE"
+    esac
+}
+
+header() {
+    printf "%s\n" "$(tput bold)Undo your last oopsie in Git 🙈️$(tput sgr0)"
+    printf "%s\n" "$(tput setaf 248)Press ctrl+c to exit anytime $(tput sgr0)"
+}
+
+init_test() {
+    # test if user is in a git directory or not
+    if git rev-parse --git-dir > /dev/null 2>&1; then
+        # check if the current working directory is top level or not
+        [ "$(pwd)" != "$(git rev-parse --show-toplevel)" ] && printf "ugit: %s\n" "Not inside top level dir $(git rev-parse --show-toplevel)"
+    else
+        printf "%s\n" "Ummm, you are not inside a Git repo 😟"
+        exit
+    fi
+}
+
 main() {
     if [[ $# -gt 0 ]]; then
         local key="$1"
         case "$key" in
             --version|-v)
-                show_version
-                ;;
+                show_version;;
             --update|-u)
-                ugit_update
-                ;;
+                ugit_update;;
             --help|-h)
                 print_help
-                exit
-                ;;
+                exit;;
+            --guide|-g)
+                open_guide ;;
             *)
                 printf "%s\n" "ERROR: Unrecognized argument $key"
-                exit 1
-                ;;
+                exit 1;;
         esac
     else
-        option=$(display_menu | nl -n ln | fzf --header="Don't worry we all mess up sometimes" --height 30% --reverse --pointer='ᐅ' --cycle | awk '{print $1}')
+        init_test
+        header
+        option=$(display_menu | nl -n ln | fzf --header="Don't worry we all mess up sometimes" --height 30% --reverse --pointer='👉' --cycle | awk '{print $1}')
         ugit_menu
     fi
 }
