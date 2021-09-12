@@ -85,10 +85,12 @@ undo_git_add() {
 }
 
 change_commit_message() {
+    printf "%s: %s\n" "Your last commit" "$(git --no-pager log --color --oneline -1)"
     printf "%s" "Enter New Commit Message (Ctrl+d to save):"
     msg=$(</dev/stdin)
     echo
-    [[ "$msg" ]] && git commit --amend -m "$msg" || perror "Empty Commit string!"
+    [[ "$msg" != "" ]] && git commit --amend -m "$msg" || perror "Empty Commit string!"
+    printf "%s\n" "Remember to run ${BOLD_ORG_FG}git push -f <remoteName> <branchName>${RESET} if this was a pushed commit"
 }
 
 undo_git_push() {
@@ -105,7 +107,7 @@ undo_branch_delete() {
         --header="Choose last good branch commit" --prompt="ugit can only branches deleted locally" | awk '{print $1}')
 
     read -p "Enter Branch Name: " -r BRANCH_NAME
-    if [ ! -z "$BRANCH_NAME" ] && git checkout -b "$BRANCH_NAME" "$last_branch_commit"; then
+    if [ -n "$BRANCH_NAME" ] && git checkout -b "$BRANCH_NAME" "$last_branch_commit"; then
         printf "%s\n" "Branch $BRANCH_NAME successfully recovered 👍️"
     else
         perror "Error: unable to perform operation"
@@ -114,7 +116,7 @@ undo_branch_delete() {
 
 undo_git_reset() {
     LAST_GOOD_STATE=$(git reflog | fzf --ansi --height 20% --reverse --multi --header="Choose last known good commit" | awk '{print $1}')
-    if [[ ! -z "$LAST_GOOD_STATE" ]] && git reset "$LAST_GOOD_STATE"; then
+    if [[ -n "$LAST_GOOD_STATE" ]] && git reset "$LAST_GOOD_STATE"; then
         printf "%s\n" "Reset to $LAST_GOOD_STATE 👍️"
     fi
 }
@@ -226,7 +228,7 @@ undo_file_delete() {
 restore_file() {
     FILE=$(git ls-files | fzf --ansi --height 20% --reverse --header="Choose a file to restore" | awk '{print $1}')
 
-    if [[ ! -z "$FILE" ]]; then
+    if [[ -n "$FILE" ]]; then
         COMMIT=$(git log --color --oneline "$FILE" | fzf --ansi --height 80% --reverse \
             --prompt="Choose a previous commit for ${BOLD_ORG_FG}$FILE${RESET}: " \
             --header="Use ctrl-j/ctrl-k to navigate file preview. ctrl+space to toggle preview" \
