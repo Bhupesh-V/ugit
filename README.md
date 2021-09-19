@@ -110,25 +110,6 @@ Have any other ideas/suggestions? [**Hop in to ugit discussions 💬️**](https
    ```bash
    ugit --version
    ```
-   Optionally run `ugit --help` to see help and management commands
-   
-   ```bash
-   Undo your last oopsie in Git 🙈
-   Usage: ugit [-h] [-v] [-u]
-
-   ugit helps you undo your last git command without much effort
-   Just run 'ugit' and search for what you want to undo
-
-   Available options:
-
-   -h, --help      Print this help and exit
-   -v, --version   Print current ugit version
-   -u, --update    Update ugit
-
-   Contact 📬: varshneybhupesh@gmail.com for assistance
-   Read the guide: https://bhupesh.gitbook.io/notes/git/how-to-undo-anything-in-git
-
-   ```
 
 ### ZSH Frameworks
 

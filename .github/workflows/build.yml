@@ -25,7 +25,7 @@ jobs:
     - name: Disable hicolor icon theme triggers
       run: sudo sed '/hicolor-icon-theme/d' -i /var/lib/dpkg/triggers/File
     - name: ShellCheck Test
-      run: shellcheck ugit
+      run: shellcheck --exclude=SC2015 ugit
     - name: Syntax Testing
       # -n : read  commands  but  do  not  execute  them.  
       #      This may be used to check a shell script for syntax errors (ignored by interactive shells).
