@@ -307,7 +307,7 @@ check_deps() {
 
     [[ "${BASH_VERSINFO[0]}" -lt 4 ]] && die "Bash >=4 required"
 
-    deps=(fzf git awk xargs cut nl tput)
+    deps=(fzf git awk xargs cut nl tput tr)
     for dep in "${deps[@]}"; do
         installed "${dep}" || die "Missing dependency: '${dep}'"
     done
@@ -336,6 +336,14 @@ printf "%s\n" "Read the guide: https://bhupesh.gitbook.io/notes/git/how-to-undo-
 printf "\n%s\n" "Please give us ⭐ a if you liked ugit ${BOLD_ORG_FG}https://github.com/Bhupesh-V/ugit${RESET}"
 }
 
+get_changelog() {
+    # get changelog/release notes for the most recent release
+    REMOTE_REPO="Bhupesh-V/ugit"
+    CHANGELOG=$(curl -s -L https://api.github.com/repos/$REMOTE_REPO/releases | awk -F=":" '/body/ {print $1;exit}' | cut -d ':' -f 2 | tr -d "\"")
+    printf "%s\n" "${BOLD}Changelog:${RESET}"
+    echo -e "${CHANGELOG#* }"
+}
+
 ugit_update() {
     printf "%s\n" "Checking for updates ..."
     curl -s -L "$SCRIPT_URL" > "$TMP_FILE"
@@ -347,6 +355,7 @@ ugit_update() {
         # WIP
         if cp "$TMP_FILE" "$SCRIPT_NAME"; then printf "%s\n" "Done"; fi
         rm -f "$TMP_FILE"
+        get_changelog
     else
         printf "%s\n" "ugit is already at the latest version ($VERSION)"
         rm -f "$TMP_FILE"
