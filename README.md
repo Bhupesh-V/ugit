@@ -15,7 +15,7 @@
   <a href="https://twitter.com/bhupeshimself">
     <img alt="Twitter: bhupeshimself" src="https://img.shields.io/twitter/follow/bhupeshimself.svg?style=social" target="_blank" />
   </a><br><br>
-  <img align="center" title="ugit demo: restore file to a previous commit" alt="ugit demo: restore file gif" src="https://user-images.githubusercontent.com/34342551/117250614-19a16380-ae61-11eb-97a9-8ba1695cc50a.gif"><br>
+  <img align="center" title="ugit demo: restore file to a previous commit" alt="ugit demo: restore file gif" src="https://user-images.githubusercontent.com/34342551/135706491-0e987e0c-3a6d-4da6-bd16-d69bb36c42a9.gif"><br>
 </p>
 
 <h2><details><summary>More Video Demos ✨️</summary>
