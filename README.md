@@ -8,7 +8,7 @@
   <a href="https://github.com/Bhupesh-V/ugit/blob/master/LICENSE">
     <img alt="License: MIT" src="https://img.shields.io/github/license/Bhupesh-V/ugit" target="_blank" />
   </a>
-  <img alt="GitHub all releases" src="https://img.shields.io/github/downloads/Bhupesh-V/ugit/total?color=orange">
+  <img alt="GitHub all releases" src="https://img.shields.io/github/downloads/Bhupesh-V/ugit/total?color=purple">
   <a href="">
     <img alt="platform support linux and macos" src="https://img.shields.io/badge/platform-GNU/Linux %7C MacOS-blue">
   </a>
