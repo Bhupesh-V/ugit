@@ -394,7 +394,7 @@ init_test() {
     # test if user is in a git directory or not
     if git rev-parse --git-dir > /dev/null 2>&1; then
         # check if the current working directory is top level or not
-        [ "$(pwd)" != "$(git rev-parse --show-toplevel)" ] && printf "ugit: %s\n" "Not inside top level dir $(git rev-parse --show-toplevel)"
+        [ "" != "$(git rev-parse --show-cdup)" ] && printf "ugit: %s\n" "Not inside top level dir $(git rev-parse --show-toplevel)"
     else
         printf "%s\n" "Ummm, you are not inside a Git repo 😟"
         exit
