@@ -35,6 +35,16 @@
         "doc",
         "plugin"
       ]
+    },
+    {
+      "login": "thecesrom",
+      "name": "César Román",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19418023?v=4",
+      "profile": "https://thecesrom.dev/",
+      "contributions": [
+        "code",
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
