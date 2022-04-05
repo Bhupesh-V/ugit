@@ -90,26 +90,21 @@ Have any other ideas/suggestions? [**Hop in to ugit discussions 💬️**](https
 - [**fzf**](https://github.com/junegunn/fzf) >= `0.21.0` - [Installation guide](https://github.com/junegunn/fzf#installation)
 - GNU utils like `awk`, `grep`, `tput` etc
 
-### Manual Installation
+### Installation
 
-1. Install the script using `curl`
+#### Linux
 
-   **Linux**
-   ```bash
-   curl -fsSL https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit -o ugit && chmod +x ugit && mv ugit $HOME/.local/bin/
-   ```
+```bash
+curl -fsSL https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit -o ugit && chmod +x ugit && mv ugit $HOME/.local/bin/
+```
 
-   **Mac**
-   ```bash
-   curl -fsSL https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit -o ugit && chmod +x ugit && mv ugit /usr/local/bin
-   ```
-   
-   Or Arch Linux users can install [**ugit via AUR**](https://aur.archlinux.org/packages/ugit).
+Or Arch Linux users can install [**ugit via AUR**](https://aur.archlinux.org/packages/ugit).
 
-2. Verify installation
-   ```bash
-   ugit --version
-   ```
+#### Mac
+
+```bash
+brew install ugit
+```
 
 ### ZSH Frameworks
 
