@@ -166,14 +166,6 @@ Used to set how long inaccessible reflog records should be preserved.
 
 You can read my in-process guide on [**How to undo anything in Git**](https://bhupesh.gitbook.io/notes/git/how-to-undo-anything-in-git)
 
-## Author
-
-:bust_in_silhouette: **Bhupesh Varshney**
-
-- Web : [bhupesh-v.github.io](https://bhupesh-v.github.io)
-- Twitter : [@bhupeshimself](https://twitter.com/bhupeshimself)
-- DEV : [bhupesh](https://dev.to/bhupesh)
-
 ## Credit & Thanks
 To all the SO threads that I will probably never visit again ;)
 
