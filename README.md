@@ -12,6 +12,9 @@
   <a href="">
     <img alt="platform support linux and macos" src="https://img.shields.io/badge/platform-GNU/Linux %7C MacOS-blue">
   </a>
+  <a href="https://til.bhupesh.me/git/how-to-undo-anything-in-git">
+    <img alt="git undo text guide" src="https://img.shields.io/badge/guide-git%20undo-orange">
+  </a>
   <a href="https://twitter.com/bhupeshimself">
     <img alt="Twitter: bhupeshimself" src="https://img.shields.io/twitter/follow/bhupeshimself.svg?style=social" target="_blank" />
   </a><br><br>
