@@ -1,0 +1,127 @@
+#!/bin/env sh
+
+# Script for installing ugit (git undo)
+#
+# This script can be executed via 
+# curl:
+#   sh -c "$(curl -fsSL https://raw.githubusercontent.com/Bhupesh-V/ugit/master/install)"
+# or wget:
+#   sh -c "$(wget -qO- https://raw.githubusercontent.com/Bhupesh-V/ugit/master/install)"
+# or httpie:
+#   sh -c "$(http --download https://raw.githubusercontent.com/Bhupesh-V/ugit/master/install)"
+
+status_check() {
+    if command -v ugit 2>&1 > /dev/null; then
+        printf "\n\t%s\n" "You already have ${BOLD}ugit${RESET} installed."
+        printf "\n\t%s\n" "Run ${BOLD}git undo${RESET} everytime you make a git mistake :)"
+        exit 0
+    fi
+}
+
+installed() {
+    cmd=$(command -v "${1}")
+    return ${?}
+}
+
+die() {
+    >&2 echo "Fatal: $*"
+    exit 1
+}
+
+# TODO
+# check if correct version of fzf is there
+# check if correct version of git is there
+# check if correct version of bash is there
+
+check_dependencies() {
+    if ! command -v git > /dev/null 2>&1; then
+        printf "\n%s\n" "${BOLD}Can't work without git 😞. Please install git version >=2.30.0${RESET}"
+        exit 1
+    fi
+    if ! command -v fzf > /dev/null 2>&1; then
+        printf "\n%s\n" "${BOLD}Can't work without fzf 😞. Please install fzf version >=0.21.0${RESET}"
+        exit 1
+    fi
+    if ! command -v bash > /dev/null 2>&1; then
+        printf "\n%s\n" "${BOLD}Can't work without bash 😞. Please install bash version >=4${RESET}"
+        exit 1
+    fi
+
+    DEPS=""
+    DEPS="${DEPS} awk" 
+    DEPS="${DEPS} xargs"
+    DEPS="${DEPS} cut"
+    DEPS="${DEPS} nl"
+    DEPS="${DEPS} tr"
+
+    for DEP in ${DEPS}; do
+        installed ${DEP} || die "Missing GNU Utility: '${DEP}'"
+    done
+}
+
+set_permissions(){
+    if [ -f ugit ] && ! chmod +x ugit; then
+        printf "\n%s\n" "Unknown error while installing ugit"
+        exit 1
+    fi
+    move_to_path
+}
+
+move_to_path(){
+    printf "%s\n" "We require some permissions to move ugit to /usr/bin"
+
+    if sudo mv ugit /usr/bin; then
+        sudo ln -s ugit /usr/bin/git-undo
+    else
+        printf "\n%s\n" "Unknown error while installing ugit"
+        exit 1
+    fi
+}
+
+download_ugit(){
+    UGIT_HOST="https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit"
+
+    printf "\n%s\n" "Downloading ugit from ${BOLD}$UGIT_HOST${RESET} ..."
+
+    if curl -fsSL $UGIT_HOST -o ugit; then
+        set_permissions
+    else
+        printf "\n%s\n" "Unknown error while downloading ugit"
+        exit 1
+    fi
+}
+
+main () {
+
+    status_check
+    check_dependencies
+    download_ugit
+
+    printf "${BOLD}${ORANGE_FG}%s\n" ""
+    printf "%s\n" "             _ _    "
+    printf "%s\n" " _   _  __ _(_| |_  "
+    printf "%s\n" "| | | |/ _\` | | __| "
+    printf "%s\n" "| |_| | (_| | | |_  "
+    printf "%s\n" " \__,_|\__, |_|\__| "
+    printf "%s\n" "       |___/        "
+    printf "${RESET}\n%s" ""
+
+    printf "\t\t%s\n" ".... is now installed 👍"
+    printf "\n%s" "Run ${BOLD}ugit --help${RESET} for any help & assistance"
+    printf "\n%s\n" "Use ${BOLD}${ORANGE_FG}git undo${RESET} or ${BOLD}${ORANGE_FG}ugit${RESET} everytime you make a git mistake :)"
+
+}
+
+# check if tput exists
+if ! command -v tput > /dev/null 2>&1; then
+    # tput could not be found :(
+    BOLD=""
+    RESET=""
+    ORANGE_FG=""
+else
+    BOLD=$(tput bold)
+    RESET=$(tput sgr0)
+    ORANGE_FG=$(tput setaf 208)
+fi
+
+main

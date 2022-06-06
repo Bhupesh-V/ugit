@@ -70,15 +70,13 @@ Help me finish above tasks by contributing?
 
 Have any other ideas/suggestions? [**Hop in to ugit discussions 💬️**](https://github.com/Bhupesh-V/ugit/discussions/7)
 
-## `ugit` in ...
-
-### News
+## News
 
 - Featured on [**Changelog News**](https://changelog.com/news/ugit-helps-you-undo-your-last-git-command-with-grace-8X6L#discussion)
 - The [guide was **tweeted by GitHub**](https://twitter.com/github/status/1392207961355862018?s=20) (I was logging my research process there while building ugit)
 - I gave a talk about the git tooling ecosystem & `git undo` in [Undo git, say whaat! - **GitHub India Constellation**, May 2022](https://youtu.be/jpR9BMFmh4Y?t=15240)
 
-### Community
+## Community
 
 - Alexander Alemayhu made a youtube tutorial on [Undoing Your Last Git Commit with Ugit](https://www.youtube.com/watch?v=nUnCgKb4tSc)
 
@@ -99,7 +97,7 @@ Have any other ideas/suggestions? [**Hop in to ugit discussions 💬️**](https
 #### Linux
 
 ```bash
-curl -fsSL https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit -o ugit && chmod +x ugit && mv ugit $HOME/.local/bin/
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/Bhupesh-V/ugit/master/install)"
 ```
 
 Or Arch Linux users can install [**ugit via AUR**](https://aur.archlinux.org/packages/ugit).
