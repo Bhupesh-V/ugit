@@ -91,11 +91,36 @@ download_ugit(){
     fi
 }
 
+config_check() {
+    reflogExpire=$(git config --get gc.reflogExpire)
+    if [ "$reflogExpire" = "" ] ; then
+        printf "%s\n" "Setting ${BOLD}gc.reflogExpire${RESET} to 200 days"
+        if ! git config --global gc.reflogExpire 200; then
+            printf "%s\n" "Unexpected error while setting up gitconfig"
+            exit 1
+        fi
+    elif [ "$reflogExpire" -lt 200 ]; then
+        printf "%s\n" "ugit recommends increasing ${BOLD}gc.reflogExpire${RESET} config duration to 200 days."
+    fi
+
+    reflogExpireUnreachable=$(git config --get gc.reflogExpireUnreachable)
+    if [ "$reflogExpireUnreachable" = "" ]; then
+        printf "%s\n" "Setting ${BOLD}gc.reflogExpireUnreachable${RESET} to 90 days"
+        if ! git config --global gc.reflogExpireUnreachable 90; then
+            printf "%s\n" "Unexpected error while setting up gitconfig"
+            exit 1
+        fi
+    elif [ "$reflogExpireUnreachable" -lt 90 ]; then
+        printf "%s\n" "ugit recommends increasing ${BOLD}gc.reflogExpireUnreachable${RESET} config duration to 90 days."
+    fi
+}
+
 main () {
 
     status_check
     check_dependencies
     download_ugit
+    config_check
 
     printf "${BOLD}${ORANGE_FG}%s\n" ""
     printf "%s\n" "             _ _    "
