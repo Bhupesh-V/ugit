@@ -108,6 +108,11 @@ Or Arch Linux users can install [**ugit via AUR**](https://aur.archlinux.org/pac
 brew install ugit
 ```
 
+#### Windows
+
+Using ugit on windows is still in experimental phases. You can use the new windows terminal + git bash to run ugit. Please read [this thread for more info](https://github.com/Bhupesh-V/ugit/issues/20#issuecomment-1048234725)
+
+
 ### ZSH Frameworks
 
 #### Zgenom
