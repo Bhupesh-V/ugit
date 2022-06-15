@@ -45,6 +45,15 @@
         "code",
         "bug"
       ]
+    },
+    {
+      "login": "ibayramli2001",
+      "name": "Ilkin Bayramli",
+      "avatar_url": "https://avatars.githubusercontent.com/u/43158991?v=4",
+      "profile": "https://github.com/ibayramli2001",
+      "contributions": [
+        "platform"
+      ]
     }
   ],
   "contributorsPerLine": 7,
