@@ -94,6 +94,14 @@ Have any other ideas/suggestions? [**Hop in to ugit discussions 💬️**](https
 
 ### Installation
 
+#### Fig
+
+[Fig](https://fig.io) adds apps, shortcuts, and autocomplete to your existing terminal.
+
+Install `ugit` in just one click.
+
+<a href="https://fig.io/plugins/other/ugit_Bhupesh-V" target="_blank"><img src="https://fig.io/badges/install-with-fig.svg" /></a>
+
 #### Linux
 
 ```bash
