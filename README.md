@@ -39,8 +39,9 @@ https://user-images.githubusercontent.com/34342551/121651071-d9fd1580-cab7-11eb-
 
 ## Why `ugit`
 
-- You did an accidental `git` command you didn't want to.
+- You ran an accidental `git` command you didn't want to.
 - You don't want to waste your time searching on _how to undo ..._
+- Because you want to focus on problems at hand and not on Git (You don't like context switching)
 - Because `ugit` is cool
 
 ### [Motivations behind writing ugit 🙇‍♂️️](https://bhupesh-v.github.io/undo-your-last-git-mistake-with-ugit)
@@ -75,6 +76,7 @@ Have any other ideas/suggestions? [**Hop in to ugit discussions 💬️**](https
 - Featured on [**Changelog News**](https://changelog.com/news/ugit-helps-you-undo-your-last-git-command-with-grace-8X6L#discussion)
 - The [guide was **tweeted by GitHub**](https://twitter.com/github/status/1392207961355862018?s=20) (I was logging my research process there while building ugit)
 - I gave a talk about the git tooling ecosystem & `git undo` in [Undo git, say whaat! - **GitHub India Constellation**, May 2022](https://youtu.be/jpR9BMFmh4Y?t=15240)
+- [console.dev](https://console.dev/tools/) featured [ugit](https://twitter.com/bhupeshimself/status/1532714651842396161) in their list of developer tools
 
 ## Community
 
