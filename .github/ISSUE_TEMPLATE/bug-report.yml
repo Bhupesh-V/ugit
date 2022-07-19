@@ -1,5 +1,5 @@
-name: Bug Report
-description: File a bug report
+name: 🐛 Bug Report
+description: Create a report to help us improve ugit
 labels: ["bug"]
 assignees:
   - Bhupesh-V
