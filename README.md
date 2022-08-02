@@ -73,10 +73,12 @@ Have any other ideas/suggestions? [**Hop in to ugit discussions 💬️**](https
 
 ## News
 
-- Featured on [**Changelog News**](https://changelog.com/news/ugit-helps-you-undo-your-last-git-command-with-grace-8X6L#discussion)
-- The [guide was **tweeted by GitHub**](https://twitter.com/github/status/1392207961355862018?s=20) (I was logging my research process there while building ugit)
-- I gave a talk about the git tooling ecosystem & `git undo` in [Undo git, say whaat! - **GitHub India Constellation**, May 2022](https://youtu.be/jpR9BMFmh4Y?t=15240)
-- [console.dev](https://console.dev/tools/) featured [ugit](https://twitter.com/bhupeshimself/status/1532714651842396161) in their list of developer tools
+|      When      |                                                                                  What                                                                                 |
+|:--------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|  02 June, 2022 | [console.dev](https://console.dev/tools/) featured [ugit](https://twitter.com/bhupeshimself/status/1532714651842396161)                                               |
+|  18 May, 2022  | I gave a talk about the git tooling ecosystem & `git undo` in [Undo git, say whaat! - **GitHub India Constellation**, May 2022](https://youtu.be/jpR9BMFmh4Y?t=15240) |
+|  12 May, 2021  | The [guide was **tweeted by GitHub**](https://twitter.com/github/status/1392207961355862018?s=20) (I was logging my research process there while building ugit)       |
+| 30 April, 2021 | Featured on [**Changelog News**](https://changelog.com/news/ugit-helps-you-undo-your-last-git-command-with-grace-8X6L)                                                |
 
 ## Community
 
