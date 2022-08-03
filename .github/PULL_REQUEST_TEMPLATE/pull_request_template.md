@@ -7,8 +7,8 @@ Please include a summary of the change and which issue is fixed. Please also inc
 For e.g #45
 -->
 
-### Screenshots / Gifs
-<!-- remove above line if not applicable -->
+### Screenshots / Gifs:
+<!-- Please any demo video/GIFs to showcase changes -->
 
 ### Changes Include
 
@@ -19,8 +19,17 @@ For e.g #45
 -   [ ] Tooling ⚙️ (Changes to the build process or auxiliary tools and libraries such as documentation generation)
 -   [ ] Performance ⚡ (code change that improves performance)
 
+## How Has This Been Tested?
+
+Please describe the tests that you ran to verify your changes. Provide instructions so we can reproduce. Please also list any relevant details for your test configuration
+
+- [ ] Test A
+- [ ] Test B
+
 ### Checklist
 
--   [ ] I have commented my code, particularly in hard-to-understand areas
--   [ ] I have made corresponding changes to the documentation
--   [ ] My changes generate no new warnings
+- [ ] I have commented my code, particularly in hard-to-understand areas
+- [ ] My changes generate no new warnings
+- [ ] I have performed a self-review of my own code
+- [ ] I have checked my code and corrected any misspellings
+
