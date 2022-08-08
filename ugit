@@ -33,6 +33,7 @@ display_menu() {
     printf "%s\n" "Undo/Restore file to a previous commit"
     printf "%s\n" "Undo ${BOLD_ORG_FG}git cherry-pick${RESET}"
     printf "%s\n" "Undo all current uncommited changes"
+    printf "%s\n" "Undo ${BOLD_ORG_FG}git tag${RESET}"
 }
 
 perror() {
@@ -266,6 +267,29 @@ undo_all() {
     fi
 }
 
+undo_git_tag() {
+    # Fetch all tags from remote
+    if git fetch --all --tags > /dev/null 2>&1; then
+        printf "\n Fetching tags from remote"
+    else
+        perror "Unable to fetch tags from remote.Please check repository access."
+        exit
+    fi
+    tag=$(git tag | fzf --ansi --height 80% \
+        --reverse --multi --header="Choose tag to undo" \
+        --preview "echo {} | cut -d' ' -f1 | xargs -I{} git show --color --pretty=format:%b {}" \
+        --bind 'j:down,k:up,ctrl-j:preview-down,ctrl-k:preview-up,ctrl-space:toggle-preview' --preview-window right:60% )
+
+    # Exit if no tag is selected
+    [ -z "$tag" ] && exit
+
+    # Delete git tag
+    printf "%s\nDeleting tag: $tag"
+    git push origin --delete "$tag" > /dev/null 2>&1
+    git tag -d "$tag" > /dev/null 2>&1
+    echo && printf "%s\nTag $tag deleted 👍️\n"
+}
+
 ugit_menu() {
     case $option in
         1) undo_git_commit;;
@@ -287,6 +311,7 @@ ugit_menu() {
         17) restore_file;;
         18) undo_git_commit;;
         19) undo_all;;
+        20) undo_git_tag;;
     esac
 }
 
