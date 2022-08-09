@@ -283,7 +283,7 @@ undo_git_tag() {
     # Exit if no tag is selected
     [ -z "$tag" ] && exit
 
-    read -p "${BOLD_ORG_FG}Warning:${RESET} Undoing a git tag will remove the tag from both your local repository as well as the remote origin. Do you want to continue [Y/n]?" USER_INPUT
+    read -p "${BOLD_ORG_FG}Warning:${RESET} Undoing a git tag will remove the tag from both your local repository as well as the remote origin. Do you want to continue [Y/n]?" -n 1 -r USER_INPUT
     USER_INPUT=${USER_INPUT:-y}
 
     # Delete git tag
