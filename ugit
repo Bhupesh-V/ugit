@@ -295,7 +295,6 @@ undo_git_tag() {
             perror "Failed to delete tag."
         fi
     else
-        perror "User cancelled operation. Exiting ..."
         exit
     fi
 }
