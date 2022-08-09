@@ -283,11 +283,21 @@ undo_git_tag() {
     # Exit if no tag is selected
     [ -z "$tag" ] && exit
 
+    read -p "${BOLD_ORG_FG}Warning:${RESET} Undoing a git tag will remove the tag from both your local repository as well as the remote origin. Do you want to continue [Y/n]?" USER_INPUT
+    USER_INPUT=${USER_INPUT:-y}
+
     # Delete git tag
-    printf "%s\nDeleting tag: $tag"
-    git push origin --delete "$tag" > /dev/null 2>&1
-    git tag -d "$tag" > /dev/null 2>&1
-    echo && printf "%s\nTag $tag deleted 👍️\n"
+    if [[ "$USER_INPUT" == Y || "$USER_INPUT" == y ]] && printf "%s\nDeleting tag: $tag"; then
+        if  git tag -d "$tag" > /dev/null 2>&1; then
+            git push origin --delete "$tag" > /dev/null 2>&1
+            printf "%s\n\nTag $tag deleted 👍️\n"
+        else
+            perror "Failed to delete tag."
+        fi
+    else
+        perror "User cancelled operation. Exiting ..."
+        exit
+    fi
 }
 
 ugit_menu() {
