@@ -270,7 +270,7 @@ undo_all() {
 undo_git_tag() {
     # Fetch all tags from remote
     if git fetch --all --tags > /dev/null 2>&1; then
-        printf "\n Fetching tags from remote"
+        printf "\nFetching tags from remote"
     else
         perror "Unable to fetch tags from remote.Please check repository access."
         exit
