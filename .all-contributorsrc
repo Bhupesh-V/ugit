@@ -54,6 +54,15 @@
       "contributions": [
         "platform"
       ]
+    },
+    {
+      "login": "kopalchakravarty",
+      "name": "Kopal Chakravarty",
+      "avatar_url": "https://avatars.githubusercontent.com/u/31576619?v=4",
+      "profile": "https://github.com/kopalchakravarty",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
