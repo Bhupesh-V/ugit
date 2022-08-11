@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Get Download Count
-        id: download-stats
+        id: downloads
         run: |
           echo ::set-output name=download_count::$((curl -sq https://formulae.brew.sh/api/formula/ugit.json | jq '.analytics.install_on_request."365d".ugit' | tr "\012" "+" && (curl -sq https://api.github.com/repos/Bhupesh-V/ugit/releases | jq .[].assets[0].download_count | tr "\012" "+" ; echo "0")) | bc)
       - name: Create Awesome Badge
@@ -21,6 +21,6 @@ jobs:
           auth: ${{ secrets.GIST_TOKEN }}
           gistID: 6b7b8e8576bc1ca237bffd9a344672ab
           filename: ugit-downloads.json
-          label: ${{ steps.downloads-stats.outputs.download_count }}
-          message: downloads
+          label: downloads
+          message: ${{ steps.downloads.outputs.download_count }}
           color: "#820F82"
