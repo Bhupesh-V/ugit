@@ -53,9 +53,14 @@ undo_git_commit() {
     [ -z "$commit" ] && exit
 
     last_commit=$(git log --format="%h" -n 1)
+    initial_commit=$(git rev-list --max-parents=0 --abbrev-commit HEAD)
 
     if [[ "$last_commit" == "$commit" ]]; then
-        if git reset HEAD~; then
+        if [[ "$last_commit" == "$initial_commit" ]]; then
+            if git update-ref -d HEAD && git rm --cached -rf . > /dev/null 2>&1; then
+                printf "%s\nInitial commit: $initial_commit successfully undone. Commit state is clean."
+            fi
+        elif git reset HEAD~; then
             printf "%s\n" "Commit: $last_commit successfully undone"
         fi
     elif git revert "$commit"; then
