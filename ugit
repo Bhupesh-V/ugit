@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-# ugit: Undo your last git command without much effort. Powered by FZF
+# ugit: Undo git commands with ease. Powered by FZF
 
 set -uo pipefail;
 
 SCRIPT_NAME="$0"
 SCRIPT_URL="https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit"
 TMP_FILE="/tmp/ugit.sh"
-VERSION="5.1"
+VERSION="5.2"
 
 BOLD_ORG_FG=$(tput bold)$(tput setaf 208)
 BOLD=$(tput bold)
