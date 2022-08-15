@@ -56,6 +56,8 @@ undo_git_commit() {
     initial_commit=$(git rev-list --max-parents=0 --abbrev-commit HEAD)
 
     if [[ "$last_commit" == "$commit" ]]; then
+        # If the last commit is the same as the initial commit, delete reference to the branch(update-ref) and unstage changes of the initial commit(git rm).
+        # This will not delete the files from your working directory
         if [[ "$last_commit" == "$initial_commit" ]]; then
             if git update-ref -d HEAD && git rm --cached -rf . > /dev/null 2>&1; then
                 printf "%s\nInitial commit: $initial_commit successfully undone. Commit state is clean."
