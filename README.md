@@ -63,7 +63,7 @@ https://user-images.githubusercontent.com/34342551/121651071-d9fd1580-cab7-11eb-
 - [x] Undo (Restore) a file to a previous version
 - [x] Undo `git merge`
 - [x] Undo `git cherry-pick`
-- [ ] Undo `git tag` (rename a tag)
+- [x] Undo `git tag`
 - [ ] Undo `git rebase`
 - [ ] Undo `git worktree remove` (recover deleted work-tree)
 
