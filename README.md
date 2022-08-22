@@ -37,7 +37,7 @@ https://user-images.githubusercontent.com/34342551/121651071-d9fd1580-cab7-11eb-
 
 </details></h2>
 
-## Why use `ugit`
+## Why use `ugit`?
 
 - You ran an accidental `git` command you wish to 'undo'.
 - You want to save time by not searching for _how to undo ..._
