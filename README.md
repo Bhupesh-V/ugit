@@ -218,6 +218,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://thecesrom.dev/"><img src="https://avatars.githubusercontent.com/u/19418023?v=4?s=100" width="100px;" alt=""/><br /><sub><b>César Román</b></sub></a><br /><a href="https://github.com/Bhupesh-V/ugit/commits?author=thecesrom" title="Code">💻</a> <a href="https://github.com/Bhupesh-V/ugit/issues?q=author%3Athecesrom" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://github.com/ibayramli2001"><img src="https://avatars.githubusercontent.com/u/43158991?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ilkin Bayramli</b></sub></a><br /><a href="#platform-ibayramli2001" title="Packaging/porting to new platform">📦</a></td>
     <td align="center"><a href="https://github.com/kopalchakravarty"><img src="https://avatars.githubusercontent.com/u/31576619?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kopal Chakravarty</b></sub></a><br /><a href="https://github.com/Bhupesh-V/ugit/commits?author=kopalchakravarty" title="Code">💻</a></td>
+    <td align="center"><a href="https://www.zorawarpurohit.com"><img src="https://avatars.githubusercontent.com/u/42845567?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Zorawar Purohit</b></sub></a><br /><a href="https://github.com/Bhupesh-V/ugit/commits?author=zora89" title="Documentation">📖</a></td>
   </tr>
 </table>
 
