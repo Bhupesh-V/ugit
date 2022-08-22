@@ -37,18 +37,18 @@ https://user-images.githubusercontent.com/34342551/121651071-d9fd1580-cab7-11eb-
 
 </details></h2>
 
-## Why `ugit`
+## Why use `ugit`?
 
-- You ran an accidental `git` command you didn't want to.
-- You don't want to waste your time searching on _how to undo ..._
-- Because you want to focus on problems at hand and not on Git (You don't like context switching)
-- Because `ugit` is cool
+- You ran an accidental `git` command you wish to 'undo'.
+- You want to save time by not searching for _how to undo ..._
+- Your focus is on problems at hand and not on Git (avoid context switching)
+- Because `ugit` is precise & uber cool !
 
 ### [Motivations behind writing ugit 🙇‍♂️️](https://bhupesh-v.github.io/undo-your-last-git-mistake-with-ugit)
 
-## What's in the box
+## What's in the box ?
 
-`ugit`/`git-undo` supports undoing following operations, some are a WIP. If you know of any other operations that can be undone and is not in the list, make sure to send a quick PR 💛️
+`ugit`/`git-undo` supports undoing following operations, some are a WIP. If you know of any other operations that can be undone and is not in the list, make sure to raise an issue or make a quick PR 💛️
 
 - [x] Undo `git commit`
 - [x] Undo `git add`
@@ -67,9 +67,9 @@ https://user-images.githubusercontent.com/34342551/121651071-d9fd1580-cab7-11eb-
 - [ ] Undo `git rebase`
 - [ ] Undo `git worktree remove` (recover deleted work-tree)
 
-Help me finish above tasks by contributing?
+Contribute to the project by helping me with the above mentioned tasks.
 
-Have any other ideas/suggestions? [**Hop in to ugit discussions 💬️**](https://github.com/Bhupesh-V/ugit/discussions/7)
+If you have any other ideas/suggestions, do send them across. [**Hop in to ugit discussions 💬️**](https://github.com/Bhupesh-V/ugit/discussions/7)
 
 ## News
 
