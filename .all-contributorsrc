@@ -63,6 +63,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "zora89",
+      "name": "Zorawar Purohit",
+      "avatar_url": "https://avatars.githubusercontent.com/u/42845567?v=4",
+      "profile": "https://www.zorawarpurohit.com",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
