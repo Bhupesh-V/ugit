@@ -316,7 +316,6 @@ undo_git_rm(){
     # Restore the file
     if git checkout "$commit"^ "$filepath"; then
         printf "%s\n" "File $filepath restored successfully." 
-        printf "%s\n" "Make sure to run ${BOLD_ORG_FG}git push${RESET} now!"
     fi
 }
 
