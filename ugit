@@ -34,6 +34,7 @@ display_menu() {
     printf "%s\n" "Undo ${BOLD_ORG_FG}git cherry-pick${RESET}"
     printf "%s\n" "Undo all current uncommited changes"
     printf "%s\n" "Undo ${BOLD_ORG_FG}git tag${RESET}"
+    printf "%s\n" "Undo ${BOLD_ORG_FG}git rm${RESET}"
 }
 
 perror() {
@@ -306,6 +307,18 @@ undo_git_tag() {
     fi
 }
 
+undo_git_rm(){
+    # Find all the deleted files from git history
+    filepath=$(git log --diff-filter=D --summary | grep delete | nl -n ln | fzf --header="Choose the file to restore" --height 50% --ansi --reverse --pointer='👉' --cycle | awk '{print $5}')
+    # Find the commit hash value of the selected filepath
+    commit=$(git log -- "$filepath"| awk 'NR==1{print $2}') 
+
+    # Restore the file
+    if git checkout "$commit"^ "$filepath"; then
+        printf "%s\n" "File $filepath restored successfully." 
+    fi
+}
+
 ugit_menu() {
     case $option in
         1) undo_git_commit;;
@@ -328,6 +341,7 @@ ugit_menu() {
         18) undo_git_commit;;
         19) undo_all;;
         20) undo_git_tag;;
+        21) undo_git_rm;;
     esac
 }
 
