@@ -123,24 +123,24 @@ brew install ugit
 #### Windows
 
 To use ugit on windows you need to install:<br>
-
-##### Git Bash
+* Git Bash<br>
 Git bash comes with git (if you have installed it on your machine then no need).<br>
 To install git (preferably with scoop):
 ```
 scoop install git
 ```
-##### FZF 
+* FZF  
 ```
 scoop install fzf
-```
+``` 
 Alternatively, with Chocolatey:
 ```
 choco install fzf
 ```
-To use bash in terminal change your directory to **git\2.35.3.windows.1\bin\bash** accordingly.
+* To use bash in terminal change your directory to **git\2.35.3.windows.1\bin\bash** accordingly.
 
-Then clone the repo 
+
+* Then clone the repo 
 ```
 git clone https://github.com/Bhupesh-V/ugit.git
 ```
