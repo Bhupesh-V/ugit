@@ -220,6 +220,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/kopalchakravarty"><img src="https://avatars.githubusercontent.com/u/31576619?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kopal Chakravarty</b></sub></a><br /><a href="https://github.com/Bhupesh-V/ugit/commits?author=kopalchakravarty" title="Code">💻</a></td>
     <td align="center"><a href="https://www.zorawarpurohit.com"><img src="https://avatars.githubusercontent.com/u/42845567?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Zorawar Purohit</b></sub></a><br /><a href="https://github.com/Bhupesh-V/ugit/commits?author=zora89" title="Documentation">📖</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://craftic.webflow.io"><img src="https://avatars.githubusercontent.com/u/38408670?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nalin Singh</b></sub></a><br /><a href="https://github.com/Bhupesh-V/ugit/commits?author=nalin-singh" title="Code">💻</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-restore -->
