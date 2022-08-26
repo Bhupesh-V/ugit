@@ -122,8 +122,37 @@ brew install ugit
 
 #### Windows
 
-Using ugit on windows is still in experimental phases. You can use the new windows terminal + git bash to run ugit. Please read [this thread for more info](https://github.com/Bhupesh-V/ugit/issues/20#issuecomment-1048234725)
+To use ugit on windows you need to install:<br>
+1. Git Bash<br>
+  Git bash comes with git (if you have installed it on your machine then no need).<br>
+ To install git (preferably with scoop):
+    
+    ```
+          scoop install git
+    ```
+2. FZF 
 
+  
+    ```
+          scoop install fzf
+    ```
+      Alternatively, with Chocolatey:
+   
+    ```
+          choco install fzf
+    ```
+3. To use bash in terminal change your directory to **git\2.35.3.windows.1\bin\bash** accordingly.
+
+
+4. Then clone the repo 
+ 
+   ```
+   git clone https://github.com/Bhupesh-V/ugit.git
+   ```
+   Alternatively, with curl:
+   ```bash
+   sh -c "$(curl -fsSL https://raw.githubusercontent.com/Bhupesh-V/ugit/master/install)"
+   ```
 
 ### ZSH Frameworks
 
