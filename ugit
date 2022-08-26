@@ -39,7 +39,8 @@ display_menu() {
 
 perror() {
     printf "%s\n" "$(tput bold)$(tput setaf 196)ugit error${RESET}: $1"
-    printf "%s\n" "If you think this is a Ugit bug, please follow this link to report it:\n https://github.com/Bhupesh-V/ugit/issues/new?template=bug-report.yml"
+    printf "%s\n" "If you think this is a Ugit bug, please follow this link to report it:"
+    printf "%s\n" "${BOLD_ORG_FG}https://github.com/Bhupesh-V/ugit/issues/new?template=bug-report.yml${RESET}"
 }
 
 undo_git_commit() {
@@ -110,7 +111,7 @@ change_commit_message() {
     printf "%s" "Enter New Commit Message (Ctrl+d to save):"
     msg=$(</dev/stdin)
     echo
-    [[ "$msg" != "" ]] && git commit --amend -m "$msg" || perror "Empty Commit string!"
+    [[ "$msg" != "" ]] && git commit --amend -m "$msg" || (perror "Empty Commit string!" && exit)
     printf "%s\n" "Remember to run ${BOLD_ORG_FG}git push -f <remoteName> <branchName>${RESET} if this was a pushed commit"
 }
 
