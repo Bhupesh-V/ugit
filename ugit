@@ -431,9 +431,8 @@ printf "\n%s\n" "Please give us ⭐ a if you liked ugit ${BOLD_ORG_FG}https://gi
 get_changelog() {
     # get changelog/release notes for the most recent release
     REMOTE_REPO="Bhupesh-V/ugit"
-    CHANGELOG=$(curl -s -L https://api.github.com/repos/$REMOTE_REPO/releases | awk -F=":" '/body/ {print $1;exit}' | cut -d ':' -f 2 | tr -d "\"")
-    printf "%s\n" "${BOLD}Changelog:${RESET}"
-    echo -e "${CHANGELOG#* }"
+    CHANGELOG=$(curl -s -L https://api.github.com/repos/$REMOTE_REPO/releases | awk -F=":" '/html_url/ {print $1;exit}' | cut -d ':' -f 2,3 | tr -d "\", ")
+    printf "Read Full Changelog: %s\n" "${BOLD}${CHANGELOG}${RESET}"
 }
 
 ugit_update() {

@@ -96,17 +96,8 @@ If you have any other ideas/suggestions, do send them across. [**Hop in to ugit 
 - [**fzf**](https://github.com/junegunn/fzf) >= `0.21.0` - [Installation guide](https://github.com/junegunn/fzf#installation)
 - GNU utils like `awk`, `grep`, `tput` etc
 
-### Installation
 
-#### Fig
-
-[Fig](https://fig.io) adds apps, shortcuts, and autocomplete to your existing terminal.
-
-Install `ugit` in just one click.
-
-<a href="https://fig.io/plugins/other/ugit_Bhupesh-V" target="_blank"><img src="https://fig.io/badges/install-with-fig.svg" /></a>
-
-#### Linux
+### Linux
 
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/Bhupesh-V/ugit/master/install)"
@@ -114,15 +105,47 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/Bhupesh-V/ugit/master/inst
 
 Or Arch Linux users can install [**ugit via AUR**](https://aur.archlinux.org/packages/ugit).
 
-#### Mac
+### Mac
 
 ```bash
 brew install ugit
 ```
 
-#### Windows
+### Windows
 
-Using ugit on windows is still in experimental phases. You can use the new windows terminal + git bash to run ugit. Please read [this thread for more info](https://github.com/Bhupesh-V/ugit/issues/20#issuecomment-1048234725)
+To use ugit on windows you need to install:
+
+1. Git Bash<br>
+   Git bash comes with git (if you have installed it on your machine then no need). To install git (preferably with scoop):
+    ```
+    scoop install git
+    ```
+2. FZF 
+   ```
+   scoop install fzf
+   ```
+   Alternatively, with Chocolatey:
+   
+   ```
+   choco install fzf
+   ```
+3. To use bash in terminal change your directory to `**git\2.35.3.windows.1\bin\bash**` accordingly.
+4. Then either clone the repo,
+   ```bash
+   git clone https://github.com/Bhupesh-V/ugit.git
+   ```
+   or get it using curl:
+   ```bash
+   sh -c "$(curl -fsSL https://raw.githubusercontent.com/Bhupesh-V/ugit/master/install)"
+   ```
+
+### Fig
+
+[Fig](https://fig.io) adds apps, shortcuts, and autocomplete to your existing terminal.
+
+Install `ugit` in just one click.
+
+<a href="https://fig.io/plugins/other/ugit_Bhupesh-V" target="_blank"><img src="https://fig.io/badges/install-with-fig.svg" /></a>
 
 
 ### ZSH Frameworks
@@ -222,6 +245,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   </tr>
   <tr>
     <td align="center"><a href="https://craftic.webflow.io"><img src="https://avatars.githubusercontent.com/u/38408670?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nalin Singh</b></sub></a><br /><a href="https://github.com/Bhupesh-V/ugit/commits?author=nalin-singh" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/vinayaknayar"><img src="https://avatars.githubusercontent.com/u/98237998?v=4?s=100" width="100px;" alt=""/><br /><sub><b>vinayaknayar</b></sub></a><br /><a href="https://github.com/Bhupesh-V/ugit/commits?author=vinayaknayar" title="Documentation">📖</a></td>
   </tr>
 </table>
 
