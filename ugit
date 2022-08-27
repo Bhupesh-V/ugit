@@ -39,6 +39,9 @@ display_menu() {
 
 perror() {
     printf "%s\n" "$(tput bold)$(tput setaf 196)ugit error${RESET}: $1"
+    printf "%s\n" "If you think this is a Ugit bug, please follow this link to report it:"
+    printf "%s\n" "${BOLD_ORG_FG}https://github.com/Bhupesh-V/ugit/issues/new?template=bug-report.yml${RESET}"
+    exit
 }
 
 undo_git_commit() {
@@ -62,13 +65,22 @@ undo_git_commit() {
         if [[ "$last_commit" == "$initial_commit" ]]; then
             if git update-ref -d HEAD && git rm --cached -rf . > /dev/null 2>&1; then
                 printf "%s\nInitial commit: $initial_commit successfully undone. Commit state is clean."
+            else
+                perror "Error: Failed to revert initial commit"
+                exit
             fi
         elif git reset HEAD~; then
             printf "%s\n" "Commit: $last_commit successfully undone"
+        else 
+            perror "%s\n" "Failed to revert commit $last_commit"
+            exit
         fi
     elif git revert "$commit"; then
         printf "%s\n" "Commit: $commit successfully reverted. Check ${BOLD_ORG_FG}git status${RESET}"
+    else 
+        perror "Error: unable to perfom operation"
     fi
+
 }
 
 do_git_reset() {
@@ -78,7 +90,7 @@ do_git_reset() {
     # check if working tree is clean or not
     [[ $(git status --porcelain 2>/dev/null) != "" ]] && read -p "You have uncommited changes, still proceed? [Y/n]: " -n 1 -r USER_INPUT
     USER_INPUT=${USER_INPUT:-Y}
-    [[ "$USER_INPUT" == Y ]] && git reset --hard "$last_good_state"
+    [[ "$USER_INPUT" == Y ]] && git reset --hard "$last_good_state" || perror "Error: unable to perform reset operation"
 }
 
 undo_git_add() {
@@ -90,6 +102,8 @@ undo_git_add() {
 
     if [[ ${#choices[@]} -gt 0 ]] && git restore --staged "${choices[@]}"; then
         printf "%s\n" "Done 👍️"
+    else
+        perror "Error: unable to perform operation"
     fi
 }
 
@@ -98,8 +112,8 @@ change_commit_message() {
     printf "%s" "Enter New Commit Message (Ctrl+d to save):"
     msg=$(</dev/stdin)
     echo
-    [[ "$msg" != "" ]] && git commit --amend -m "$msg" || perror "Empty Commit string!"
-    printf "%s\n" "Remember to run ${BOLD_ORG_FG}git push -f <remoteName> <branchName>${RESET} if this was a pushed commit"
+    [[ "$msg" != "" ]] && git commit --amend -m "$msg" && printf "%s\n" "Remember to run ${BOLD_ORG_FG}git push -f <remoteName> <branchName>${RESET} if this was a pushed commit" \
+    || perror "Empty Commit string!"
 }
 
 undo_git_push() {
@@ -107,6 +121,8 @@ undo_git_push() {
     if git revert "$commit"; then
         printf "%s\n" "Commit: $commit successfully reverted."
         printf "%s\n" "Make sure to run ${BOLD_ORG_FG}git push${RESET} now!"
+    else
+        perror "Error: unable to perform operation"
     fi
 }
 
@@ -119,7 +135,7 @@ undo_branch_delete() {
     if [ -n "$BRANCH_NAME" ] && git checkout -b "$BRANCH_NAME" "$last_branch_commit"; then
         printf "%s\n" "Branch $BRANCH_NAME successfully recovered 👍️"
     else
-        perror "Error: unable to perform operation"
+        perror "%s\n" "Failed to recover branch $BRANCH_NAME"
     fi
 }
 
@@ -127,6 +143,8 @@ undo_git_reset() {
     LAST_GOOD_STATE=$(git reflog | fzf --ansi --height 20% --reverse --multi --header="Choose last known good commit" | awk '{print $1}')
     if [[ -n "$LAST_GOOD_STATE" ]] && git reset "$LAST_GOOD_STATE"; then
         printf "%s\n" "Reset to $LAST_GOOD_STATE 👍️"
+    else 
+        perror "Unable to reset state"
     fi
 }
 
@@ -144,7 +162,15 @@ undo_git_merge() {
         [[ $(git status --porcelain 2>/dev/null) != "" ]] && read -p "You have uncommited changes, still proceed? [Y/n]: " -n 1 -r USER_INPUT
         USER_INPUT=${USER_INPUT:-Y}
         # ref: ORIG_HEAD points to the original commit from before the merge
-        [[ "$USER_INPUT" == Y ]] && git reset --merge ORIG_HEAD || exit 0
+        if [[ "$USER_INPUT" == Y ]]; then
+            if git reset --merge ORIG_HEAD; then
+                printf "Operation completed successfully"
+            else
+                perror "Unable to revert merge commit"
+            fi
+        else
+            exit
+        fi
         # [[ "$USER_INPUT" == Y ]] && git reset --merge "$last_good_state" || exit 0
     else
         default_branch=$(git remote show origin | awk '/HEAD/ {print $3}')
@@ -153,6 +179,7 @@ undo_git_merge() {
         commit=$(git log --oneline | fzf --ansi --height 10% --reverse --header="Choose the merge commit" | awk '{print $1}')
         if git revert -m 1 "$commit"; then
             printf "%s\n" "Merge ($commit) successfully reverted 👍️"
+        else perror "Unable to revert merge commit"
         fi
     fi
 }
@@ -216,6 +243,8 @@ undo_file_delete() {
         if git checkout HEAD "$DELETED_FILE"; then
             printf "%s\n" "${BOLD}$DELETED_FILE${RESET} Successfully Recovered 👍️"
             exit 0
+        else
+            perror "%s\n" "Unable to recover ${BOLD}$DELETED_FILE${RESET}"
         fi
     elif [[ "$1" = "commited" ]]; then
         read -p "Enter complete filename: " -r FILENAME
@@ -230,6 +259,8 @@ undo_file_delete() {
 
         if git checkout "$COMMIT"~1 -- "$FILENAME"; then
             printf "%s\n" "${BOLD}$FILENAME${RESET} Successfully Recovered 👍️"
+        else 
+            perror "%s\n" "Unable to recover ${BOLD}$FILENAME${RESET}"
         fi
     fi
 }
@@ -255,6 +286,8 @@ restore_file() {
         exit 0
     elif [[ "$COMMIT" != "" && "$FILE" != "" ]] && git restore --source="$COMMIT" "$FILE"; then
         printf "%s\n" "$FILE restored to version at ${BOLD}$COMMIT${RESET}"
+    else 
+        perror "Error: unable to perform operation"
     fi
 }
 
@@ -272,6 +305,8 @@ undo_all() {
         # printf "%s\n" "Note: Stashing untracked files might take some time, hold on"
         printf "%s\n" "Cleared all changes 👍️"
         printf "%s\n" "Run ${BOLD_ORG_FG}git stash apply${RESET} to redo changes or ${BOLD_ORG_FG}git stash drop${RESET} to remove them"
+    else
+        perror "Error: unable to perform operation"
     fi
 }
 
@@ -315,7 +350,9 @@ undo_git_rm(){
 
     # Restore the file
     if git checkout "$commit"^ "$filepath"; then
-        printf "%s\n" "File $filepath restored successfully." 
+        printf "%s\n" "File $filepath restored successfully."
+    else
+        perror "%s\n" "Unable to restore Fie $filepath"
     fi
 }
 
