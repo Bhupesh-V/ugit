@@ -7,7 +7,7 @@ set -uo pipefail;
 SCRIPT_NAME="$0"
 SCRIPT_URL="https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit"
 TMP_FILE="/tmp/ugit.sh"
-VERSION="5.2"
+VERSION="5.3"
 
 BOLD_ORG_FG=$(tput bold)$(tput setaf 208)
 BOLD=$(tput bold)
@@ -72,7 +72,7 @@ undo_git_commit() {
         elif git reset HEAD~; then
             printf "%s\n" "Commit: $last_commit successfully undone"
         else 
-            perror "%s\n" "Failed to revert commit $last_commit"
+            perror "Failed to revert commit $last_commit"
             exit
         fi
     elif git revert "$commit"; then
@@ -135,7 +135,7 @@ undo_branch_delete() {
     if [ -n "$BRANCH_NAME" ] && git checkout -b "$BRANCH_NAME" "$last_branch_commit"; then
         printf "%s\n" "Branch $BRANCH_NAME successfully recovered 👍️"
     else
-        perror "%s\n" "Failed to recover branch $BRANCH_NAME"
+        perror "Failed to recover branch $BRANCH_NAME"
     fi
 }
 
@@ -244,7 +244,7 @@ undo_file_delete() {
             printf "%s\n" "${BOLD}$DELETED_FILE${RESET} Successfully Recovered 👍️"
             exit 0
         else
-            perror "%s\n" "Unable to recover ${BOLD}$DELETED_FILE${RESET}"
+            perror "Unable to recover ${BOLD}$DELETED_FILE${RESET}"
         fi
     elif [[ "$1" = "commited" ]]; then
         read -p "Enter complete filename: " -r FILENAME
@@ -260,7 +260,7 @@ undo_file_delete() {
         if git checkout "$COMMIT"~1 -- "$FILENAME"; then
             printf "%s\n" "${BOLD}$FILENAME${RESET} Successfully Recovered 👍️"
         else 
-            perror "%s\n" "Unable to recover ${BOLD}$FILENAME${RESET}"
+            perror "Unable to recover ${BOLD}$FILENAME${RESET}"
         fi
     fi
 }
@@ -352,7 +352,7 @@ undo_git_rm(){
     if git checkout "$commit"^ "$filepath"; then
         printf "%s\n" "File $filepath restored successfully."
     else
-        perror "%s\n" "Unable to restore Fie $filepath"
+        perror "Unable to restore Fie $filepath"
     fi
 }
 
