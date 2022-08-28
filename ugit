@@ -64,7 +64,7 @@ undo_git_commit() {
         # This will not delete the files from your working directory
         if [[ "$last_commit" == "$initial_commit" ]]; then
             if git update-ref -d HEAD && git rm --cached -rf . > /dev/null 2>&1; then
-                printf "%s\nInitial commit: $initial_commit successfully undone. Commit state is clean."
+                printf "%s\n" "Initial commit: $initial_commit successfully undone. Commit state is clean."
             else
                 perror "Error: Failed to revert initial commit"
                 exit
