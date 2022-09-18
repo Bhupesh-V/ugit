@@ -234,19 +234,22 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 <table>
-  <tr>
-    <td align="center"><a href="https://github.com/sharan-aithal"><img src="https://avatars.githubusercontent.com/u/32029982?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sharan Aithal</b></sub></a><br /><a href="https://github.com/Bhupesh-V/ugit/commits?author=sharan-aithal" title="Code">💻</a> <a href="https://github.com/Bhupesh-V/ugit/commits?author=sharan-aithal" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://tabulate.tech"><img src="https://avatars.githubusercontent.com/u/58576759?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Tabulate</b></sub></a><br /><a href="https://github.com/Bhupesh-V/ugit/commits?author=TabulateJarl8" title="Code">💻</a> <a href="#platform-TabulateJarl8" title="Packaging/porting to new platform">📦</a></td>
-    <td align="center"><a href="http://unixorn.github.io"><img src="https://avatars.githubusercontent.com/u/23920?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Joe Block</b></sub></a><br /><a href="https://github.com/Bhupesh-V/ugit/commits?author=unixorn" title="Code">💻</a> <a href="https://github.com/Bhupesh-V/ugit/commits?author=unixorn" title="Documentation">📖</a> <a href="#plugin-unixorn" title="Plugin/utility libraries">🔌</a></td>
-    <td align="center"><a href="https://thecesrom.dev/"><img src="https://avatars.githubusercontent.com/u/19418023?v=4?s=100" width="100px;" alt=""/><br /><sub><b>César Román</b></sub></a><br /><a href="https://github.com/Bhupesh-V/ugit/commits?author=thecesrom" title="Code">💻</a> <a href="https://github.com/Bhupesh-V/ugit/issues?q=author%3Athecesrom" title="Bug reports">🐛</a></td>
-    <td align="center"><a href="https://github.com/ibayramli2001"><img src="https://avatars.githubusercontent.com/u/43158991?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ilkin Bayramli</b></sub></a><br /><a href="#platform-ibayramli2001" title="Packaging/porting to new platform">📦</a></td>
-    <td align="center"><a href="https://github.com/kopalchakravarty"><img src="https://avatars.githubusercontent.com/u/31576619?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kopal Chakravarty</b></sub></a><br /><a href="https://github.com/Bhupesh-V/ugit/commits?author=kopalchakravarty" title="Code">💻</a></td>
-    <td align="center"><a href="https://www.zorawarpurohit.com"><img src="https://avatars.githubusercontent.com/u/42845567?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Zorawar Purohit</b></sub></a><br /><a href="https://github.com/Bhupesh-V/ugit/commits?author=zora89" title="Documentation">📖</a></td>
-  </tr>
-  <tr>
-    <td align="center"><a href="https://craftic.webflow.io"><img src="https://avatars.githubusercontent.com/u/38408670?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nalin Singh</b></sub></a><br /><a href="https://github.com/Bhupesh-V/ugit/commits?author=nalin-singh" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/vinayaknayar"><img src="https://avatars.githubusercontent.com/u/98237998?v=4?s=100" width="100px;" alt=""/><br /><sub><b>vinayaknayar</b></sub></a><br /><a href="https://github.com/Bhupesh-V/ugit/commits?author=vinayaknayar" title="Documentation">📖</a></td>
-  </tr>
+  <tbody>
+    <tr>
+      <td align="center"><a href="https://github.com/sharan-aithal"><img src="https://avatars.githubusercontent.com/u/32029982?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sharan Aithal</b></sub></a><br /><a href="https://github.com/Bhupesh-V/ugit/commits?author=sharan-aithal" title="Code">💻</a> <a href="https://github.com/Bhupesh-V/ugit/commits?author=sharan-aithal" title="Documentation">📖</a></td>
+      <td align="center"><a href="https://tabulate.tech"><img src="https://avatars.githubusercontent.com/u/58576759?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Tabulate</b></sub></a><br /><a href="https://github.com/Bhupesh-V/ugit/commits?author=TabulateJarl8" title="Code">💻</a> <a href="#platform-TabulateJarl8" title="Packaging/porting to new platform">📦</a></td>
+      <td align="center"><a href="http://unixorn.github.io"><img src="https://avatars.githubusercontent.com/u/23920?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Joe Block</b></sub></a><br /><a href="https://github.com/Bhupesh-V/ugit/commits?author=unixorn" title="Code">💻</a> <a href="https://github.com/Bhupesh-V/ugit/commits?author=unixorn" title="Documentation">📖</a> <a href="#plugin-unixorn" title="Plugin/utility libraries">🔌</a></td>
+      <td align="center"><a href="https://thecesrom.dev/"><img src="https://avatars.githubusercontent.com/u/19418023?v=4?s=100" width="100px;" alt=""/><br /><sub><b>César Román</b></sub></a><br /><a href="https://github.com/Bhupesh-V/ugit/commits?author=thecesrom" title="Code">💻</a> <a href="https://github.com/Bhupesh-V/ugit/issues?q=author%3Athecesrom" title="Bug reports">🐛</a></td>
+      <td align="center"><a href="https://github.com/ibayramli2001"><img src="https://avatars.githubusercontent.com/u/43158991?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ilkin Bayramli</b></sub></a><br /><a href="#platform-ibayramli2001" title="Packaging/porting to new platform">📦</a></td>
+      <td align="center"><a href="https://github.com/kopalchakravarty"><img src="https://avatars.githubusercontent.com/u/31576619?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kopal Chakravarty</b></sub></a><br /><a href="https://github.com/Bhupesh-V/ugit/commits?author=kopalchakravarty" title="Code">💻</a></td>
+      <td align="center"><a href="https://www.zorawarpurohit.com"><img src="https://avatars.githubusercontent.com/u/42845567?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Zorawar Purohit</b></sub></a><br /><a href="https://github.com/Bhupesh-V/ugit/commits?author=zora89" title="Documentation">📖</a></td>
+    </tr>
+    <tr>
+      <td align="center"><a href="https://craftic.webflow.io"><img src="https://avatars.githubusercontent.com/u/38408670?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nalin Singh</b></sub></a><br /><a href="https://github.com/Bhupesh-V/ugit/commits?author=nalin-singh" title="Code">💻</a></td>
+      <td align="center"><a href="https://github.com/vinayaknayar"><img src="https://avatars.githubusercontent.com/u/98237998?v=4?s=100" width="100px;" alt=""/><br /><sub><b>vinayaknayar</b></sub></a><br /><a href="https://github.com/Bhupesh-V/ugit/commits?author=vinayaknayar" title="Documentation">📖</a></td>
+      <td align="center"><a href="https://github.com/RohitSingh107"><img src="https://avatars.githubusercontent.com/u/64142943?v=4?s=100" width="100px;" alt=""/><br /><sub><b>RohitSingh107</b></sub></a><br /><a href="#platform-RohitSingh107" title="Packaging/porting to new platform">📦</a></td>
+    </tr>
+  </tbody>
 </table>
 
 <!-- markdownlint-restore -->
