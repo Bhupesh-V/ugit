@@ -345,7 +345,7 @@ undo_git_tag() {
 
 undo_git_rm(){
     # Find all the deleted files from git history
-    filepath=$(git log --diff-filter=D --summary | grep delete | nl -n ln | fzf --header="Choose the file to restore" --height 50% --ansi --reverse $pointer --cycle | awk '{print $5}')
+    filepath=$(git log --diff-filter=D --summary | grep delete | nl -n ln | fzf --header="Choose the file to restore" --height 50% --ansi --reverse "$pointer" --cycle | awk '{print $5}')
     # Find the commit hash value of the selected filepath
     commit=$(git log -- "$filepath"| awk 'NR==1{print $2}') 
 
@@ -407,7 +407,7 @@ check_deps() {
 
     # if version of fzf < 0.21, do not use --pointer
     fzf_version=$(fzf --version | cut -d "." -f 1,2 | tr -d '.')
-    if test $fzf_version -ge 021; then
+    if test "$fzf_version" -ge 021; then
         pointer="--pointer=👉"
     fi
 }
@@ -520,7 +520,7 @@ main() {
         check_deps
         init_test
         header
-        option=$(display_menu | nl -n ln | fzf --header="Don't worry we all mess up sometimes" --height 50% --ansi --reverse $pointer --cycle | awk '{print $1}')
+        option=$(display_menu | nl -n ln | fzf --header="Don't worry we all mess up sometimes" --height 50% --ansi --reverse "$pointer" --cycle | awk '{print $1}')
         ugit_menu
     fi
 }
