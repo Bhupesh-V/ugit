@@ -406,7 +406,7 @@ check_deps() {
     done
 
     # if version of fzf < 0.21, do not use --pointer
-    fzf_version=$(fzf --version | cut -d "." -f 1,2 | tr -d '.')
+    fzf_version=$(fzf --version | cut -d "." -f 1,2 | tr -d '.()'[:alpha:])
     if test "$fzf_version" -ge 021; then
         pointer="--pointer=👉"
     fi
