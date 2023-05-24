@@ -186,15 +186,21 @@ undo_git_merge() {
 }
 
 recover_lost_stash() {
-    LOST_STASH=$(git fsck --no-progress --unreachable | \
-        awk '/commit/ {print $3}' | \
-        xargs git log --color --oneline --merges --no-walk | \
-        fzf --ansi --height 20% --reverse --header="Choose commit associated with stash" | awk '{print $1}'
+    LOST_STASH=$(git fsck --no-progress --unreachable | 
+        awk '/commit/ {print $3}' | 
+        xargs git log --color --oneline --merges --no-walk 
     )
 
-    [[ "$LOST_STASH" ]] && read -p "Enter Stash Description: " -r STASH_MSG || exit
+    if [ -z "$LOST_STASH" ]; then
+        echo "No unreachable commits found. Exiting..."
+        exit
+    fi
 
-    if git update-ref refs/stash "$LOST_STASH" --create-reflog -m "$STASH_MSG"; then
+    STASH=$(echo "$LOST_STASH" | fzf --ansi --height 20% --reverse --header="Choose commit associated with stash" | awk '{print $1}')
+
+    read -p "Enter Stash Description: " -r STASH_MSG
+
+    if git update-ref refs/stash "$STASH" --create-reflog -m "$STASH_MSG"; then
         printf "%s\n" "Stash Successfully Recovered 👍️"
     else
         perror "Unable to recover stash"
