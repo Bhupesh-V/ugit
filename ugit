@@ -325,7 +325,7 @@ undo_git_tag() {
         perror "Unable to fetch tags from remote.Please check repository access."
         exit
     fi
-    tag=$(git tag | fzf --ansi --height 80% \
+    tag=$(git tag --sort=v:refname | fzf --ansi --height 80% \
         --reverse --multi --header="Choose a tag to remove" \
         --preview "echo {} | cut -d' ' -f1 | xargs -I{} git show --color --pretty=format:%b {}" \
         --bind 'j:down,k:up,ctrl-j:preview-down,ctrl-k:preview-up,ctrl-space:toggle-preview' --preview-window right:60% )
