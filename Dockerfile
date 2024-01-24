@@ -1,44 +1,59 @@
-# First stage: Install packages
-FROM alpine:3.18 as builder
+FROM alpine:3.18 as ugit-ops
 
 RUN apk add --no-cache \
     bash \
     coreutils \
     git \
     ncurses \
-    fzf && \
-    apk --purge del apk-tools
+    curl
 
-# Copy only the ugit script, LICENSE, and README.md into the container at /app
-WORKDIR /app
+# Download fzf binary from GitHub, pin to 0.46.0, ugit requires minimum 0.21.0
+RUN curl -L -o fzf.tar.gz https://github.com/junegunn/fzf/releases/download/0.46.0/fzf-0.46.0-linux_amd64.tar.gz && \
+    tar -xzf fzf.tar.gz && \
+    mv fzf /usr/bin/
+
+# Copy only the ugit script into the container at /app
 COPY ugit .
-COPY LICENSE .
-COPY README.md .
 
 # Set permissions and move the script to path
-RUN chmod +x ugit && mv ugit /usr/local/bin/
+RUN chmod +x ugit && mv ugit /usr/bin/
 
 # Second stage: Copy only necessary binaries and their dependencies
-FROM busybox
+FROM scratch
 
-COPY --from=builder /usr/local/bin/ugit /usr/local/bin/
-COPY --from=builder /usr/bin/git /usr/bin/
-COPY --from=builder /usr/bin/fzf /usr/bin/
-COPY --from=builder /usr/bin/tput /usr/bin/
-COPY --from=builder /usr/bin/nl /usr/bin/
-COPY --from=builder /bin/bash /bin/
+LABEL version="1.0"
+LABEL description="Undo your last oopsie in git with ugit"
+LABEL maintainer="Bhupesh Varshney <varshneybhupesh@gmail.com>"
 
-COPY --from=builder /usr/lib/bash /usr/lib/bash
-COPY --from=builder /usr/lib/libncursesw.so.6 /usr/lib/
-COPY --from=builder /usr/lib/libncursesw.so.6.4 /usr/lib/
-COPY --from=builder /usr/lib/libpcre* /usr/lib/
-COPY --from=builder /usr/lib/libreadline* /usr/lib/
-COPY --from=builder /usr/lib/libunistring* /usr/lib/
+COPY --from=ugit-ops /usr/bin/ugit /bin/
+COPY --from=ugit-ops /usr/bin/git /usr/bin/
+COPY --from=ugit-ops /usr/bin/fzf /usr/bin/
+COPY --from=ugit-ops /usr/bin/tput /usr/bin/
+COPY --from=ugit-ops /usr/bin/nl /usr/bin/
+COPY --from=ugit-ops /usr/bin/awk /usr/bin/
+COPY --from=ugit-ops /usr/bin/xargs /usr/bin/
+COPY --from=ugit-ops /usr/bin/cut /usr/bin/cut
+COPY --from=ugit-ops /usr/bin/tr /usr/bin/tr
+COPY --from=ugit-ops /bin/bash /bin/
+COPY --from=ugit-ops /bin/sh /bin/
 
-COPY --from=builder /lib/ /lib/
+# copy lib files
+COPY --from=ugit-ops /usr/lib/libncursesw.so.6 /usr/lib/
+COPY --from=ugit-ops /usr/lib/libncursesw.so.6.4 /usr/lib/
+COPY --from=ugit-ops /usr/lib/libpcre* /usr/lib/
+COPY --from=ugit-ops /usr/lib/libreadline* /usr/lib/
 
-COPY --from=builder /etc/terminfo/ /usr/share/terminfo/
+COPY --from=ugit-ops /lib/libacl.so.1 /lib/
+COPY --from=ugit-ops /lib/libattr.so.1 /lib/
+COPY --from=ugit-ops /lib/libc.musl-aarch64.so.1 /lib/
+COPY --from=ugit-ops /lib/ld-musl-aarch64.so.1 /lib/
+COPY --from=ugit-ops /lib/libutmps.so.0.1 /lib/
+COPY --from=ugit-ops /lib/libskarnet.so.2.13 /lib/
+COPY --from=ugit-ops /lib/libz.so.1 /lib/
+
+# copy terminfo database
+COPY --from=ugit-ops /etc/terminfo/ /usr/share/terminfo/
 
 WORKDIR /app
 # Run ugit when the container launches
-CMD ["ugit"]
+CMD ["/bin/bash", "/bin/ugit"]
