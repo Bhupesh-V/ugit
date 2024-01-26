@@ -52,7 +52,10 @@ COPY --from=ugit-ops /lib/libskarnet.so.2.13 /lib/
 COPY --from=ugit-ops /lib/libz.so.1 /lib/
 
 # copy terminfo database
-COPY --from=ugit-ops /etc/terminfo/ /usr/share/terminfo/
+COPY --from=ugit-ops /etc/terminfo/x/xterm-256color /usr/share/terminfo/x/
+
+# Gib me all the colors
+ENV TERM=xterm-256color
 
 WORKDIR /app
 # Run ugit when the container launches
