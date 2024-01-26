@@ -35,7 +35,6 @@ COPY --from=ugit-ops /usr/bin/xargs /usr/bin/
 COPY --from=ugit-ops /usr/bin/cut /usr/bin/cut
 COPY --from=ugit-ops /usr/bin/tr /usr/bin/tr
 COPY --from=ugit-ops /bin/bash /bin/
-COPY --from=ugit-ops /bin/sh /bin/
 
 # copy lib files
 COPY --from=ugit-ops /usr/lib/libncursesw.so.6 /usr/lib/
@@ -56,6 +55,7 @@ COPY --from=ugit-ops /etc/terminfo/x/xterm-256color /usr/share/terminfo/x/
 
 # Gib me all the colors
 ENV TERM=xterm-256color
+ENV SHELL=/bin/bash
 
 WORKDIR /app
 # Run ugit when the container launches
