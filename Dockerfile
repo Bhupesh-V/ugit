@@ -45,8 +45,8 @@ COPY --from=ugit-ops /usr/lib/libreadline* /usr/lib/
 
 COPY --from=ugit-ops /lib/libacl.so.1 /lib/
 COPY --from=ugit-ops /lib/libattr.so.1 /lib/
-COPY --from=ugit-ops /lib/libc.musl-aarch64.so.1 /lib/
-COPY --from=ugit-ops /lib/ld-musl-aarch64.so.1 /lib/
+COPY --from=ugit-ops /lib/libc.musl-* /lib/
+COPY --from=ugit-ops /lib/ld-musl-* /lib/
 COPY --from=ugit-ops /lib/libutmps.so.0.1 /lib/
 COPY --from=ugit-ops /lib/libskarnet.so.2.13 /lib/
 COPY --from=ugit-ops /lib/libz.so.1 /lib/
