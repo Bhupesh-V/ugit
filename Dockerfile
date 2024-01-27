@@ -32,8 +32,8 @@ COPY --from=ugit-ops /usr/bin/tput /usr/bin/
 COPY --from=ugit-ops /usr/bin/nl /usr/bin/
 COPY --from=ugit-ops /usr/bin/awk /usr/bin/
 COPY --from=ugit-ops /usr/bin/xargs /usr/bin/
-COPY --from=ugit-ops /usr/bin/cut /usr/bin/cut
-COPY --from=ugit-ops /usr/bin/tr /usr/bin/tr
+COPY --from=ugit-ops /usr/bin/cut /usr/bin/
+COPY --from=ugit-ops /usr/bin/tr /usr/bin/
 COPY --from=ugit-ops /bin/bash /bin/
 
 # copy lib files
