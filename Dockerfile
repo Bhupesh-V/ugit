@@ -61,5 +61,6 @@ ENV SHELL=/bin/bash
 ENV UGIT_RUNNING_IN_DOCKER=true
 
 WORKDIR /app
+# TODO - replace with ENTRYPOINT when ugit is optimized for docker
 # Run ugit when the container launches
 CMD ["/bin/bash", "/bin/ugit"]
