@@ -55,7 +55,10 @@ COPY --from=ugit-ops /etc/terminfo/x/xterm-256color /usr/share/terminfo/x/
 
 # Gib me all the colors
 ENV TERM=xterm-256color
+# Let fzf know our deault shell
 ENV SHELL=/bin/bash
+# Let ugit know we are running in docker
+ENV UGIT_RUNNING_IN_DOCKER=true
 
 WORKDIR /app
 # Run ugit when the container launches
