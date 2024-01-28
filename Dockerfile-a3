@@ -1,0 +1,33 @@
+# First stage: Install packages
+FROM alpine:3.18 as builder
+
+RUN apk add --no-cache \
+    bash \
+    coreutils \
+    git \
+    ncurses \
+    fzf
+
+# Copy only the ugit script into the container at /app
+WORKDIR /app
+COPY ugit .
+
+# Set permissions and move the script to path
+RUN chmod +x ugit && mv ugit /usr/local/bin/
+
+# Second stage: Copy only necessary binaries and their dependencies
+FROM alpine:3.18
+
+COPY --from=builder /usr/local/bin/ugit /usr/bin/
+COPY --from=builder /usr/bin/git /usr/bin/
+COPY --from=builder /usr/bin/fzf /usr/bin/
+COPY --from=builder /usr/bin/tput /usr/bin/
+COPY --from=builder /usr/bin/cut /usr/bin/
+COPY --from=builder /usr/bin/tr /usr/bin/
+COPY --from=builder /usr/bin/nl /usr/bin/
+COPY --from=builder /usr/bin/env /bin/
+COPY --from=builder /bin/bash /bin/
+
+WORKDIR /app
+# Run ugit when the container launches
+CMD ["ugit"]
