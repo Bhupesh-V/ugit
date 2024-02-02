@@ -118,6 +118,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "T-Joseph-Kim",
+      "name": "Taebok Joseph Kim",
+      "avatar_url": "https://avatars.githubusercontent.com/u/116681578?v=4",
+      "profile": "https://github.com/T-Joseph-Kim",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -126,5 +135,6 @@
   "repoType": "github",
   "repoHost": "https://github.com",
   "skipCi": true,
-  "commitConvention": "angular"
+  "commitConvention": "angular",
+  "commitType": "docs"
 }
