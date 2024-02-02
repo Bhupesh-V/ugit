@@ -421,8 +421,9 @@ check_deps() {
 show_version() {
     printf "ugit version %s\n" "$VERSION"
 }
+
 print_help() {
-    printf "Usage: %s [-h] [-v] [-u] [-g]\n" "$(basename "${BASH_SOURCE[0]}")"
+    printf "Usage: %s [-h] [-v] [-u] [-g]\n" "ugit"
     printf "ugit helps you undo git commands without much effort\n"
     printf "Just run 'ugit' and search for what you want to undo\n\n"
     printf "Available options:\n"
