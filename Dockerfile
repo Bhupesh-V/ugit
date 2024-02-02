@@ -37,10 +37,17 @@ COPY --from=ugit-ops /usr/bin/tr /usr/bin/
 COPY --from=ugit-ops /bin/bash /bin/
 
 # copy lib files
+
+# WORK IN PROGRESS
+
+# COPY --from=ugit-ops /usr/lib/libncursesw* /usr/lib/
 COPY --from=ugit-ops /usr/lib/libncursesw.so.6 /usr/lib/
-COPY --from=ugit-ops /usr/lib/libncursesw.so.6.4 /usr/lib/
-COPY --from=ugit-ops /usr/lib/libpcre* /usr/lib/
-COPY --from=ugit-ops /usr/lib/libreadline* /usr/lib/
+
+# COPY --from=ugit-ops /usr/lib/libpcre* /usr/lib/
+COPY --from=ugit-ops /usr/lib/libpcre2-8.so.0 /usr/lib/
+
+# COPY --from=ugit-ops /usr/lib/libreadline* /usr/lib/
+COPY --from=ugit-ops /usr/lib/libreadline.so.8 /usr/lib/
 
 COPY --from=ugit-ops /lib/libacl.so.1 /lib/
 COPY --from=ugit-ops /lib/libattr.so.1 /lib/
