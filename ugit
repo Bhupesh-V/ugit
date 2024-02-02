@@ -431,7 +431,7 @@ print_help() {
     printf "  -u, --update    Update ugit\n"
     printf "  -g, --guide     Open ugit undo text guide\n\n"
     printf "Contact 📬️: %s for assistance\n" "$(tput bold)varshneybhupesh@gmail.com${RESET}"
-    printf "Read the guide: %s\n" "https://bhupesh.gitbook.io/notes/git/how-to-undo-anything-in-git"
+    printf "Read the guide: %s\n" "https://til.bhupesh.me/git/how-to-undo-anything-in-git"
     printf "Please give us ⭐ a if you liked ugit %s\n" "${BOLD_ORG_FG}https://github.com/Bhupesh-V/ugit${RESET}"
 }
 
