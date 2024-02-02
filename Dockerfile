@@ -21,7 +21,7 @@ RUN chmod +x ugit && mv ugit /usr/bin/
 # Second stage: Copy only necessary binaries and their dependencies
 FROM scratch
 
-LABEL version="1.0"
+
 LABEL description="Undo your last oopsie in git with ugit"
 LABEL maintainer="Bhupesh Varshney <varshneybhupesh@gmail.com>"
 
@@ -37,8 +37,6 @@ COPY --from=ugit-ops /usr/bin/tr /usr/bin/
 COPY --from=ugit-ops /bin/bash /bin/
 
 # copy lib files
-
-# WORK IN PROGRESS
 
 # COPY --from=ugit-ops /usr/lib/libncursesw* /usr/lib/
 COPY --from=ugit-ops /usr/lib/libncursesw.so.6 /usr/lib/
@@ -68,6 +66,5 @@ ENV SHELL=/bin/bash
 ENV UGIT_RUNNING_IN_DOCKER=true
 
 WORKDIR /app
-# TODO - replace with ENTRYPOINT when ugit is optimized for docker
 # Run ugit when the container launches
-CMD ["/bin/bash", "/bin/ugit"]
+ENTRYPOINT ["/bin/bash", "/bin/ugit"]
