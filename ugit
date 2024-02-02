@@ -421,24 +421,18 @@ check_deps() {
 show_version() {
     printf "ugit version %s\n" "$VERSION"
 }
-
 print_help() {
-    cat <<EOF
-Usage: $(basename "${BASH_SOURCE[0]}") [-h] [-v] [-u] [-g]
-
-ugit helps you undo git commands without much effort
-Just run 'ugit' and search for what you want to undo
-
-Available options:
-
--h, --help      Print this help and exit
--v, --version   Print current ugit version
--u, --update    Update ugit
--g, --guide     Open ugit undo text guide
-EOF
-printf "\n%s\n" "Contact 📬️: $(tput bold)varshneybhupesh@gmail.com${RESET} for assistance"
-printf "%s\n" "Read the guide: https://bhupesh.gitbook.io/notes/git/how-to-undo-anything-in-git"
-printf "\n%s\n" "Please give us ⭐ a if you liked ugit ${BOLD_ORG_FG}https://github.com/Bhupesh-V/ugit${RESET}"
+    printf "Usage: %s [-h] [-v] [-u] [-g]\n" "$(basename "${BASH_SOURCE[0]}")"
+    printf "ugit helps you undo git commands without much effort\n"
+    printf "Just run 'ugit' and search for what you want to undo\n\n"
+    printf "Available options:\n"
+    printf "  -h, --help      Print this help and exit\n"
+    printf "  -v, --version   Print current ugit version\n"
+    printf "  -u, --update    Update ugit\n"
+    printf "  -g, --guide     Open ugit undo text guide\n\n"
+    printf "Contact 📬️: %s for assistance\n" "$(tput bold)varshneybhupesh@gmail.com${RESET}"
+    printf "Read the guide: %s\n" "https://bhupesh.gitbook.io/notes/git/how-to-undo-anything-in-git"
+    printf "Please give us ⭐ a if you liked ugit %s\n" "${BOLD_ORG_FG}https://github.com/Bhupesh-V/ugit${RESET}"
 }
 
 get_changelog() {
