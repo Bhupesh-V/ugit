@@ -39,16 +39,16 @@ https://user-images.githubusercontent.com/34342551/121651071-d9fd1580-cab7-11eb-
 
 ## Why use `ugit`?
 
-- You ran an accidental `git` command you wish to 'undo'.
+- You accidentally ran a `git` command you wish to 'undo'.
 - You want to save time by not searching for _how to undo ..._
-- Your focus is on problems at hand and not on Git (avoid context switching)
-- Because `ugit` is precise & uber cool !
+- Your focus is on the problems at hand and not on Git (avoid context switching)
+
 
 ### [Motivations behind writing ugit 🙇‍♂️️](https://bhupesh-v.github.io/undo-your-last-git-mistake-with-ugit)
 
-## What's in the box ?
+## What's in the box?
 
-`ugit`/`git-undo` supports undoing following operations, some are a WIP. If you know of any other operations that can be undone and is not in the list, make sure to raise an issue or make a quick PR 💛️
+`ugit`/`git-undo` supports undoing the following operations, some are a WIP. If you know of any other operations that can be undone and are not in the list, make sure to raise an issue or make a quick PR 💛️
 
 - [x] Undo `git commit`
 - [x] Undo `git add`
@@ -67,7 +67,7 @@ https://user-images.githubusercontent.com/34342551/121651071-d9fd1580-cab7-11eb-
 - [ ] Undo `git rebase`
 - [ ] Undo `git worktree remove` (recover deleted work-tree)
 
-Contribute to the project by helping me with the above mentioned tasks.
+Contribute to the project by helping me with the above-mentioned tasks.
 
 If you have any other ideas/suggestions, do send them across. [**Hop in to ugit discussions 💬️**](https://github.com/Bhupesh-V/ugit/discussions/7)
 
@@ -83,7 +83,7 @@ If you have any other ideas/suggestions, do send them across. [**Hop in to ugit 
 
 ## Community
 
-- Alexander Alemayhu made a youtube tutorial on [Undoing Your Last Git Commit with Ugit](https://www.youtube.com/watch?v=nUnCgKb4tSc)
+- Alexander Alemayhu made a YouTube tutorial on [Undoing Your Last Git Commit with Ugit](https://www.youtube.com/watch?v=nUnCgKb4tSc)
 
 
 ## Installation
@@ -104,7 +104,7 @@ If you have any other ideas/suggestions, do send them across. [**Hop in to ugit 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/Bhupesh-V/ugit/master/install)"
 ```
 
-Or Arch Linux users can install [**ugit via AUR**](https://aur.archlinux.org/packages/ugit).
+Arch Linux users can install [**ugit via AUR**](https://aur.archlinux.org/packages/ugit).
 
 ### Mac
 
@@ -114,7 +114,7 @@ brew install ugit
 
 ### Windows
 
-To use ugit on windows you need to install:
+To use ugit on Windows you need to install:
 
 1. Git Bash<br>
    Git bash comes with git (if you have installed it on your machine then no need). To install git (preferably with scoop):
@@ -188,14 +188,14 @@ If you're using [oh-my-zsh](github.com/robbyrussell/oh-my-zsh):
 Git comes with a garbage collector ([in case you didn't know](https://git-scm.com/docs/git-gc)) therefore undoing some commands will become impossible if the entries are deleted from the reflog.
 One way to prevent this is to increase default time limits before the reflog entries expire.
 
-Add these configuration in your global `.gitconfig` file:
+Add these configurations in your global `.gitconfig` file:
 
 ```gitconfig
 [gc]
     # default 90 days
     reflogExpire = 200
 ```
-Used to set how long records in a branches reflog should be preserved.
+Used to set how long records in a branch reflog should be preserved.
 
 ```gitconfig
 [gc]
