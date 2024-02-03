@@ -88,6 +88,13 @@ If you have any other ideas/suggestions, do send them across. [**Hop in to ugit 
 
 ## Installation
 
+[Try `ugit` via Docker](https://hub.docker.com/r/bhupeshimself/ugit):
+
+```bash
+docker pull bhupeshimself/ugit
+docker run --rm -it -v $(pwd):/app bhupeshimself/ugit
+```
+
 ### Prerequisites
 
 **ugit** dependencies:
