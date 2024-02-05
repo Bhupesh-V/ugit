@@ -104,6 +104,10 @@ docker run --rm -it -v $(pwd):/app bhupeshimself/ugit
 - [**fzf**](https://github.com/junegunn/fzf) >= `0.21.0` - [Installation guide](https://github.com/junegunn/fzf#installation)
 - GNU utils like `awk`, `grep`, `tput` etc
 
+<br>
+
+[![Packaging status](https://repology.org/badge/vertical-allrepos/ugit.svg)](https://repology.org/project/ugit/versions)
+
 
 ### Linux
 
