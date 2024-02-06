@@ -35,6 +35,7 @@ COPY --from=ugit-ops /usr/bin/xargs /usr/bin/
 COPY --from=ugit-ops /usr/bin/cut /usr/bin/
 COPY --from=ugit-ops /usr/bin/tr /usr/bin/
 COPY --from=ugit-ops /bin/bash /bin/
+COPY --from=ugit-ops /bin/grep /bin/
 
 # copy lib files
 
