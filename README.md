@@ -5,8 +5,8 @@
   <a href="https://github.com/Bhupesh-V/ugit/actions/workflows/build.yml">
     <img alt="build ugit" src="https://github.com/Bhupesh-V/ugit/actions/workflows/build.yml/badge.svg">
   </a>
-  <a href="https://github.com/Bhupesh-V/ugit/blob/master/LICENSE">
-    <img alt="License: MIT" src="https://img.shields.io/github/license/Bhupesh-V/ugit" target="_blank" />
+  <a href="https://hub.docker.com/r/bhupeshimself/ugit">
+    <img alt="Docker pulls" src="https://img.shields.io/docker/pulls/bhupeshimself/ugit?logo=docker" target="_blank" />
   </a>
   <img alt="total downloads (github + brew)" src="https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Bhupesh-V/6b7b8e8576bc1ca237bffd9a344672ab/raw/ugit-downloads.json">
   <a href="">
