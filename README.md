@@ -192,6 +192,15 @@ If you're using [oh-my-zsh](github.com/robbyrussell/oh-my-zsh):
 
     `source ~/.zshrc`
 
+## Note on `git-undo` Command Conflict
+
+If you have both `ugit` and `git-extras` (https://github.com/tj/git-extras) installed, be aware that both provide a `git-undo` command. This can lead to conflicts, as only one version of the command will be accessible at a time. To resolve this:
+
+- **Using Homebrew**: Homebrew will notify you of the conflict during installation. You can choose to unlink the conflicting formula or use the --overwrite flag to force the link as follows:
+
+  `brew link --overwrite ugit`
+
+- **Manual Installation**: Ensure that the `git-undo` command from the desired package is prioritized in your system's PATH. 
 
 
 ## Please read ⚠️
