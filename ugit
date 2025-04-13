@@ -246,12 +246,21 @@ recover_deleted_tag() {
 undo_file_delete() {
     if [[ "$1" = "uncommited" ]]; then
         # user didn't commit the file deletion
-        DELETED_FILE=$(git ls-files -d | fzf --ansi --height 20% --reverse --header="Choose deleted file to recover" | awk '{print $1}')
-        if git checkout HEAD "$DELETED_FILE"; then
-            printf "%s\n" "${BOLD}$DELETED_FILE${RESET} Successfully Recovered 👍️"
+        readarray -t DELETED_FILES < <(
+            git ls-files -d |
+            fzf --ansi --height 20% --reverse --header="Choose deleted files to recover" --multi |
+            awk '{print $1}'
+        )
+
+        if [ ${#DELETED_FILES[@]} -eq 0 ]; then
             exit 0
+        fi
+
+        if git checkout HEAD -- "${DELETED_FILES[@]}"; then
+            printf "%s\n" "${BOLD}${DELETED_FILES[*]}${RESET}"
+            printf "%s\n" "Successfully Recovered ${#DELETED_FILES[@]} file(s)"
         else
-            perror "Unable to recover ${BOLD}$DELETED_FILE${RESET}"
+            perror "Unable to recover ${BOLD}${DELETED_FILES[*]}${RESET}"
         fi
     elif [[ "$1" = "commited" ]]; then
         read -p "Enter complete filename: " -r FILENAME
